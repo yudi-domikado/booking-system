@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Yudi Hotel</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+	<div class="navbar navbar-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#">Company Name</a>
+        <div class="container nav-collapse">
+          <ul class="nav">
+            <li><%= link_to "Home" %><li>
+			     <li><%= link_to "About", about_path %><li>
+            <li><%= link_to "Rooms", rooms_path %><li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
+<div class="span12">
+  <% if user_signed_in? %>
+   Sign in as <%= current_user.email %> | <%= link_to "Edit", edit_user_registration_path %> | 
+   <%= link_to "Sign Out", destroy_user_session_path, :method => 'delete' %>
+<div class="cart">
+  My Cart
+</div>
+  <% else %>
+    <%= link_to "Sign Up", new_user_registration_path %> or <%= link_to "Sign In", new_user_session_path %>
+  <% end %>
+</div>
+<div class="span12">
+	<p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
+	<%= yield %>
+</div>
+</body>
+</html>
