@@ -11,7 +11,7 @@ class CartsController < ApplicationController
        		@cart_item.check_out = params[:check_out]
        		@cart_item.price = @cart_item.room.price
        		@cart_item.save
-       		redirect_to :carts_path
+       		# redirect_to :carts_path
        end
 
        private
