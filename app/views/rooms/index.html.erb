@@ -1,23 +1,19 @@
-<h1>Rooms</h1>
-<table class="table">
-<thead>
-<tr>
-	<th>Picture</th>
-	<th>Name</th>
-	<th>Description</th>
-	<th>Price</th>
-	<th>Booking?</th>
-</tr>
-</thead>
-<tbody>
-<% @rooms.each do |kamar| %>
-  <tr>
-  	<td><%= image_tag kamar.picture.url(:thumb) %></td>
-    <td><%= kamar.name %></td>
-    <td><%= kamar.description %></td>
-    <td><%= kamar.price %></td>
-    <td><%= link_to "Booking", room_path(kamar) %></td>
-  </tr>
-<% end %>
-</tbody>
-</table>
+<h1>ROOMS</h1>
+<div class="news-a">
+            <% @rooms.each do |kamar| %>
+            <article>
+              <header>
+                <figure><%= image_tag kamar.picture.url(:thumb) %><figcaption></figcaption></figure>
+              </header>
+
+              <div class="descenter">
+                <h2><%= kamar.name %></h2>
+                <p><%= kamar.description %></p>
+                <p class="scheme-d"><span>$</span><%= kamar.price %> <%= link_to "Booking", room_path(kamar) %></p>
+              </div>
+              <footer>
+                <p class="link-b"><%= link_to "View Details", room_path(kamar) %></p>
+              </footer>
+            </article>
+            <% end %>
+</div>

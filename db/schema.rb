@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130503063910) do
+ActiveRecord::Schema.define(:version => 20130508105032) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -61,6 +61,17 @@ ActiveRecord::Schema.define(:version => 20130503063910) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "price"
+  end
+
+  create_table "events", :force => true do |t|
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "user_id"
+    t.integer  "room_id"
   end
 
   create_table "models", :force => true do |t|
@@ -113,6 +124,14 @@ ActiveRecord::Schema.define(:version => 20130503063910) do
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
+  end
+
+  create_table "topups", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "credit"
+    t.date     "topup_date"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

@@ -11,4 +11,9 @@
  *= require_self
  *= require bootstrap_and_overrides
  *= require bootstrap-datepicker
+ *= require fullcalendar
+ *= require fullcalendar.print
+ *= require print
+ *= require screen
+ *= require revision
  */

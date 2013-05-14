@@ -5,13 +5,18 @@ Booking::Application.routes.draw do
   devise_for :users
   ActiveAdmin.routes(self)
   resources :users do
+    get :checkin, on: :collection
     get :checkout, on: :collection
   end
-  resources :carts
+
   resources :rooms
-  
-  root :to => 'page#home'
-  get "/about", :to => 'page#about'
+  resources :carts
+  resources :cart_items
+  resources :topups
+  resources :events
+
+  root :to => 'pages#home'
+  get "/about", :to => 'pages#about'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

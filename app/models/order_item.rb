@@ -1,3 +1,6 @@
 class OrderItem < ActiveRecord::Base
-  # attr_accessible :title, :body
+belongs_to :user
+belongs_to :order
+belongs_to :room
+  attr_accessible :quantity, :price, :food_id
 end

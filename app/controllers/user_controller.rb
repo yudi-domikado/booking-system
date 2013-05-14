@@ -1,4 +1,7 @@
 class UserController < ApplicationController
+	def all
+		@users = User.all
+	end
 	before_filter :authenticate_user
 	def checkout
 		@cart = Cart.find_or_create_by_session_id(session_cart)

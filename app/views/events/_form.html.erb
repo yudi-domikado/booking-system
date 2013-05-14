@@ -1,0 +1,32 @@
+<%= form_for(@event) do |f| %>
+  <% if @event.errors.any? %>
+    <div class="alert alert-error">  
+      <a class="close" data-dismiss="alert">×</a>
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :starts_at %>
+    <%= f.datetime_select :starts_at %><br /><br />
+  </div>
+  <div class="field">
+    <%= f.label :ends_at %>
+    <%= f.datetime_select :ends_at %><br /><br />
+  </div>
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %><br /><br />
+  </div>
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %><br />
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
