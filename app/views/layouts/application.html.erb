@@ -30,23 +30,26 @@
           </ul>
           <p class="link-a">
             <% if user_signed_in? %>
-             Sign in as <%= current_user.email %> &nbsp;&nbsp;&nbsp; <%= link_to "Edit", edit_user_registration_path %> 
+              Sign in as <u><%= current_user.name %></u> &nbsp;&nbsp;&nbsp; <%= link_to "Edit My Account", edit_user_registration_path %> 
              <%= link_to "Sign Out", destroy_user_session_path, :method => 'delete' %>
             <% else %>
-            <%= link_to "Sign In", new_user_session_path %> <%= link_to "Sign Up", new_user_registration_path %>
+              <%= link_to "Sign In", new_user_session_path %> <%= link_to "Sign Up", new_user_registration_path %>
             <% end %>
           </p>
         </nav>
-        <form action="./" method="post" id="search">
-          <fieldset>
-            <legend>Search</legend>
-            <p>
-              <label for="sa">Search</label>
-              <input type="text" id="sa" name="sa" required>
-              <button type="submit">Submit</button>
-            </p>
-          </fieldset>
-        </form>
+
+
+          <%= form_tag(rooms_path, :method => :get, :id => 'search') do %>
+            <fieldset>
+              <legend>Search</legend>
+              <p>
+                <label for="sa"></label>
+                <%= text_field_tag :search, (params[:search]), :id => 'sa', :placeholder => 'Search..' %>
+                <%= submit_tag "search", :class=> 's_submit', :name => nil %>
+              </p>
+            </fieldset>
+          <% end %>
+
         <p class="tel">Call us today <span>(84) - 868 868 888</span></p>
       </header>    
       <nav id="breadcrumbs">

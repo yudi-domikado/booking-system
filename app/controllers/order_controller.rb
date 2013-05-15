@@ -1,3 +1,0 @@
-class OrderController < ApplicationController
-
-end

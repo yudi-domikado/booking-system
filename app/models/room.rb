@@ -9,4 +9,12 @@ class Room < ActiveRecord::Base
   has_attached_file :picture, 
                     :styles => { :medium => "250x250>", :thumb => "150x150>" }, 
                     :default_url => "/images/missing.png"
+
+	def self.search(search) #search yang didalam kurung adalah parameter yang di controller
+	    if search
+	      return where(['name LIKE ? OR price LIKE ? OR description LIKE ? ' , "%#{search}%","%#{search}%","%#{search}%"]) # dikasih pagar biar kecetak di sql
+	    else
+	      return find(:all)
+	    end
+	end
 end

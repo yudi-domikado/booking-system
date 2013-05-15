@@ -5,8 +5,9 @@ Booking::Application.routes.draw do
   devise_for :users
   ActiveAdmin.routes(self)
   resources :users do
-    get :checkin, on: :collection
-    get :checkout, on: :collection
+    get :check_in, on: :collection
+    get :check_out, on: :collection
+    get :checkout, :on => :collection # collection ga pake id sedangkan member  pake id
   end
 
   resources :rooms

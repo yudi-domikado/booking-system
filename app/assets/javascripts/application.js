@@ -22,11 +22,6 @@ $(document).ready(function() {
     pickTime: true             // disables de time picker
     });
 
-    $("[data-behaviour~='datetimepicker2']").datetimepicker({
-    pickDate: true,            // disables the date picker
-    pickTime: true             // disables de time picker
-    });
-
     $("[data-behaviour~='datepicker']").datepicker({
         format: 'yyyy-mm-dd'
     });

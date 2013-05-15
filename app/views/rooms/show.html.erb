@@ -1,12 +1,11 @@
 <div class="row">
 
 	<div class="span3">
-		
 		<%= form_tag carts_path, :class => 'form-c' do %>
 			<legend style="z-index: 16;">Book now</legend>
 			<label>Check In</label>
 			  <div data-behaviour="datetimepicker1" class="input-append">
-			    <%= text_field_tag :check_in, "", "data-format" => "yyyy-mm-dd hh:mm" %>
+			    <%= text_field_tag "check_in", "", "data-format" => "yyyy-MM-dd hh:mm" %>
 			    <span class="add-on">
 			      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
 			      </i>
@@ -17,7 +16,7 @@
 
 			<label>Check Out</label>
 			  <div data-behaviour="datetimepicker1" class="input-append">
-			    <%= text_field_tag :check_out, "", "data-format" => "yyyy-mm-dd hh:mm" %>
+			    <%= text_field_tag "check_out", "", "data-format" => "yyyy-MM-dd hh:mm" %>
 			    <span class="add-on">
 			      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
 			      </i>

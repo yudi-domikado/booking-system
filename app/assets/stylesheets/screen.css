@@ -763,6 +763,7 @@ textarea { overflow: auto; vertical-align: top; resize: vertical; }
 input[type="checkbox"], input[type="radio"] { box-sizing: border-box; }
 input[type="search"] { -webkit-appearance: textfield; -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box; }
 input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; }
+.s_submit{display: none;}
 
 .check-a { clear: both; width: 100%; font-size: 1.3em; }
 	#root .check-a > label { position: relative; float: none; width: 100%; padding: 0 0 0 31px; }
