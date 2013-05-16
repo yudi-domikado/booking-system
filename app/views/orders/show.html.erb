@@ -1,0 +1,30 @@
+<h1> ORDER ID : <%= @order.id %></h1>
+
+<table class="table">
+	<thead>
+		<tr>
+		  <th>Order Name</th>
+		  <th>Chec kIn/Check Out</th>
+		  <th>Sub Total</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<% total = 0 %>
+		<% @order.order_items.each do |order_item|%>
+		<% subtotal = order_item.price * order_item.quantity %>
+		<% total += subtotal %>
+		<tr>
+			<td>
+        <%= image_tag order_item.room.picture.url(:thumb) %>
+			<%= order_item.room.try(:name) %></td>
+			<td><%= order_item.check_in %></td>
+			<td><%= order_item.check_out %></td>
+			<td><%= number_to_currency(subtotal, format: "%u %n")  %></td>				
+	</tr>
+	</tbody>
+<% end %>
+</table>
+	<div class="btn btn-primary">
+		 Total Order: <%= total %> 
+	</div>

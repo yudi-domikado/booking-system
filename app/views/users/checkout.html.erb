@@ -1,23 +1,31 @@
-<h1>Rooms</h1>
-<table class="table">
-<thead>
-<tr>
-	<th>Picture</th>
-	<th>Name</th>
-	<th>Description</th>
-	<th>Price</th>
-	<th>Booking?</th>
-</tr>
-</thead>
-<tbody>
-<% @cart.cart_items.each do |cart_item| %>
-  <tr>
-  	<td><%= image_tag cart_item.picture.url(:thumb) %></td>
-    <td><%= cart_item.name %></td>
-    <td><%= cart_item.description %></td>
-    <td><%= cart_item.price %></td>
-    <td><%= link_to "Booking", room_path(cart_item) %></td>
-  </tr>
-<% end %>
-</tbody>
-</table>
+<h1>My Booking</h1>
+  <table class="table" style="float:left; border-top:1px solid;">
+    <thead>
+    <tr>
+      <th>Picture</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Check In</th>
+      <th>Check Out</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+      <tbody>
+      <% @cart.cart_items.each do |cart| %>
+        <tr>
+          <td><%= image_tag cart.room.picture.url(:thumb)  %></td>
+          <td><%= cart.room.try(:name)        %></td>
+          <td><%= cart.room.try(:description) %></td>
+          <td><%= cart.try(:check_in)    %></td>
+          <td><%= cart.try(:check_out)   %></td>
+          <td>
+            <%= form_for cart do |z|  %>
+            <%= link_to "Delete", cart_item_path(cart), :method => :delete, :class => 'btn btn-alert' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+  </table>
+<%= link_to "Back to Room", rooms_path, :class => 'btn btn-primary' %>
+
