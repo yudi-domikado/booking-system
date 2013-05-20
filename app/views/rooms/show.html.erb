@@ -1,44 +1,41 @@
-<div class="row">
-	<div class="span3">		
-<h3 >Facilities</h3>
-							
-									  <% @room.facilities.each do |f| %>	
-									    <%= f.name %>	
-									  <% end %>	
+<aside>
+  <form class="form-c">
+      <fieldset>
+        <legend>Book now</legend>
+        <h3><span>01. When?</span></h3>
+        <p class="date-a">
+          <span>
+            <%= label_tag(:fcb, "Date") %>
+            <%= text_field_tag "date", "", "id" => "fcc" %>
+          </span>
+        </p>
 
-	<%= form_tag carts_path, :class => 'form-c' do %>
-	<legend style="z-index: 16;">Book now</legend>
-	
-			<label>Check In</label>
-			  <div data-behaviour="datetimepicker1" class="input-append">
-			    <%= text_field_tag "check_in", "", "data-format" => "yyyy-MM-dd hh:mm" %>
-			    <span class="add-on">
-			      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-			      </i>
-			    </span>
-			  </div>
+        <h3><span>02. Duration</span></h3>
+        <p class="time-a">
+          <span>
+            <%= label_tag(:fcc, "Check In") %>
+            <%= text_field_tag "check_in", "", "class" => "timepick" %>
+          </span>
+          <span>
+            <%= label_tag(:fcd, "Check Out") %>
+            <%= text_field_tag "check_out", "", "class" => "timepick" %>
+          </span>             
+        </p>
 
-			<p style="margin:0;">&nbsp;</p>
-
-			<label>Check Out</label>
-			  <div data-behaviour="datetimepicker1" class="input-append">
-			    <%= text_field_tag "check_out", "", "data-format" => "yyyy-MM-dd hh:mm" %>
-			    <span class="add-on">
-			      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-			      </i>
-			    </span>
-			  </div>
-			<%= hidden_field_tag "room_id", @room.id %>
-			<%= submit_tag "BOOKING NOW" %>
-		<% end %>
-	</div>
-	<div class="span1"></div>
-	<div class="span5">
-		<h1><%= @room.name %></h1>
-		<%= image_tag @room.picture.url(:medium) %>
-		<p><br /><%= @room.description %></p>
-		<hr />
-		<h3>Price</h3>
-		<p><%= @room.price %></p>
-	</div>
-</div>
+        <h3><span>03. Facilities</span></h3>
+        <div>
+          <ul class="check-d">
+            <% @facilities.each do |facility| %>
+            <li>
+              <%= label_tag facility.name do %>
+                <%= check_box_tag facility.name %>
+                <%= facility.name %>
+              <% end %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+        <p class="submit"><button>Proceed</button></p>
+      </fieldset>
+    </form>
+</aside>

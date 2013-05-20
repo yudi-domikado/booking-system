@@ -1,0 +1,52 @@
+<header id="top">
+  <h1><a href="./" accesskey="h"></a></h1>
+  <nav id="skip">
+    <ul>
+      <li><a href="#nav" accesskey="n">Skip to navigation (n)</a></li>
+      <li><a href="#content" accesskey="c">Skip to content (c)</a></li>
+      <li><a href="#footer" accesskey="f">Skip to footer (f)</a></li>
+    </ul>
+  </nav>
+  <nav id="nav">
+    <ul class="primary">
+      <li>
+        <%= link_to root_path do %>
+          Home
+          <div class="fit-a"></div>
+        <% end %>
+      </li>
+      <li><%= link_to about_path do %>
+        About
+        <div class="fit-a"></div>
+      <% end %>
+      </li>
+      <li><%= link_to rooms_path do %>
+        Rooms
+        <div class="fit-a"></div>
+      <% end %>
+      </li>
+    </ul>
+    <p class="link-a">
+      <% if user_signed_in? %>
+        Sign in as <u><%= current_user.name %></u> &nbsp;&nbsp;&nbsp; <%= link_to "My Booking", carts_path %> <%= link_to "Edit My Account", edit_user_registration_path %> 
+       <%= link_to "Sign Out", destroy_user_session_path, :method => 'delete' %>
+      <% else %>
+        <%= link_to "Sign In", new_user_session_path %> <%= link_to "Sign Up", new_user_registration_path %>
+      <% end %>
+    </p>
+  </nav>
+
+
+    <%= form_tag(rooms_path, :method => :get, :id => 'search') do %>
+      <fieldset>
+        <legend>Search</legend>
+        <p>
+          <label for="sa"></label>
+          <%= text_field_tag :search, (params[:search]), :id => 'sa', :placeholder => 'Search..' %>
+          <%= submit_tag "search", :class=> 's_submit', :name => nil %>
+        </p>
+      </fieldset>
+    <% end %>
+
+  <p class="tel">Call us today <span>(84) - 868 868 888</span></p>
+</header> 

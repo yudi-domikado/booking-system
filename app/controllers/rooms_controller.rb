@@ -7,6 +7,7 @@ class RoomsController < ApplicationController
 	end
 
 	def show
+	    @facilities = Facility.all
 		@room = Room.find(params[:id])
 	end
 end
