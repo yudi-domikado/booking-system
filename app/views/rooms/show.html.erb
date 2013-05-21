@@ -1,5 +1,5 @@
 <aside>
-  <form class="form-c">
+     <%= form_tag carts_path, :class => 'form-c' do %>
       <fieldset>
         <legend>Book now</legend>
         <h3><span>01. When?</span></h3>
@@ -14,12 +14,13 @@
         <p class="time-a">
           <span>
             <%= label_tag(:fcc, "Check In") %>
-            <%= text_field_tag "check_in", "", "class" => "timepick" %>
+            <%= text_field_tag "start_time", "", "class" => "timepick" %>
           </span>
+          <p style="margin:0; line-height:0;">&nbsp;</p>
           <span>
             <%= label_tag(:fcd, "Check Out") %>
-            <%= text_field_tag "check_out", "", "class" => "timepick" %>
-          </span>             
+            <%= text_field_tag "end_time", "", "class" => "timepick" %>
+          </span>            
         </p>
 
         <h3><span>03. Facilities</span></h3>
@@ -36,6 +37,8 @@
           </ul>
         </div>
         <p class="submit"><button>Proceed</button></p>
+        <%= hidden_field_tag "room_id", @room.id %>
+        <p class="submit"><button><%= submit_tag "BOOKING NOW" %></button></p>
       </fieldset>
-    </form>
+    <% end %>
 </aside>

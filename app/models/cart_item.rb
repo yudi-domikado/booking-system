@@ -1,24 +1,24 @@
 class CartItem < ActiveRecord::Base
   # attr_accessible :title, :body
-  attr_accessible :cart_id, :check_in, :check_out, :room_id
+  attr_accessible :cart_id, :start_time, :end_time, :room_id
   belongs_to :cart
   belongs_to :room
-  validate :check_room
-  validates_presence_of :check_in
-  validates_presence_of :check_out
+  validate :check_time
+  validates_presence_of :start_time
+  validates_presence_of :end_time
 
-  def check_room
-  	if check_in.present?
-  	  if check_in < Time.now
-  	  	errors.add("Check In", "should be greater than now")
+  def check_time
+  	if start_time.present?
+  	  if start_time < Time.now
+  	  	errors.add("Start Time", "should be greater than now")
   	  end
-  	elsif check_out.present?
-  	  if check_out < Time.now
-  	  	errors.add("Check Out", "should be greater than now")
+  	elsif end_time.present?
+  	  if end_time < Time.now
+  	  	errors.add("End Time", "should be greater than now")
   	  end
   	end
-  	if check_in && check_out && check_in > check_out
-  		errors.add("Check Out", "should be greater than check in")
+  	if start_time && end_time && start_time > end_time
+  		errors.add("End Time", "should be greater than Start Time")
   	end
   end
 end
