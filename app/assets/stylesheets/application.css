@@ -47,3 +47,19 @@ input{
 li.ui-timepicker-selected, .ui-timepicker-list li:hover, .ui-timepicker-list .ui-timepicker-selected:hover{
 	background: #CE260C !important;
 }
+
+.alert-succes{
+    color: green;
+    display: block;
+    font-size: 20px;
+    margin: 0 auto;
+    width: 950px;
+}
+
+.alert-error{
+    color: green;
+    display: block;
+    font-size: 20px;
+    margin: 0 auto;
+    width: 950px;
+}
