@@ -50,7 +50,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 /* 2. Layout
 /*-------------------------------------------------------------------------------------------*/
 #root { overflow: hidden; position: relative; z-index: 1; background: #fff; }
-	#top { position: relative; width: 100%; height: 72px; margin: 0 0 59px; border-top: 4px solid #ff5f46; border-bottom: 1px solid #d9d9d9; background: #f2f2f2; z-index:2; }
+	#top { position: relative; width: 100%; height: 72px; margin: 0 0 84px; border-top: 4px solid #ff5f46; border-bottom: 1px solid #d9d9d9; background: #f2f2f2; z-index:2; }
 	#top:after { content: ""; display: block; overflow: hidden; clear: both; height: 0; }
 		#top h1 { width: 960px; height: 50px; margin: 0 auto; padding: 12px 0 0; }
 			#top h1 a { display: block; overflow: hidden; position: relative; left: 1px; width: 176px; height: 100%; background: url(logo.png) no-repeat; text-indent: -3000em; }
@@ -102,7 +102,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 		#breadcrumbs li { display: inline; position: relative; left: 10px; padding: 0 11px 0 12px; background: url(sprite-a.png) 0 -420px no-repeat; font-size: 1.2em; }
 		#breadcrumbs li:first-child { padding-left: 0; background: none; }
 		#breadcrumbs li a { color: #8e8e8e; }
-	#content { width: 960px; min-width: 960px; margin: 0 auto; padding: 0 0 38px; }
+	#content { width: 960px; min-width: 960px; min-height: 380px; margin: 0 auto; padding: 0 0 38px; }
+	#content h1 { font-size: 2.6em; line-height: 30px; }
 	#content:after { content: ""; display: block; overflow: hidden; clear: both; height: 0; }
 	#root > .vcard.a { margin: 0; padding: 7px 0 16px; border: 0; }
 		#root > .vcard.a h2, #root > .vcard.a h3, #root > .vcard.a h4 { margin: 0 0 8px; color: #4a4a4a; font-size: 2.4em; }
