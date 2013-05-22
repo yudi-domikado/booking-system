@@ -1,0 +1,72 @@
+<article id="content" class="cols-c">
+  <section id="content" class="cols-e">
+    <article class="news-e">
+  <h1>Confirm Your Booking Room</h1>
+  <br/>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Picture</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+        <tbody>  
+        <% @cart.cart_items.each do |cart_item| %>
+          <tr>
+            <td>
+              <%= image_tag cart_item.room.picture.url(:thumb)  %>
+            </td>
+            <td>
+              <%= cart_item.room.name %>
+            </td>
+            <td width="40%">
+              <%= cart_item.room.description %>
+            </td>
+            <td>
+              <%= number_to_currency(cart_item.room.price, unit: "Rp.", format: "%u %n") %>
+            </td>
+          </tr>
+        
+        </tbody>
+    </table>
+    <ul class="list-c">
+      <li><span> Check in Date </span>
+          <%= cart_item.check_in_date.strftime('%d-%B-%Y') %>
+      </li>
+      <li><span>Start Time</span>
+          <%= cart_item.start_time.strftime('%H:%M:%S') %>
+      </li>
+      <li><span>End Time</span>        
+          <%= cart_item.end_time.strftime('%H:%M:%S') %>
+      </li>
+    </ul>
+    <% end %>
+    <%= form_tag orders_path, :method => :post do %>
+    <%= submit_tag "Approve?", :class => 'link-a' %>
+    <% end %>
+</article>
+  <aside>
+          <div class="tabs-b">
+            <div>
+              <div class="news-f">
+                <h2 style="text-align:center;">OUR ROOMS</h2>
+                <article>
+                  <figure><img alt=".jpg?1369211634" src="/system/rooms/pictures/000/000/001/medium/.jpg?1369211634" /></figure>
+                  <p>Large</p>
+                  <p><b><a href="/rooms/1">Booking Now</a></b></p>
+                </article>
+                <article>
+                  <figure><img alt="Meeting-room_8" src="/system/rooms/pictures/000/000/002/medium/Meeting-room_8.jpg?1369211635" /></figure>
+                  <p>Medium</p>
+                  <p><b><a href="/rooms/2">Booking Now</a></b></p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </aside>
+</section>
+</article>
+
+
