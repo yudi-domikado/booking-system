@@ -8,7 +8,7 @@ class Room < ActiveRecord::Base
   has_many :facilities
   attr_accessible :name, :description, :price, :picture, :user_id
   has_attached_file :picture, 
-                    :styles => {:large => "693xauto>", :medium => "250x250>", :thumb => "150x150>" }, 
+                    :styles => {:large => "693xauto>", :medium => "66x50>", :thumb => "150x150>" }, 
                     :default_url => "/images/missing.png"
 
 	def self.search(search) #search yang didalam kurung adalah parameter yang di controller

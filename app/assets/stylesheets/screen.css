@@ -103,7 +103,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 		#breadcrumbs li:first-child { padding-left: 0; background: none; }
 		#breadcrumbs li a { color: #8e8e8e; }
 	#content { width: 960px; min-width: 960px; min-height: 380px; margin: 0 auto; padding: 0 0 38px; }
-	#content h1 { font-size: 2.6em; line-height: 30px; }
+	#content h1 { font-size: 22px; line-height: 41px; color: #088AD5;}
 	#content:after { content: ""; display: block; overflow: hidden; clear: both; height: 0; }
 	#root > .vcard.a { margin: 0; padding: 7px 0 16px; border: 0; }
 		#root > .vcard.a h2, #root > .vcard.a h3, #root > .vcard.a h4 { margin: 0 0 8px; color: #4a4a4a; font-size: 2.4em; }
@@ -392,7 +392,7 @@ html.a { }
 .news-f { color: #444; font-family: Arial, Helvetica, sans-serif; line-height: 1.525; }
 	.news-f article { overflow: hidden; position: relative; padding: 14px 17px 12px; border-top: 1px solid #e2e2e2; }
 	.news-f article:first-child { border: 0; }
-		.news-f article:nth-child(2n), .news-f article:nth-child(2n) a { color: #ff5f46; }
+		.news-f article:nth-child(2n), .news-f article:nth-child(2n) a {}
 		.news-f article > .fit-a { display: block; position: absolute; left: 0; top: 0; width: 100%; height: 1px; background: #fff; }
 	.news-f a { color: #444; }
 	.news-f figure { float: left; margin: 0 13px 0 0; padding: 2px 0 0; }
