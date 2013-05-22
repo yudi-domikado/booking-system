@@ -49,8 +49,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 /*-------------------------------------------------------------------------------------------*/
 /* 2. Layout
 /*-------------------------------------------------------------------------------------------*/
-#root { overflow: hidden; position: relative; z-index: 1; background: #fff; }
-	#top { position: relative; width: 100%; height: 72px; margin: 0 0 59px; border-top: 4px solid #ff5f46; border-bottom: 1px solid #d9d9d9; background: #f2f2f2; z-index:2; }
+#root { background: url(featured-a.jpg) no-repeat !important; overflow: hidden; position: relative; z-index: 1; background: #fff; }
+	#top { position: relative; width: 100%; height: 91px; margin: 0 0 84px; border-top: 4px solid #ff5f46; border-bottom: 1px solid #d9d9d9; background: #f2f2f2; z-index:2; }
 	#top:after { content: ""; display: block; overflow: hidden; clear: both; height: 0; }
 		#top h1 { width: 960px; height: 50px; margin: 0 auto; padding: 12px 0 0; }
 			#top h1 a { display: block; overflow: hidden; position: relative; left: 1px; width: 176px; height: 100%; background: url(logo.png) no-repeat; text-indent: -3000em; }
@@ -63,7 +63,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 			.boxshadow #nav > ul.primary { box-shadow: 0 1px 1px #d1d1d1; -moz-box-shadow: 0 1px 1px #d1d1d1; -webkit-box-shadow: 0 1px 1px #d1d1d1; }
 				#nav > ul.primary > li { position: relative; float: left; margin: 0; padding: 0 0 0 26px; background: none; font-size: 1.4em; text-shadow: 1px 1px 1px #b83d29; text-transform: uppercase; }
 				#nav > ul.primary > li > a { display: block; position: relative; float: left; color: #fff; line-height: 40px; text-decoration: none; }
-				#nav > ul.primary > li > a > .fit-a { display: block; position: absolute; left: -1px; bottom: 0; width: 100%; height: 4px; border: 1px solid #b51a02; background: #c11c02; opacity: 0; filter: alpha(opacity = 0); }
+				#nav > ul.primary > li > a > .fit-a { display: block; position: absolute; left: -1px; bottom: -28px; width: 100%; height: 4px; border: 1px solid #b51a02; background: #c11c02; opacity: 0; filter: alpha(opacity = 0); }
 				#nav > ul.primary > li > a > .fit-a { border-radius: 2px 2px 0 0; -moz-border-radius: 2px 2px 0 0; -webkit-border-radius: 2px 2px 0 0; }
 					#nav > ul.primary > li > a:hover > .fit-a, #nav > ul.primary > li > a:focus > .fit-a, #nav > ul.primary > li > a:active > .fit-a, #nav > ul.primary > li.active > a > .fit-a, #nav > ul.primary > li:hover > a > .fit-a { opacity: 1; filter: alpha(opacity = 100); }
 			#nav > ul.primary > li > ul, .js #nav > ul.primary > li:hover > ul { display: none; position: absolute; left: 25px; top: 40px; list-style: none; width: 246px; margin: 0; padding: 10px 17px 9px; background: #f2f2f2; font-family: Arial, Helvetica, sans-serif; font-weight: 500; text-shadow: none; text-transform: none; }
@@ -102,7 +102,22 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 		#breadcrumbs li { display: inline; position: relative; left: 10px; padding: 0 11px 0 12px; background: url(sprite-a.png) 0 -420px no-repeat; font-size: 1.2em; }
 		#breadcrumbs li:first-child { padding-left: 0; background: none; }
 		#breadcrumbs li a { color: #8e8e8e; }
-	#content { width: 960px; min-width: 960px; margin: 0 auto; padding: 0 0 38px; }
+	#content { 
+		color: white;
+	    font-size: 15px;
+	    margin: 0 auto;
+	    min-width: 960px;
+	    min-height: 400px;
+	    padding: 0 0 38px;
+	    text-shadow: 1px 1px 1px gray;
+	    width: 960px;
+	}
+
+	#content h1{
+		color: white;
+		font-size: 1.6em;
+		text-shadow: 1px 1px 1px gray;
+	}
 	#content:after { content: ""; display: block; overflow: hidden; clear: both; height: 0; }
 	#root > .vcard.a { margin: 0; padding: 7px 0 16px; border: 0; }
 		#root > .vcard.a h2, #root > .vcard.a h3, #root > .vcard.a h4 { margin: 0 0 8px; color: #4a4a4a; font-size: 2.4em; }
@@ -180,7 +195,7 @@ html.a { }
 .cols-a { width: 100%; }
 .cols-a:after { content: ""; display: block; overflow: hidden; clear: both; height: 0; }
 	.cols-a > *:first-child { float: left; width: 693px; }
-	.cols-a > aside { position: relative; top: -1px; float: right; width: 202px; padding: 14px 19px 0; border: 1px solid #eee; background: #fbfbfb; color: #666; }
+	.cols-a > aside { position: relative; top: -1px; float: right; width: 245px; border: 1px solid #eee; background: #fbfbfb; color: #666; }
 	.cols-a > aside { box-shadow: 0 0 1px #e6e6e6; -moz-box-shadow: 0 0 1px #e6e6e6; -webkit-box-shadow: 0 0 1px #e6e6e6; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
 	
 .cols-b { width: 100%; }
@@ -460,7 +475,7 @@ html.a { }
 .slider-a { overflow: hidden; position: relative; margin: 0 0 17px; }
 .slider-a { border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
 	.js .slider-a figure { margin: 0; }
-	.slider-a .bx-pager { position: absolute; right: 19px; bottom: 15px; z-index: 2; }
+	.slider-a .bx-pager { display: none; position: absolute; right: 19px; bottom: 15px; z-index: 2; }
 		.slider-a .bx-pager .bx-pager-item { float: left; padding: 0 9px 0 0; }
 		.slider-a .bx-pager .bx-pager-item a { display: block; overflow: hidden; float: left; width: 11px; height: 11px; background: url(sprite-a.png) -79px -45px no-repeat; text-indent: -3000em; }
 		.slider-a .bx-pager .bx-pager-item a.active { background-position: -94px -45px; }
@@ -981,10 +996,10 @@ svg:not(:root) { overflow: hidden; }
 ::selection { background: #ff5f46; color: #fff; text-shadow: none; }
 ::-moz-selection { background: #ff5f46; color: #fff; text-shadow: none; }
 
-@font-face { font-family: 'Raleway_bold'; src: url('fonts/raleway-bold.eot'); src: url('fonts/raleway-bold.eot@#iefix') format('embedded-opentype'), url('fonts/raleway-bold.woff') format('woff'), url('fonts/raleway-bold.ttf') format('truetype'), url('fonts/raleway-bold.svg#ralewaybold') format('svg'); font-weight: 500; font-style: normal; }
-@font-face { font-family: 'Raleway'; src: url('fonts/raleway-regular.eot'); src: url('fonts/raleway-regular.eot@#iefix') format('embedded-opentype'), url('fonts/raleway-regular.woff') format('woff'), url('fonts/raleway-regular.ttf') format('truetype'), url('fonts/raleway-regular.svg#ralewayregular') format('svg'); font-weight: 500; font-style: normal; }
-@font-face { font-family: 'Lithos_black'; src: url('fonts/lithospro-black.eot'); src: url('fonts/lithospro-black.eot@#iefix') format('embedded-opentype'), url('fonts/lithospro-black.woff') format('woff'), url('fonts/lithospro-black.ttf') format('truetype'), url('fonts/lithospro-black.svg#lithos_problack') format('svg'); font-weight: 500; font-style: normal; }
-@font-face { font-family: 'Lithos'; src: url('fonts/lithospro-regular.eot'); src: url('fonts/lithospro-regular.eot@#iefix') format('embedded-opentype'), url('fonts/lithospro-regular.woff') format('woff'), url('fonts/lithospro-regular.ttf') format('truetype'), url('fonts/lithospro-regular.svg#lithos_pro_regularregular') format('svg'); font-weight: 500; font-style: normal; }
+@font-face { font-family: 'Raleway_bold'; src: url('raleway-bold.eot'); src: url('raleway-bold.eot@#iefix') format('embedded-opentype'), url('raleway-bold.woff') format('woff'), url('raleway-bold.ttf') format('truetype'), url('raleway-bold.svg#ralewaybold') format('svg'); font-weight: 500; font-style: normal; }
+@font-face { font-family: 'Raleway'; src: url('raleway-regular.eot'); src: url('raleway-regular.eot@#iefix') format('embedded-opentype'), url('raleway-regular.woff') format('woff'), url('raleway-regular.ttf') format('truetype'), url('raleway-regular.svg#ralewayregular') format('svg'); font-weight: 500; font-style: normal; }
+@font-face { font-family: 'Lithos_black'; src: url('lithospro-black.eot'); src: url('lithospro-black.eot@#iefix') format('embedded-opentype'), url('lithospro-black.woff') format('woff'), url('lithospro-black.ttf') format('truetype'), url('lithospro-black.svg#lithos_problack') format('svg'); font-weight: 500; font-style: normal; }
+@font-face { font-family: 'Lithos'; src: url('lithospro-regular.eot'); src: url('lithospro-regular.eot@#iefix') format('embedded-opentype'), url('lithospro-regular.woff') format('woff'), url('lithospro-regular.ttf') format('truetype'), url('lithospro-regular.svg#lithos_pro_regularregular') format('svg'); font-weight: 500; font-style: normal; }
 
 
 /*-------------------------------------------------------------------------------------------*/

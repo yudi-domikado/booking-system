@@ -1,5 +1,4 @@
-class CartsController < ApplicationController
-
+class CartsController < ApplicationController  
   def index
     @cart = Cart.find_or_create_by_session_id(session_cart)
   end
