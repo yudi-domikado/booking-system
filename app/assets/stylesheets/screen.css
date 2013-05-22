@@ -593,7 +593,11 @@ sub { bottom: -0.25em; }
 .scheme-c { position: relative; padding: 0 0 32px; color: #1a90e0; font-size: 1.4em; }
 	#root .scheme-c > span { position: absolute; right: 0; top: -9px; color: #ff5f46; font-size: 3.3em; font-weight: 700; font-family: Arial, Helvetica, sans-serif; text-shadow: 1px 1px 0 #d6d6d6; }
 	#root .scheme-c > span span { position: relative; top: -13px; font-size: .6em; }
+<<<<<<< HEAD
 .scheme-d, #root .scheme-d { display: block; overflow: hidden; position: relative; width: 114px; height: 85px; padding: 30px 0 0 22px; background: url(sprite-a.png) 0 -780px no-repeat; color: #fff; font-size: 20px; font-family: Arial, Helvetica, sans-serif; font-weight: 700; text-shadow: 1px 1px 1px #ca4b37; text-align: center; }
+=======
+.scheme-d, #root .scheme-d { display: block; overflow: hidden; position: relative; width: 114px; height: 85px; padding: 18px 0 0 22px; background: url(sprite-a.png) 0 -780px no-repeat; color: #fff; font-size: 2em; font-family: Arial, Helvetica, sans-serif; font-weight: 700; text-shadow: 1px 1px 1px #ca4b37; text-align: center; }
+>>>>>>> d1ee6635a8209c8948cb0f3f749dd5c0511d4451
 .scheme-d, #root .scheme-d { border-radius: 0 6px 0 0; -moz-border-radius: 0 6px 0 0; -webkit-border-radius: 0 6px 0 0; }
 	#root .scheme-d.a { height: 75px; padding-top: 28px; }
 	#root .scheme-d.b { height: 77px; padding-top: 26px; }

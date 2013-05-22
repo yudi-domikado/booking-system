@@ -2,28 +2,33 @@
 <p>Your comfirmation number is <span>223686</span></p>          
 <article id="content" class="cols-d">
   <div>
-    <h3>Information</h3>
-    <h4 class="scheme-g">User Infomation</h4>
-    <ul class="list-c">
-      <li><span>Full Name</span> <%= current_user.name %></li>
-      <li><span>Email Address</span> <span class="email"><%= current_user.email %></span></li>
-    </ul>
-    <h4 class="scheme-g">Payment</h4>
-    <p>Lorem ipsum dolor sit saelas met, consecttur ads ipi deese cing elit. Mauris fringilla bibe endums. Lorem ipsum dolor sit saelas met, consecttur ads ipi deese cing elit. Mauris fringilla </p>
-    <h4 class="scheme-g">Special Request</h4>
-    <p>Lorem ipsum dolor sit saelas met, consecttur ads ipi deese cing elit. Mauris fringilla bibe endums. Lorem ipsum dolor sit saelas met, consecttur ads ipi deese cing elit. Mauris fringilla </p>
-    <p class="scheme-h">Grand Total : <span><span>$</span>790</span></p>
-    <p class="link-c"><a href="./">Reservation</a> <a href="./">Print receipt</a></p>
-
-      <% @cart.cart_items.each do |cart_item| %>
-        <li><span>Room</span><%= cart_item.room.try(:name) %></li>
-        <li><span>Price</span><%= cart_item.room.try(:price) %></li>
-        <li><span>Date</span><%= cart_item.check_in_date %></li>
-        <li><span>Check in</span><%= cart_item.start_time %></li>
-        <li><span>Check out</span><%= cart_item.end_time %></li>
+    <h3>Information</h3> 
+    <% if user_signed_in? %>
+      <h4 class="scheme-g">User Infomation</h4>
+      <ul class="list-c">
+        <li><span>Full Name</span> <%= current_user.name %></li>
+        <li><span>Email Address</span> <span class="email"><%= current_user.email %></span></li>
+    <% else %>
+      <h1><span>Hello,Guest!</span></h1>
+      <br/>
       <% end %>
-      
-
+    </ul>
+    <ul class="list-c">  
+      <% @cart.cart_items.each do |cart_item| %>
+        <li><span>Room Name</span><%= cart_item.room.name %></span></li>
+        <li><span>Picture</span>
+        <%= image_tag cart_item.room.picture.url(:medium) %>
+        </li>
+        <li><span>Room price</span><%= number_to_currency(cart_item.room.price, unit: "Rp.", format: "%u %n") %></span></li>
+        <li><span>Check in Date</span><%= cart_item.check_in_date.strftime('%d-%B-%Y') %></span></li>
+        <li><span>Start Time</span><%= cart_item.start_time.strftime('%H:%M:%S') %></span></li>
+        <li><span>End Time</span><%= cart_item.end_time.strftime('%H:%M:%S') %></span></li>     
+      <% end %>
+    </ul>  
+    <p class="link-c">
+    <%= link_to "Reservation", check_out_users_path %>
+    <!--   <a href="./">Print receipt</a> -->
+    </p>
   </div>
   <aside>
     <h3>Summary</h3>
