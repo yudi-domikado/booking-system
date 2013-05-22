@@ -14,7 +14,6 @@ Booking::Application.routes.draw do
   resources :carts
   resources :cart_items
   resources :topups
-  resources :events
   resources :orders
   root :to => 'pages#home'
   get "/about", :to => 'pages#about'

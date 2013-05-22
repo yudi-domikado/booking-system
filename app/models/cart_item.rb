@@ -1,6 +1,6 @@
 class CartItem < ActiveRecord::Base
   # attr_accessible :title, :body
-  attr_accessible :cart_id, :start_time, :end_time, :room_id
+  attr_accessible :cart_id, :room_id, :check_in_date, :start_time, :end_time, :price
   belongs_to :cart
   belongs_to :room
   validate :check_time

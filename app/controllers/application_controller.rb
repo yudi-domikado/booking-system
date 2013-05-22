@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   #buat testing id session dari browser
 
 	private
+  
 	def session_cart
 	  return session[:cart_id] if session[:cart_id]
 	  session[:cart_id] = request.session_options[:id]	
