@@ -7,13 +7,8 @@
         <%= image_tag kamar.picture.url(:thumb) %><figcaption></figcaption></figure>
     </header>
       <p><%= kamar.description %></p>
-<<<<<<< HEAD
       <p class="scheme-d"><span>Rp</span>
         <%= kamar.price %> <%= link_to "Booking", room_path(kamar) %></p>
-=======
-      <p class="scheme-d"><span>$</span>
-        <%= number_to_currency(kamar.price, unit: "Rp.", format: "%u %n") %> <%= link_to "Booking", room_path(kamar) %></p>
->>>>>>> d1ee6635a8209c8948cb0f3f749dd5c0511d4451
     <footer>
       <p class="link-b"><%= link_to "View Details", room_path(kamar) %></p>
     </footer>
