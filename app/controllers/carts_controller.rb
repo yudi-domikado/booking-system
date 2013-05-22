@@ -6,7 +6,7 @@ class CartsController < ApplicationController
 
   def create
     @cart_item = Cart.add_item(session_cart,params)
-    # flash[:alert] = @cart_item.errors.full_messages.uniq.to_sentence unless @cart_item.valid? 
+    flash[:alert] = @cart_item.errors.full_messages.uniq.to_sentence unless @cart_item.valid? 
     redirect_to carts_path  
   end
 

@@ -26,7 +26,11 @@
 $(document).ready(function() {
 	$('.timepick').timepicker({
 		'scrollDefaultNow': true,
-		'minTime': '8:00am',
-		'maxTime': '9:00pm'
+		'minTime': '1:00am',
+		'maxTime': '12:00am'
+	});
+
+	$('#check_in_date').datepicker({
+	    dateFormat: 'dd/mm/yy'
 	});
 });

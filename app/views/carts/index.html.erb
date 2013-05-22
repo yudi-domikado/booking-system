@@ -14,12 +14,13 @@
     <p>Lorem ipsum dolor sit saelas met, consecttur ads ipi deese cing elit. Mauris fringilla bibe endums. Lorem ipsum dolor sit saelas met, consecttur ads ipi deese cing elit. Mauris fringilla </p>
     <p class="scheme-h">Grand Total : <span><span>$</span>790</span></p>
     <p class="link-c"><a href="./">Reservation</a> <a href="./">Print receipt</a></p>
-      <% @cart.cart_items do |cart_item| %>
+
+      <% @cart.cart_items.each do |cart_item| %>
         <li><span>Room</span><%= cart_item.room.try(:name) %></li>
-        <li><span>Price</span> $360</li>
-        <li><span>Date</span><%= cart_item.try(:check_in_date) %></li>
-        <li><span>Check in</span><%= cart_item.try(:start_time) %></li>
-        <li><span>Check out</span><%= cart_item.try(:end_time) %></li>
+        <li><span>Price</span><%= cart_item.room.try(:price) %></li>
+        <li><span>Date</span><%= cart_item.check_in_date %></li>
+        <li><span>Check in</span><%= cart_item.start_time %></li>
+        <li><span>Check out</span><%= cart_item.end_time %></li>
       <% end %>
       
 
