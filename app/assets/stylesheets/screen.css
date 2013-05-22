@@ -180,7 +180,7 @@ html.a { }
 .cols-a { width: 100%; }
 .cols-a:after { content: ""; display: block; overflow: hidden; clear: both; height: 0; }
 	.cols-a > *:first-child { float: left; width: 693px; }
-	.cols-a > aside { position: relative; top: -1px; float: right; width: 202px; padding: 14px 19px 0; border: 1px solid #eee; background: #fbfbfb; color: #666; }
+	.cols-a > aside { position: relative; top: -1px; float: right; width: 245px; border: 1px solid #eee; background: #fbfbfb; color: #666; }
 	.cols-a > aside { box-shadow: 0 0 1px #e6e6e6; -moz-box-shadow: 0 0 1px #e6e6e6; -webkit-box-shadow: 0 0 1px #e6e6e6; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
 	
 .cols-b { width: 100%; }
@@ -460,7 +460,7 @@ html.a { }
 .slider-a { overflow: hidden; position: relative; margin: 0 0 17px; }
 .slider-a { border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
 	.js .slider-a figure { margin: 0; }
-	.slider-a .bx-pager { position: absolute; right: 19px; bottom: 15px; z-index: 2; }
+	.slider-a .bx-pager { display: none; position: absolute; right: 19px; bottom: 15px; z-index: 2; }
 		.slider-a .bx-pager .bx-pager-item { float: left; padding: 0 9px 0 0; }
 		.slider-a .bx-pager .bx-pager-item a { display: block; overflow: hidden; float: left; width: 11px; height: 11px; background: url(sprite-a.png) -79px -45px no-repeat; text-indent: -3000em; }
 		.slider-a .bx-pager .bx-pager-item a.active { background-position: -94px -45px; }
