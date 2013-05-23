@@ -758,6 +758,20 @@ ul { list-style: none; padding-left: 0; }
 legend, caption { display: none; padding: 0; border: 0; white-space: normal; }
 fieldset, hr { border-width: 0; }
 button, input[type="submit"] { padding: 0 8px; overflow: visible; cursor: pointer; -webkit-appearance: button; } button::-moz-focus-inner { padding: 0; border: 0; outline: none; }
+input[type="submit"] { 
+	background: url("sprite-a.png") repeat-x scroll 0 -289px transparent;
+    color: #FFFFFF;
+    display: inline-block;
+    height: 21px;
+    line-height: 21px;
+    margin: 0 10px 0 0;
+    min-width: 50px;
+    width: 140px;
+    padding: 0 9px;
+    position: relative;
+    text-align: center;
+    text-shadow: 1px 1px 1px #B83D29;
+    }
 textarea { overflow: auto; vertical-align: top; resize: vertical; }
 input[type="checkbox"], input[type="radio"] { box-sizing: border-box; }
 input[type="search"] { -webkit-appearance: textfield; -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box; }
@@ -1098,5 +1112,5 @@ svg:not(:root) { overflow: hidden; }
 
 /*CUSTOM*/
 .s_submit{
-	display: none;
+	display: none !important;
 }

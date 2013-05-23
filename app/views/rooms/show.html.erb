@@ -15,9 +15,6 @@
               <div>
                 <p><%= @room.description %></p>
               </div>
-              <div>
-              
-              </div>
             </div>
           </div>
         </article>
@@ -57,9 +54,8 @@
             <% end %>
           </ul>
         </div>
-        <p class="submit"><button>Proceed</button></p>
         <%= hidden_field_tag "room_id", @room.id %>
-        <p class="submit"><button><%= submit_tag "BOOKING NOW" %></button></p>
+        <p class="submit"><button>Proceed</button></p>
       </fieldset>
     <% end %>
 </aside>
