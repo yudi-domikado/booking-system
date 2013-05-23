@@ -51,7 +51,7 @@
             <li>
               <%= label_tag facility.name do %>
                 <%= check_box_tag facility.name %>
-                <%= facility.name %>
+                <%= facility.name %><%= yesno(facility.unlimited) %>
               <% end %>
             </li>
             <% end %>
