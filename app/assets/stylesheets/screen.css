@@ -1029,7 +1029,8 @@ svg:not(:root) { overflow: hidden; }
 .double-a > *:first-child { margin-bottom: 2em; }
 .double-a > .fit-a { position: absolute; left: -3000em; top: -3000em; }
 .double-b > *, .double-b > *:first-child { float: none; }
-
+#content .cols-ccd{ font-size: 12px !important; }
+#content .cols-ccd { font-size: 12px !important; }
 .module-a .rating-a { top: 0; margin-bottom: 3px; }
 .news-a article footer .link-b { float: left; width: 100%; }
 .scroller-a { width: 100%; }
