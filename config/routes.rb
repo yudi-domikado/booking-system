@@ -17,6 +17,7 @@ Booking::Application.routes.draw do
   resources :orders
   root :to => 'pages#home'
   get "/about", :to => 'pages#about'
+  get "/contact", :to => 'pages#contact'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
