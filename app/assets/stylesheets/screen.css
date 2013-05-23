@@ -263,11 +263,11 @@ html.a { }
 			.bar-b.ui-slider-horizontal .ui-slider-range-max { right: 0; }
 	.bar-b span { display: block; padding: 13px 0 0; }
 
-.map-a { overflow: hidden; position: relative; width: 622px; height: 318px; }
+.map-a { overflow: hidden; width: 622px; height: 318px; }
 .map-a { border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; }
 	.map-a > *, .map-a > .inner > * { display: block; width: 622px; height: 318px; }
-	.map-a .fit-a { display: block; position: absolute; left: 0; top: 0; width: 622px; height: 318px; }
-	.map-a .fit-a { box-shadow: inset 0 0 1px rgba(0,0,0,0.35); border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; }
+	.map-a .fit-a { display: block; left: 0; top: 0; width: 622px; height: 318px; }
+	.map-a .fit-a { border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; }
 
 .module-a { overflow: hidden; position: relative; min-height: 25px; margin: 0 0 22px; padding: 13px 150px 0 60px; background: #f2f2f2; }
 .module-a { box-shadow: 1px 1px 0 #ccc; -moz-box-shadow: 1px 1px 0 #ccc; -webkit-box-shadow: 1px 1px 0 #ccc; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
@@ -758,6 +758,20 @@ ul { list-style: none; padding-left: 0; }
 legend, caption { display: none; padding: 0; border: 0; white-space: normal; }
 fieldset, hr { border-width: 0; }
 button, input[type="submit"] { padding: 0 8px; overflow: visible; cursor: pointer; -webkit-appearance: button; } button::-moz-focus-inner { padding: 0; border: 0; outline: none; }
+input[type="submit"] { 
+	background: url("sprite-a.png") repeat-x scroll 0 -289px transparent;
+    color: #FFFFFF;
+    display: inline-block;
+    height: 21px;
+    line-height: 21px;
+    margin: 0 10px 0 0;
+    min-width: 50px;
+    width: 140px;
+    padding: 0 9px;
+    position: relative;
+    text-align: center;
+    text-shadow: 1px 1px 1px #B83D29;
+    }
 textarea { overflow: auto; vertical-align: top; resize: vertical; }
 input[type="checkbox"], input[type="radio"] { box-sizing: border-box; }
 input[type="search"] { -webkit-appearance: textfield; -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box; }
@@ -1098,5 +1112,5 @@ svg:not(:root) { overflow: hidden; }
 
 /*CUSTOM*/
 .s_submit{
-	display: none;
+	display: none !important;
 }
