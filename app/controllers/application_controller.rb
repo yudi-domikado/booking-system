@@ -20,5 +20,5 @@ class ApplicationController < ActionController::Base
 	end
 
 
-  #cara untuk membuat method untuk share ke anak2nya 
+  #cara untuk membuat method untuk share ke anak2nya
 end
