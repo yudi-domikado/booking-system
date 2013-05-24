@@ -48,7 +48,7 @@ li.ui-timepicker-selected, .ui-timepicker-list li:hover, .ui-timepicker-list .ui
 	background: #CE260C !important;
 }
 
-.alert-succes{
+.alert-success{
     color: green;
     display: block;
     font-size: 20px;
@@ -57,7 +57,7 @@ li.ui-timepicker-selected, .ui-timepicker-list li:hover, .ui-timepicker-list .ui
 }
 
 .alert-error{
-    color: green;
+    color: red;
     display: block;
     font-size: 20px;
     margin: 0 auto;

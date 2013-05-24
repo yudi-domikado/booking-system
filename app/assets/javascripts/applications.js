@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery.min
 //= require jquery.1.9.min
+//= require_self
 //= require jquery-ui.min
 //= require active_admin
 //= require bootstrap
@@ -20,7 +21,6 @@
 //= require mobile
 //= require scripts
 //= require jquery.timepicker
-//= require_self
 
 
 $(document).ready(function() {
@@ -33,5 +33,9 @@ $(document).ready(function() {
 
 	$('#check_in_date').datepicker({
 	    dateFormat: 'dd/mm/yy'
+	});
+
+	$('.close').click(function() {
+		$('.alert').fadeOut('medium');
 	});
 });
