@@ -29,5 +29,5 @@ class OrderItem < ActiveRecord::Base
                    present?
         self.errors.add("room", "is already used by another company")
       end
-      end
     end
+end
