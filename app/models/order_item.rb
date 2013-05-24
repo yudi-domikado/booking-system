@@ -16,5 +16,4 @@ class OrderItem < ActiveRecord::Base
         self.errors.add("room", "is already used by another company")
       end
     end
-
 end
