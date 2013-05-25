@@ -1,11 +1,12 @@
 class CartItem < ActiveRecord::Base
   # attr_accessible :title, :body
-  attr_accessible :cart_id, :room_id, :check_in_date, :start_time, :end_time, :price
+  attr_accessible :cart_id, :room_id, :check_in_date, :start_time, :end_time, :price , :facility_ids
   belongs_to :room
   belongs_to :cart
   validate :check_time
   validates_presence_of :start_time
   validates_presence_of :end_time
+  before_destroy :facility
 
   def check_time
 
@@ -32,5 +33,9 @@ class CartItem < ActiveRecord::Base
                  present?
       self.errors.add("room", "is already used by another company")
     end
+  end
+
+  def facility
+    Facility.where("id IN (?)", facility_ids.to_s.split(","))
   end
 end

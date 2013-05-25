@@ -9,6 +9,7 @@ class Cart < ActiveRecord::Base
 	  cart_item = cart.cart_items.find_or_initialize_by_room_id(params[:room_id])
 	  cart_item.check_in_date = params[:check_in_date]
 	  cart_item.start_time = params[:start_time]
+	  cart_item.facility_ids = params[:facility_ids].join(",") if params[:facility_ids].present?	
 	  cart_item.end_time = params[:end_time]
 	  cart_item.price = cart_item.room.price
 	  cart_item.save
