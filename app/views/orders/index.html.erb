@@ -1,46 +1,39 @@
-
-
 <div id="content" class="clearfix">
   <div id="left-area" class="clearfix full-wide"> 
-
-<h1>Order <span>List</span></h1>
-
-<table class="table">
-  <thead >
-  	<tr>
- 	<th>ID</th>
- 	<th>Total</th>
-  <th>User</th>
-  <th>Menu</th>
-  <th>Picture</th>
-    </tr>
-  </thead>
-  <tbody>
-
-		<% @orders.each do |order| %>
-    <!-- dalam masalah loop..yang di loop tr nya -->
-    		<tr>
-    			<td><%= link_to order.id, order_path(order) %></td>
-					<td>
-					  <%= number_to_currency(order.ammount, format: "%u %n") %>
-					</td>
-          <td>
-            <%= order.user.name %>
-          </td>
-            <% order.order_items.each do |order_item| %>  
-          <td>
-            <%= order_item.room.name  %> 
-          </td> 
-          <td>
-            <%= image_tag order_item.room.picture.url(:thumb)%>
-          </td>
+    <h1>Order <span>List</span></h1>
+    <% @orders.each do |order| %>
+    <table class="table">
+    <thead >
+      <tr>
+       	<th>ID</th>
+       	<th>Total</th>
+        <th>User</th>
+        <th>Menu</th>
+        <th>Picture</th>
+      </tr>
+    </thead>
+    <tbody>
+  		<tr>
+  			<td>
+          <%= link_to order.id, order_path(order) %>
+        </td>
+				<td>
+				  <%= number_to_currency(order.ammount, format: "%u %n") %>
+				</td>
+        <td>
+          <%= order.user.name %>
+        </td>
+          <% order.order_items.each do |order_item| %>  
+        <td>
+          <%= order_item.room.name  %> 
+        </td> 
+        <td>
+          <%= image_tag order_item.room.picture.url(:thumb)%>
+        </td>
           <% end %>
-
-				</tr>
-	</tbody>
-
-<% end %>
-
-</table>
-</div>
+			</tr>
+	  </tbody>
+    </table>
+    <% end %>
+  </div>
 </div>
