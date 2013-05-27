@@ -10,4 +10,14 @@ class CartsController < ApplicationController
     redirect_to carts_path
   end
 
+  def edit
+	@cart = Cart.find(params[:id])
+  end
+
+  def update
+	@cart = cart.find(params[:id])
+	@cart.update_attributes(params[:cart])
+	redirect_to carts_path
+  end
+
 end
