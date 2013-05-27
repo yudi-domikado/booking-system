@@ -13,6 +13,8 @@
   <th>User</th>
   <th>Menu</th>
   <th>Picture</th>
+  <th>Start Time</th>
+  <th>End Time</th>
     </tr>
   </thead>
   <tbody>
@@ -33,6 +35,12 @@
           </td> 
           <td>
             <%= image_tag order_item.room.picture.url(:thumb)%>
+          </td>
+          <td>
+            <%= order_item.start_time.strftime('%H:%M:%S') %>
+          </td>
+          <td>
+            <%= order_item.end_time.strftime('%H:%M:%S') %>
           </td>
           <% end %>
 
