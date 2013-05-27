@@ -103,7 +103,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 		#breadcrumbs li:first-child { padding-left: 0; background: none; }
 		#breadcrumbs li a { color: #8e8e8e; }
 	#content { width: 960px; min-width: 960px; min-height: 380px; margin: 0 auto; padding: 0 0 38px; }
-	#content h1 { font-size: 22px; line-height: 41px; color: #088AD5;}
+	#content h1 { font-size: 22px; line-height: 41px; color: #088AD5; }
 	#content:after { content: ""; display: block; overflow: hidden; clear: both; height: 0; }
 	#root > .vcard.a { margin: 0; padding: 7px 0 16px; border: 0; }
 		#root > .vcard.a h2, #root > .vcard.a h3, #root > .vcard.a h4 { margin: 0 0 8px; color: #4a4a4a; font-size: 2.4em; }
@@ -356,7 +356,7 @@ html.a { }
 		.news-d article header figure { overflow: hidden; position: relative; left: -1px; top: -1px; width: 298px; margin: 0 0 16px -19px; padding: 0 0 1px; border-bottom: 1px solid #f3f3f3; }
 			.news-d article header figure img { display: block; position: relative; border-bottom: 1px solid #c9c9c9; }
 			.news-d article header figure img { border-radius: 5px 5px 0 0; -moz-border-radius: 5px 5px 0 0; -webkit-border-radius: 5px 5px 0 0; }
-			.news-d article header figure > .fit-a { display: block; position: absolute; left: 1px; bottom: 0; width: 298px; height: 1px; background: #e1e1e1; }
+			.news-d article header figure > .fit-a { display: none; position: absolute; left: 1px; bottom: 0; width: 298px; height: 1px; background: #e1e1e1; }
 		.news-d article header p { color: #1a90e0; font-size: 1.1em; }
 		.news-d article header .rating-a { position: relative; top: 2px; float: left; margin: 0 6px 0 0; }
 		.ie7 .news-d article header .rating-a { top: 1px; }
@@ -398,7 +398,7 @@ html.a { }
 	.news-f figure { float: left; margin: 0 13px 0 0; padding: 2px 0 0; }
 		.news-f figure img { display: block; position: relative; }
 		.news-f figure img { border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
-		.news-f h2{ color: #088AD5; }
+		.news-f h2{ color: #088AD5; margin: 13px 0;}
 	.news-f p { margin: 0 0 1px; font-size: 1.3em; }
 	.news-f p.date { color: #747474; font-size: 1.2em; }
 	
