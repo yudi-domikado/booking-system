@@ -14,5 +14,6 @@ ActiveAdmin.register Facility do
       number_to_currency(currency.price, unit: "Rp.", format: "%u %n")
     end
     c.column :description
+    c.actions
   end
 end

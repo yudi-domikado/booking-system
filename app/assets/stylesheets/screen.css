@@ -103,7 +103,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 		#breadcrumbs li:first-child { padding-left: 0; background: none; }
 		#breadcrumbs li a { color: #8e8e8e; }
 	#content { width: 960px; min-width: 960px; min-height: 380px; margin: 0 auto; padding: 0 0 38px; }
-	#content h1 { font-size: 22px; line-height: 41px; color: #088AD5; }
+	#content h1 { font-size: 22px; line-height: 41px; color: #088AD5; width: 100%;}
+	#content h2 { width: 100%; }
 	#content:after { content: ""; display: block; overflow: hidden; clear: both; height: 0; }
 	#root > .vcard.a { margin: 0; padding: 7px 0 16px; border: 0; }
 		#root > .vcard.a h2, #root > .vcard.a h3, #root > .vcard.a h4 { margin: 0 0 8px; color: #4a4a4a; font-size: 2.4em; }
@@ -1189,4 +1190,23 @@ svg:not(:root) { overflow: hidden; }
 
 .alert-block p + p {
   margin-top: 5px;
+}
+
+
+/*CUSTOM*/
+
+p.link-z a{
+    background: none repeat scroll 0 0 #FC5B42;
+    border: 0 none;
+    color: #FFFFFF;
+    display: inline-block;
+    line-height: 24px;
+    font-weight: 700;
+    font-size: 11px;
+    min-width: 70px;
+    border-radius: 5px 5px 5px 5px;
+    padding: 0 15px;
+    text-align: center;
+    text-shadow: 1px 1px 0 #DE503A;
+    text-transform: uppercase;
 }

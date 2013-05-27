@@ -8,7 +8,7 @@
             <li><span>Full Name</span> <%= current_user.name %></li>
              <li><span>Email Address</span> <span class="email"><%= current_user.email %></span></li>
             <% else %>
-            <h4 class="scheme-g"><span>Hello, <%= current_user.name %></span></h4>
+            <h4 class="scheme-g"><span></span></h4>
             <% end %>
             <br/>
 
@@ -25,15 +25,16 @@
               <li><span>End Time</span><%= cart_item.end_time.strftime('%H:%M:%S') %></li>
               <li><span>Facilities</span></li>
               <% cart_item.facilities.each do |facility| %>
-                <li><%= facility.name %> - <%= number_to_currency(facility.price, unit: "Rp.", format: "%u %n") %> ( <%= facility.description %> )</li>
+                <li>- <%= facility.name %> - <%= number_to_currency(facility.price, unit: "Rp.", format: "%u %n") %> (<%= facility.description %>)</li>
               <% end %>
-              <hr/>
-            <p class="scheme-h">Grand Total : <span><span>$</span>790</span></p>
+            <p class="scheme-h">Total : <span><span>Rp.</span>790</span></p>
+            <p class="link-z"><%= link_to "Delete", cart_item_path(cart_item), :method => :delete %></p>
+            <p class="link-z"><%= link_to "Edit", cart_item_path(cart_item), :method => :delete %></p>
+            <hr/>
             <% end %>
           </ul>  
       <p class="link-c">
-      <%= link_to "Reservation", check_out_users_path %>
-      <!--   <a href="./">Print receipt</a> -->
+      <%= link_to "Check Out", check_out_users_path %>
       </p>   
     </div>
     <aside>
