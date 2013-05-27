@@ -1,0 +1,16 @@
+				<aside>
+					<div class="tabs-b">
+						<div>
+							<div class="news-f">
+								<h2 style="text-align:center; color:#088AD5;">OUR ROOMS</h2>
+								<% @rooms.each do |room| %>
+								<article>
+									<figure><%= image_tag room.picture.url(:medium) %></figure>
+									<p><%= room.name %></p>
+									<p><b><%= link_to "Booking Now", room_path(room) %> &raquo;</b></p>
+								</article>
+								<% end %>
+							</div>
+						</div>
+					</div>
+				</aside>
