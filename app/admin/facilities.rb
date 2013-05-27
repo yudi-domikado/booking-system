@@ -3,8 +3,7 @@ ActiveAdmin.register Facility do
     f.inputs "Details" do
       f.input :name
       f.input :price
-      f.input :quantity
-      f.input :unlimited , :to => :boolean
+      f.input :description
    end
    f.actions
   end
@@ -14,9 +13,6 @@ ActiveAdmin.register Facility do
   	c.column :price do |currency|
       number_to_currency(currency.price, unit: "Rp.", format: "%u %n")
     end
-    c.column :quantity
-    c.column :unlimited do |stock|
-      stock.unlimited ? "Unlimited" : "Limited"
-    end
+    c.column :description
   end
 end

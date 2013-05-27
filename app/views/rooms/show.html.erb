@@ -41,19 +41,18 @@
             <%= text_field_tag :end_time, "", "class" => "timepick" %>
           </span>            
         </p>
-        <h3><span>03. Facilities</span></h3>
+       <h3><span>03. Facilities</span></h3>
         <div>
           <ul class="check-d">
             <% @facilities.each do |facility| %>
             <li>
-              <%= label_tag facility.name do %>
-                <%= check_box_tag facility.name %>
-                <%= facility.name %>
-              <% end %>
+              <%#= label_tag facility.name do %>
+                <%= check_box_tag 'facility_ids[]',facility.id %><%= facility.name %>
+              <%# end %>
             </li>
             <% end %>
           </ul>
-        </div>
+        </div> 
         <%= hidden_field_tag "room_id", @room.id %>
         <p class="submit"><button>Proceed</button></p>
       </fieldset>

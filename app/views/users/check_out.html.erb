@@ -3,17 +3,17 @@
     <article class="news-e">
   <h1>Confirm Your Booking Room</h1>
   <br/>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Picture</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Price</th>
-        </tr>
-      </thead>
+    <% @cart.cart_items.each do |cart_item| %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Picture</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+          </tr>
+        </thead>
         <tbody>  
-        <% @cart.cart_items.each do |cart_item| %>
           <tr>
             <td>
               <%= image_tag cart_item.room.picture.url(:thumb)  %>
@@ -27,8 +27,10 @@
             <td>
               <%= number_to_currency(cart_item.room.price, unit: "Rp.", format: "%u %n") %>
             </td>
+            <td>
+              
+            </td>
           </tr>
-        
         </tbody>
     </table>
     <ul class="list-c">
@@ -44,29 +46,41 @@
     </ul>
     <% end %>
     <%= form_tag orders_path, :method => :post do %>
+    <table class="table">
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Department</th>
+            </tr>
+          <tr>
+            <td><%= text_area_tag :company,"Type your Company Here" %></td>
+            <td><%= text_area_tag :department, "Type Your Department Here" %></td>
+          </tr>
+     
+        </table>
     <%= submit_tag "Approve?", :class => 'link-a' %>
     <% end %>
-</article>
-  <aside>
-          <div class="tabs-b">
-            <div>
-              <div class="news-f">
-                <h2 style="text-align:center;">OUR ROOMS</h2>
-                <article>
-                  <figure><img alt=".jpg?1369211634" src="/system/rooms/pictures/000/000/001/medium/.jpg?1369211634" /></figure>
-                  <p>Large</p>
-                  <p><b><a href="/rooms/1">Booking Now</a></b></p>
-                </article>
-                <article>
-                  <figure><img alt="Meeting-room_8" src="/system/rooms/pictures/000/000/002/medium/Meeting-room_8.jpg?1369211635" /></figure>
-                  <p>Medium</p>
-                  <p><b><a href="/rooms/2">Booking Now</a></b></p>
-                </article>
-              </div>
-            </div>
+    </article>
+    <aside>
+      <div class="tabs-b">
+        <div>
+          <div class="news-f">
+            <h2 style="text-align:center;">OUR ROOMS</h2>
+            <article>
+              <figure><img alt=".jpg?1369211634" src="/system/rooms/pictures/000/000/001/medium/.jpg?1369211634" /></figure>
+              <p>Large</p>
+              <p><b><a href="/rooms/1">Booking Now</a></b></p>
+            </article>
+            <article>
+              <figure><img alt="Meeting-room_8" src="/system/rooms/pictures/000/000/002/medium/Meeting-room_8.jpg?1369211635" /></figure>
+              <p>Medium</p>
+              <p><b><a href="/rooms/2">Booking Now</a></b></p>
+            </article>
           </div>
-        </aside>
-</section>
+        </div>
+      </div>
+    </aside>
+  </section>
 </article>
 
 
