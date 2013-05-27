@@ -1,12 +1,13 @@
 class CartItem < ActiveRecord::Base
   # attr_accessible :title, :body
-  attr_accessible :cart_id, :room_id, :check_in_date, :start_time, :end_time, :price , :facility_ids
+  attr_accessible :cart_id, :room_id, :check_in_date, :start_time, :end_time, :price , :facility_ids , :total
   belongs_to :room
   belongs_to :cart
+  belongs_to :facility
   validate :check_time
   validates_presence_of :start_time
   validates_presence_of :end_time
-  before_destroy :facility
+  before_destroy :facilities
 
   def check_time
 
@@ -35,7 +36,7 @@ class CartItem < ActiveRecord::Base
     end
   end
 
-  def facility
+  def facilities
     Facility.where("id IN (?)", facility_ids.to_s.split(","))
   end
 end

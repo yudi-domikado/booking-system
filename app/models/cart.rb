@@ -11,7 +11,7 @@ class Cart < ActiveRecord::Base
 	  cart_item.start_time = params[:start_time]
 	  cart_item.facility_ids = params[:facility_ids].join(",") if params[:facility_ids].present?	
 	  cart_item.end_time = params[:end_time]
-	  cart_item.price = cart_item.room.price
+	  cart_item.total = cart_item.price.to_i + cart_item.room.price.to_i
 	  cart_item.save
 	  cart_item
 	end

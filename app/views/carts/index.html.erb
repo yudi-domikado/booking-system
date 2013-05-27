@@ -1,4 +1,4 @@
-<section id="content" class="cols-a">
+
   <article id="content" class="cols-d">
     <div>
       <h3>Information</h3> 
@@ -8,11 +8,10 @@
             <li><span>Full Name</span> <%= current_user.name %></li>
              <li><span>Email Address</span> <span class="email"><%= current_user.email %></span></li>
             <% else %>
+            <h4 class="scheme-g"><span>Hello, <%= current_user.name %></span></h4>
             <% end %>
-            <% if user_signed_in? %>
-            <h1><span>Hello, <%= current_user.name %></span></h1>
             <br/>
-            <% end %>
+
           </ul>
           <ul class="list-c">  
             <% @cart.cart_items.each do |cart_item| %>
@@ -24,9 +23,12 @@
               <li><span>Check in Date</span><%= cart_item.check_in_date.strftime('%d-%B-%Y') %></li>
               <li><span>Start Time</span><%= cart_item.start_time.strftime('%H:%M:%S') %></li>
               <li><span>End Time</span><%= cart_item.end_time.strftime('%H:%M:%S') %></li>
-              <% cart_item.facility.each do |facility| %>
-                <li><span>Facilities</span><%= facility.name %>( <%= facility.description %> )</li>
+              <li><span>Facilities</span></li>
+              <% cart_item.facilities.each do |facility| %>
+                <li><%= facility.name %> - <%= number_to_currency(facility.price, unit: "Rp.", format: "%u %n") %> ( <%= facility.description %> )</li>
               <% end %>
+              <hr/>
+            <p class="scheme-h">Grand Total : <span><span>$</span>790</span></p>
             <% end %>
           </ul>  
       <p class="link-c">
@@ -34,5 +36,16 @@
       <!--   <a href="./">Print receipt</a> -->
       </p>   
     </div>
+    <aside>
+    <h3>Summary</h3>
+    <div class="vcard a">
+      <h4 class="fn org">Domikado Meeting Room</h4>
+      <p class="adr">Domikado - <span class="locality">Jakarta</span>, <span class="country-name">Indonesia</span></p>
+    </div>
+    <h4 class="scheme-g">Summary</h4>
+    <ul class="list-c">
+     
+    </ul>
+  </aside>
   </article>    
-</section>
+
