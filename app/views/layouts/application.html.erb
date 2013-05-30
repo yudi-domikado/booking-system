@@ -3,6 +3,7 @@
   <head>
     <title><%= content_for?(:title) ? yield(:title) : "Domikado Meeting Room" %></title>
     <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= stylesheet_link_tag "print", :media => "print" %>
     <%= javascript_include_tag "applications" %>
     <%= csrf_meta_tags %>
   </head>
@@ -16,9 +17,7 @@
       <section id="content" class="cols-e">
         <%= yield %>
       </section>
-      <%= render "shares/footer" %>
     </div>
-    <script src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&language=en"></script>
     <script type="text/javascript">
       head.js('<%= asset_path 'jquery.min.js' %>, <%= asset_path 'jquery-ui.min.js' %>, <%= asset_path 'scripts.js' %>, <%= asset_path 'mobile.js' %>')
     </script>

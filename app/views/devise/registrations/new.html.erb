@@ -1,20 +1,68 @@
-<h2>Sign up</h2>
+<section id="content" class="cols-a">
+  <article class="vcard">
+    <div class="tabs-a">
+      <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+        <fieldset>
+          <legend> SIGN UP </legend>
+          <%= devise_error_messages! %>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-  <div><%= f.label :name %><br />
-  <%= f.text_field :name %></div>
+          <h3><span>Full Name</span></h3>
+          <p>
+            <span>
+              <%= f.text_field :name, required: true %>
+            </span>
+          </p>
+          
+          <h3><span>Email Address</span></h3>
+          <p>
+            <span>
+              <%= f.email_field :email, autofocus: true, required: true %>
+            </span>
+          </p>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+          <h3><span>Your Company</span></h3>
+          <p>
+            <span>
+              <%= f.text_field :company, autofocus: true, required: true %>
+            </span>
+          </p>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+          <h3><span>Your Department</span></h3>
+          <p>
+            <span>
+              <%= f.text_field :department, autofocus: true, required: true %>
+            </span>
+          </p>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+          <h3><span>Phone Number</span></h3>
+          <p>
+            <span>
+              <%= f.text_field :phone, autofocus: true, required: true %>
+            </span>
+          </p>
 
-  <div><%= f.submit "Sign up" %></div>
-<% end %>
+          <h3><span>Your Password</span></h3>
+          <p>
+            <span>
+              <%= f.password_field :password, required: true %>
+            </span>
+          </p>
 
-<%= render "devise/shared/links" %>
+          <h3><span>Your Password Confirmation</span></h3>
+          <p>
+            <span>
+              <%= f.password_field :password_confirmation, required: true %>
+            </span>
+          </p>
+
+          <p class="submit"><button class="btn btn-info">JOIN NOW</button></p>
+        </fieldset>
+      <% end %>
+    </div>
+  </article>
+  <aside style="padding:6px;">
+    <h4>
+      <%= render "devise/shared/links" %>
+    </h4>
+  </aside>
+</section>

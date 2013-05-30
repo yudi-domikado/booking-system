@@ -1,18 +1,18 @@
 class Order < ActiveRecord::Base
-  attr_accessible :user_id, :ammount, :company, :department
+  attr_accessible :user_id, :ammount, :company, :department, :phone
   belongs_to :user
   has_many :order_items, dependent: :destroy
 
-  def self.approve_cart(session_id, user_id, company, department)
+  def self.approve_cart(session_id, user_id, params)
   	cart = Cart.find_by_session_id(session_id)
   	return unless cart 
   	create do |order|
     	order.user_id = user_id 
-      order.ammount = 0
-      order.company = company
-      order.department = department
+      order.ammount = cart.cart_items.sum(:price)
+      order.company = params[:company]
+      order.department = params[:department]
+      order.phone = params[:phone] 
     	cart.cart_items.each do |cart_item|
-        order.ammount += cart_item.price
     		order.order_items.new({room_id: cart_item.room_id,
                                price: cart_item.price,
                                check_in_date: cart_item.check_in_date,

@@ -1,16 +1,16 @@
 <div class="news-a">
   <% @rooms.each do |kamar| %>
-  <article>
-    <header>
-      <h2><a><%= kamar.name %></a></h2>
-      <figure><%= image_tag kamar.picture.url(:thumb) %><figcaption></figcaption></figure>
-    </header>
-      <p><%= kamar.description %></p>
-      <p class="scheme-d">
-        <%= number_to_currency(kamar.price, unit: "Rp.", format: "%u %n") %> <%= link_to "Booking", room_path(kamar) %></p>
-    <footer>
-      <p class="link-b"><%= link_to "View Details", room_path(kamar) %></p>
-    </footer>
-  </article>
+    <article>
+      <header>
+        <h2><%= link_to kamar.name, room_path(kamar) %></h2>
+        <figure><%= image_tag kamar.picture.url(:thumb) %><figcaption></figcaption></figure>
+      </header>
+        <p><%= kamar.description %></p>
+        <p class="scheme-d">
+          <%= number_to_currency(kamar.price, unit: "Rp.", format: "%u %n") %> <%= link_to "Booking", room_path(kamar) %></p>
+      <footer>
+        <p class="link-b"><%= link_to "View Details", room_path(kamar) %></p>
+      </footer>
+    </article>
   <% end %>
 </div>

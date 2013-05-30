@@ -1,83 +1,73 @@
-<article id="content" class="cols-c">
-  <section id="content" class="cols-e">
-    <article class="news-e">
-  <h1>Confirm Your Booking Room</h1>
-  <br/>
-    <% @cart.cart_items.each do |cart_item| %>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Picture</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>  
-          <tr>
-            <td>
-              <%= image_tag cart_item.room.picture.url(:thumb)  %>
-            </td>
-            <td>
-              <%= cart_item.room.name %>
-            </td>
-            <td width="40%">
-              <%= cart_item.room.description %>
-            </td>
-            <td>
-              <%= number_to_currency(cart_item.room.price, unit: "Rp.", format: "%u %n") %>
-            </td>
-          </tr>
-        </tbody>
-    </table>
-    <ul class="list-c">
-      <li><span> Check in Date </span>
-          <%= cart_item.check_in_date.strftime('%d-%B-%Y') %>
-      </li>
-      <li><span>Start Time</span>
-          <%= cart_item.start_time.strftime('%H:%M:%S') %>
-      </li>
-      <li><span>End Time</span>        
-          <%= cart_item.end_time.strftime('%H:%M:%S') %>
-      </li>
-    </ul>
+<article>
+  <h2>Confirm Your Reservation</h2>
+  <table>
+    <thead>
+      <th colspan="2">Room</th>
+      <th> Check In </th>
+      <th> Start On </th>
+      <th> End On   </th>
+    </thead>
+    <tbody>
+      <% @cart.cart_items.each do |cart_item| %>
+        <tr>
+          <td style="width:60px;">
+            <%= image_tag cart_item.room.picture.url(:medium), style: "height: 50px;" %>
+          </td>
+          <td>
+            <%= link_to cart_item.room.name, room_path(cart_item.room) %>
+          </td>
+          <td>
+            <%= cart_item.check_in_date.strftime('%d-%B-%Y') %>
+          </td>
+          <td>
+            <%= cart_item.start_time.strftime('%H:%M') %>
+          </td>
+          <td>
+            <%= cart_item.end_time.strftime('%H:%M') %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>  
+</article>  
+
+<aside class="vcard" style="padding: 10px; border: 1px solid #cecece;border-radius: 5px;">
+  <div class="tabs-a">
+    <%= form_tag orders_path, method: :post do %>
+      <fieldset>
+        <legend style="display:block;"> Please complete form below: </legend>
+
+        <h3><span>Company Name</span></h3>
+        <p>
+          <span>
+            <%= text_field_tag :company, current_user.company||params[:company], placeholder: "write your company name here", required: true %>
+          </span>
+        </p>
+        
+        <h3><span>Department Name</span></h3>
+        <p>
+          <span>
+            <%= text_field_tag :department, current_user.department||params[:department], placeholder: "write your department here", required: true %>
+          </span>
+        </p>
+        <h3><span>Your Name</span></h3>
+        <p>
+          <span>
+            <%= text_field_tag :full_name, current_user.name||params[:full_name], placeholder: "please enter your name", required: true %>
+          </span>
+        </p>
+
+        <h3><span>Phone No. / Phone Ext</span></h3>
+        <p>
+          <span>
+            <%= text_field_tag :phone, current_user.phone||params[:phone], placeholder: "please enter your name", required: true %>
+          </span>
+        </p>
+
+        <p class="submit" style="text-align:center;"><button class="btn btn-info">SUBMIT BOOKING</button></p>
+      </fieldset>
     <% end %>
-    <%= form_tag orders_path, :method => :post do %>
-    <table class="table">
-          <thead>
-            <tr>
-              <th>Company</th>
-              <th>Department</th>
-            </tr>
-          <tr>
-            <td><%= text_area_tag :company,"Type your Company Here" %></td>
-            <td><%= text_area_tag :department, "Type Your Department Here" %></td>
-          </tr>
-     
-        </table>
-    <%= submit_tag "Approve?", :class => 'link-a' %>
-    <% end %>
-    </article>
-    <aside>
-      <div class="tabs-b">
-        <div>
-          <div class="news-f">
-            <h2 style="text-align:center;">OUR ROOMS</h2>
-            <article>
-              <figure><img alt=".jpg?1369211634" src="/system/rooms/pictures/000/000/001/medium/.jpg?1369211634" /></figure>
-              <p>Large</p>
-              <p><b><a href="/rooms/1">Booking Now</a></b></p>
-            </article>
-            <article>
-              <figure><img alt="Meeting-room_8" src="/system/rooms/pictures/000/000/002/medium/Meeting-room_8.jpg?1369211635" /></figure>
-              <p>Medium</p>
-              <p><b><a href="/rooms/2">Booking Now</a></b></p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </aside>
-  </section>
-</article>
+  </div>
+</aside>
 
 

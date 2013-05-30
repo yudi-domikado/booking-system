@@ -17,7 +17,6 @@
 //= require jquery-ui.min
 //= require active_admin
 //= require bootstrap
-//= require head
 //= require mobile
 //= require scripts
 //= require jquery.timepicker

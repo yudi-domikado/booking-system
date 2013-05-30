@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
 	end
 
 	def create
-		Order.approve_cart(session_cart, current_user.id, params[:company], params[:department]) # <--- disini dijelaskan bahwa model Order memanggil metode Approve Cart ( dua metode )
+		Order.approve_cart(session_cart, current_user.id, params)
 		redirect_to orders_path
 	end
 end

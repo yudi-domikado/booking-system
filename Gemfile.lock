@@ -123,6 +123,7 @@ GEM
     mime-types (1.23)
     multi_json (1.7.2)
     mysql2 (0.3.11)
+    nokogiri (1.5.9)
     orm_adapter (0.4.0)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
@@ -155,6 +156,8 @@ GEM
     ref (1.0.4)
     responders (0.9.3)
       railties (~> 3.1)
+    sanitize (2.0.3)
+      nokogiri (>= 1.4.4, < 1.6)
     sass (3.2.8)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -200,6 +203,7 @@ DEPENDENCIES
   mysql2
   paperclip!
   rails (= 3.2.13)
+  sanitize
   sass-rails (~> 3.2.3)
   therubyracer
   twitter-bootstrap-rails

@@ -4,27 +4,24 @@
 	<thead>
 		<tr>
 		  <th>Order Name</th>
-		  <th>Check In/Check Out</th>
-		  <th>Sub Total</th>
+		  <th>Check In</th>
+		  <th>Start On</th>
+		  <th>End On</th>
 		</tr>
 	</thead>
 
 	<tbody>
 		<% total = 0 %>
 		<% @order.order_items.each do |order_item|%>
-		<% subtotal = order_item.price %>
-		<% total += subtotal %>
-		<tr>
-			<td>
-        <%= image_tag order_item.room.picture.url(:thumb) %>
-			<%= order_item.room.try(:name) %></td>
-			<td><%= order_item.start_time %></td>
-			<td><%= order_item.end_time %></td>
-			<td><%= number_to_currency(subtotal, format: "%u %n")  %></td>				
-	</tr>
+			<tr>
+				<td>
+	        <%= image_tag order_item.room.picture.url(:medium) %>
+				  <%= link_to order_item.room.try(:name), room_path(order_item.room) %>
+				</td>
+				<td><%= order_item.check_in_date.strftime("%a, %d %b %Y") %></td>
+				<td><%= order_item.start_time.strftime("%H:%M") %></td>
+				<td><%= order_item.end_time.strftime("%H:%M") %></td>	
+		  </tr>
+		<% end %>
 	</tbody>
-<% end %>
 </table>
-	<div class="btn btn-primary">
-		 Total Order: <%= total %> 
-	</div>

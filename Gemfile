@@ -28,6 +28,7 @@ gem 'devise'
 gem 'activeadmin', git: "git://github.com/gregbell/active_admin.git"
 gem 'ckeditor_rails'
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+gem "sanitize"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -1,18 +1,36 @@
-<h2>Sign in</h2>
+<section id="content" class="cols-a">
+  <article class="vcard">
+    <div class="tabs-a">
+      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), html:{class: "form-c"}) do |f| %>
+        <fieldset>
+          <legend> SIGN IN </legend>
+          <h3><span>Your Email</span></h3>
+          <p>
+            <span>
+              <%= f.email_field :email, autofocus: true, required: true %>
+            </span>
+          </p>
+          <h3><span>Your Password</span></h3>
+          <p>
+            <span>
+              <%= f.password_field :password, required: true %>
+            </span>
+          </p>
+          <% if devise_mapping.rememberable? -%>
+            <p>
+              <span><%= f.check_box :remember_me, style: "width: 20px;" %></span>
+              <span style="margin-top: -4px;display: inline-table;">Remember Me</span>
+            </p>
+          <% end -%>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
-
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
-
-  <div><%= f.submit "Sign in" %></div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+          <p class="submit"><button>ENTER</button></p>
+        </fieldset>
+      <% end %>
+    </div>
+  </article>
+  <aside style="padding:6px;">
+    <h4>
+      <%= render "devise/shared/links" %>
+    </h4>
+  </aside>
+</section>
