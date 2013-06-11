@@ -21,10 +21,10 @@
             <%= cart_item.check_in_date.strftime('%d-%B-%Y') %>
           </td>
           <td>
-            <%= cart_item.start_time.strftime('%H:%M') %>
+            <%= Time.at(cart_item.start_time).strftime('%H:%M') %>
           </td>
           <td>
-            <%= cart_item.end_time.strftime('%H:%M') %>
+            <%= Time.at(cart_item.end_time).strftime('%H:%M') %>
           </td>
           <td>
             <%= link_to "Delete", cart_item_path(cart_item), :method => :delete %>

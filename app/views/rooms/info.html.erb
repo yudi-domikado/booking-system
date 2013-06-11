@@ -1,0 +1,43 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container row-fluid" style="width: 100%">
+      <a class="brand" href=""><%= @room.name.upcase %></a>
+    
+      <ul class="nav pull-right time-clock">
+        <li class="divider-vertical"></li>
+        <li><sup2>TIME</sup2></li>
+        <li>
+          <a href="#">
+            <div class="clock">
+              <ul>
+                <li id="hours"> </li>
+                <li id="point">:</li>
+                <li id="min"> </li>
+                <li id="point">:</li>
+                <li id="sec"> </li>
+              </ul>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+<div class="row-fluid" style="margin-top: 10px;">
+  <div class="bs-docs-social">
+    <div id="current_meeting" class="row-fluid">
+      <%= render partial: "status" %>
+    </div>
+  </div>
+</div>
+<% if @next_meetings.present? %>
+  <div class="row-fluid" style="margin-top: 10px;">
+    <div class="span12 centered">
+      <div id="next_meetings" class="row-fluid">
+        <%= render partial: "queue" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+

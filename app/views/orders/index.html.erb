@@ -22,9 +22,9 @@
                       <%= image_tag order_item.room.picture.url(:thumb)%>
           				  </td>
                     <td>
-                      <%= link_to order_item.room.name, room_path(order_item) %> <br/>
+                      <%= link_to order_item.room.name, room_path(order_item.room_id) %> <br/>
                       <%= order_item.check_in_date.strftime("%a, %d %b %Y") %><br/>
-                      <%= order_item.start_time.strftime("%H:%M") %> - <%= order_item.end_time.strftime("%H:%M") %>
+                      <%= Time.at(order_item.start_time).strftime("%H:%M") %> - <%= Time.at(order_item.end_time).strftime("%H:%M") %>
                     </td>
                   <% end %>
                 </tr>

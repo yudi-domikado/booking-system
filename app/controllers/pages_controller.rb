@@ -7,4 +7,5 @@ class PagesController < ApplicationController
   def about
   	@rooms = Room.all
   end
+
 end

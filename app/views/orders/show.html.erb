@@ -19,8 +19,8 @@
 				  <%= link_to order_item.room.try(:name), room_path(order_item.room) %>
 				</td>
 				<td><%= order_item.check_in_date.strftime("%a, %d %b %Y") %></td>
-				<td><%= order_item.start_time.strftime("%H:%M") %></td>
-				<td><%= order_item.end_time.strftime("%H:%M") %></td>	
+				<td><%= Time.at(order_item.start_time).strftime("%H:%M") %></td>
+				<td><%= Time.at(order_item.end_time).strftime("%H:%M") %></td>	
 		  </tr>
 		<% end %>
 	</tbody>

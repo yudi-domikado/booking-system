@@ -1,0 +1,13 @@
+<table class="table table-striped">
+  <tbody>
+    <% @next_meetings.each do |meeting| %>
+      <tr>
+        <td style="width:56px;"><%= image_tag "logo_1.jpg" %></td>
+        <td>
+          <h6><%= Time.at(meeting.start_time).strftime("%H:%M") %> - <%= Time.at(meeting.end_time).strftime("%H:%M") %></h6>
+          <h7><%= meeting.order.company %></h7>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

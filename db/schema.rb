@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130530072923) do
+ActiveRecord::Schema.define(:version => 20130611062610) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(:version => 20130530072923) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.date     "check_in_date"
-    t.time     "start_time"
-    t.time     "end_time"
+    t.integer  "start_time"
+    t.integer  "end_time"
     t.integer  "total"
     t.string   "facility_ids"
   end
@@ -110,8 +110,8 @@ ActiveRecord::Schema.define(:version => 20130530072923) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.date     "check_in_date"
-    t.time     "start_time"
-    t.time     "end_time"
+    t.integer  "start_time"
+    t.integer  "end_time"
     t.integer  "order_id"
   end
 

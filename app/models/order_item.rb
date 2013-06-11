@@ -6,28 +6,24 @@ class OrderItem < ActiveRecord::Base
 
   private 
     def check_availability
-      if start_time.present?
-        self.start_time = Time.parse("#{self.check_in_date} #{self.start_time}")
-        errors.add("Start Time", "should be greater than now") if self.start_time < Time.now
+      if self.start_time.blank?
+        self.room.errors.add("Start time", "should be greater than now")
       end
       
-      if end_time.present?
-        self.end_time = Time.parse("#{self.check_in_date} #{self.end_time}")    
-        errors.add("End Time", "should be greater than now") if self.end_time < Time.now
+      if self.end_time.present? && self.end_time < Time.now.to_i
+        self.room.errors.add("End time", "should be greater than now")
       end
     
-      if start_time && end_time && start_time > end_time
-        errors.add("End Time", "should be greater than Start Time")
+      if self.start_time && self.end_time && self.start_time > self.end_time
+        self.room.errors.add("End time", "should be greater than Start Time")
       end
 
-      #self.class --> CartItem.where
-
       if OrderItem.where(room_id: self.room_id).
-                   where(check_in_date: check_in_date).
-                   where("(start_time <= ? AND end_time > ?) OR (start_time < ? AND end_time >= ?) OR (start_time > ? AND end_time < ?)", 
-                          self.start_time, self.start_time, self.end_time, self.end_time, self.start_time, self.end_time).
+                   where(check_in_date: self.check_in_date).
+                   where("(start_time <= ? AND end_time >= ?) OR (start_time <= ? AND end_time >= ?) OR (start_time > ? AND end_time < ?)", 
+                          self.start_time.to_i, self.start_time.to_i, self.end_time.to_i, self.end_time.to_i, self.start_time.to_i, self.end_time.to_i).
                    present?
-        self.errors.add("room", "is already used by another company")
+        self.room.errors.add("room", "is already used by another company")
       end
     end
 end

@@ -3,5 +3,18 @@
 
   Use Font Awesome icons (default)
   To use Glyphicons sprites instead of Font Awesome, replace with "require twitter-bootstrap-static/sprites"
-  =require twitter-bootstrap-static/fontawesome
+  =require twitter-bootstrap-static/sprites
   */
+
+table.schedule_rows{
+  width: 100% !important;
+  float: left !important;
+}
+
+table.schedule_rows tr th{
+  width: 41.9% !important;
+}
+
+table.schedule_rows tr td{
+  width: 46.5% !important;
+}

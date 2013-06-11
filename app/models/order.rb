@@ -19,7 +19,7 @@ class Order < ActiveRecord::Base
                                start_time: cart_item.start_time,
                                end_time: cart_item.end_time})
     	end
-      cart.destroy
+      cart.destroy if order.valid?
   	end
   end
 

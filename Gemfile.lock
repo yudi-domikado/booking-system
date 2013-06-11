@@ -91,6 +91,9 @@ GEM
     fastercsv (1.5.5)
     formtastic (2.2.1)
       actionpack (>= 3.0)
+    gon (4.1.1)
+      actionpack (>= 2.3.0)
+      json
     has_scope (0.5.1)
     hike (1.2.2)
     i18n (0.6.1)
@@ -128,6 +131,9 @@ GEM
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
+    rabl-rails (0.3.3)
+      activesupport (~> 3.0)
+      railties (~> 3.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -197,11 +203,13 @@ DEPENDENCIES
   ckeditor_rails
   coffee-rails (~> 3.2.1)
   devise
+  gon
   jquery-rails
   jquery-timepicker-rails
   jquery-ui-rails
   mysql2
   paperclip!
+  rabl-rails
   rails (= 3.2.13)
   sanitize
   sass-rails (~> 3.2.3)
