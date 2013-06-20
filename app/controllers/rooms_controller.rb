@@ -34,8 +34,7 @@ class RoomsController < ApplicationController
     end
 
     def next_meetings_content
-      next_meetings
-      view_context.render(partial: 'rooms/queue').to_s.html_safe if request.xhr?
+      view_context.render(partial: 'rooms/queue', collection: next_meetings).to_s.html_safe if request.xhr?
     end
 
     def custom

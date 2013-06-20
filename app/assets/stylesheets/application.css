@@ -10,7 +10,6 @@
  *
  *= require_self
  *= require bootstrap_and_overrides
- *= require screen
  *= require jquery.timepicker
- *= require custom
+ *= require home
  */

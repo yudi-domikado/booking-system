@@ -1,13 +1,18 @@
-<% if @current_meeting %>
-  <div class="span3">
-    <%= image_tag "logo_1.jpg" %>
+<div class="banner-image">
+  <div class="banner-logo">
+    <%= image_tag "sap.png" %>
   </div>
-  <div class="span9 current-meeting">
-    <h1><%= Time.at(@current_meeting.start_time).strftime("%H:%M") %> - <%= Time.at(@current_meeting.end_time).strftime("%H:%M") %></h1>
-    <h4><%= @current_meeting.order.company %></h4>
-  </div>
-<% else %>
-  <div class="span12 current-meeting not-available">
-    <h1> Room is Available </h1>
-  </div>
-<% end %>
+
+  <% if @current_meeting %>
+    <p class="banner-time">
+      <%= Time.at(@current_meeting.start_time).strftime("%H:%M") %> - <%= Time.at(@current_meeting.end_time).strftime("%H:%M") %>
+    </p>
+    <p class="banner-title">
+      <%= @current_meeting.order.company %>
+    </p>
+  <% else %>
+    <p class="banner-title">
+      Room is Available
+    </p>
+  <% end %>
+</div>

@@ -19,7 +19,7 @@ Booking::Application.routes.draw do
   resources :cart_items
   resources :topups
   resources :orders
-  root to: 'pages#home'
+  root to: 'home#show'
 
   get "/about",      to: 'pages#about'
   get "/contact",    to: 'pages#contact'

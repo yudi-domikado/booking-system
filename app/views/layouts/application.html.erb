@@ -4,22 +4,10 @@
     <title><%= content_for?(:title) ? yield(:title) : "Domikado Meeting Room" %></title>
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= stylesheet_link_tag "print", :media => "print" %>
-    <%= javascript_include_tag "applications" %>
+    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <div id="root">
-      <%= render "shares/header" %>   
-      <nav>
-        <%= bootstrap_flash %>   
-      </nav>
-
-      <section id="content" class="cols-e">
-        <%= yield %>
-      </section>
-    </div>
-    <script type="text/javascript">
-      head.js('<%= asset_path 'jquery.min.js' %>, <%= asset_path 'jquery-ui.min.js' %>, <%= asset_path 'scripts.js' %>, <%= asset_path 'mobile.js' %>')
-    </script>
+    <%= yield %>
   </body>
 </html>
