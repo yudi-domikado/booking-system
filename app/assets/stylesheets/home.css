@@ -24,7 +24,7 @@ img.ac_bgimage{
   position:fixed;
   top:0px;
   left:0px;
-  background:transparent url(pattern.png) repeat top left;
+  /*background:transparent url(pattern.png) repeat top left;*/
 }
 .ac_loading{
   position:fixed;
@@ -100,7 +100,7 @@ img.ac_bgimage{
   text-shadow:1px 1px 1px #000;
 }
 
-.ac_subitem{
+.ac_subitem, .ac_cart{
   width:400px;
   height:0px; /* animate to 400px */
   top:50%;
@@ -111,27 +111,50 @@ img.ac_bgimage{
   overflow:hidden;
   background:transparent url(bg_menu.png) repeat top left;
 }
-.ac_subitem h2{
+
+.ac_cart{
+  width: 600px;
+}
+
+.ac_subitem h2, .ac_cart h2{
   font-size:22px;
   font-weight:bold;
   color:#fff;
   padding: 40px 0px 0px 40px;
   text-shadow:0px 0px 1px #000;
 }
-.ac_subitem ul{
+.ac_subitem ul, .ac_cart ul{
   padding:0px 40px;
 }
-.ac_subitem ul li{
+.ac_subitem ul li, .ac_cart ul li{
   margin:10px 0px;
 }
-.ac_subitem ul li:first-child{
+.ac_subitem ul li:first-child, .ac_cart ul li:first-child{
   font-size:14px;
   text-transform:none;
   border-bottom:1px dotted #333;
   padding-bottom:15px;
   margin-bottom:15px;
 }
-span.ac_close{
+.ac_cart ul li:first-child{
+  padding-bottom: 0px;
+  margin-top: 0px;
+  line-height: 1px;
+}
+
+.ac_cart ul li:last-child{
+  text-align: center;
+}
+
+.ac_cart li a.btn {
+  float: none;
+}
+
+.ac_cart .table th, .table td{
+  border-top: 1px dotted #333;
+}
+
+span.ac_close, span.td_delete{
   float:right;
   margin:10px;
   width:11px;
@@ -140,7 +163,7 @@ span.ac_close{
   background:transparent url(close.png) no-repeat top left;
   opacity:0.4;
 }
-span.ac_close:hover{
+span.ac_close:hover, span.td_delete:hover{
   opacity:1.0;
 }
 .ac_footer{
@@ -154,6 +177,14 @@ span.ac_close:hover{
   height:20px;
   padding-bottom:5px;
 }
+
+.alert{
+  position:fixed;
+  top:0px;
+  width: 100%;
+  border-radius: 0px;
+}
+
 .ac_footer a{
   padding:5px 10px;
   letter-spacing:1px;
@@ -185,6 +216,30 @@ span.ac_close:hover{
 }
 
 .book-title{
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
+}
+
+.book-now{
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+
+td.day{
+  color: #000;
+}
+
+td.day.old{
+  color: #757575;
+}
+
+.datepicker-switch{
+  color: #3C6480;
+  font-weight: bold;
+}
+
+.ac_cart td a{
+  float: left;
 }

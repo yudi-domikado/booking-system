@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130611062610) do
+ActiveRecord::Schema.define(:version => 20130708201618) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(:version => 20130611062610) do
     t.integer  "end_time"
     t.integer  "total"
     t.string   "facility_ids"
+    t.string   "title"
+    t.integer  "company_id"
   end
 
   create_table "carts", :force => true do |t|
@@ -64,6 +66,16 @@ ActiveRecord::Schema.define(:version => 20130611062610) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "price"
+  end
+
+  create_table "companies", :force => true do |t|
+    t.string   "title"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "events", :force => true do |t|
@@ -113,6 +125,8 @@ ActiveRecord::Schema.define(:version => 20130611062610) do
     t.integer  "start_time"
     t.integer  "end_time"
     t.integer  "order_id"
+    t.integer  "title"
+    t.integer  "company_id"
   end
 
   create_table "orders", :force => true do |t|

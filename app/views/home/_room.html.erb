@@ -1,0 +1,13 @@
+<li>
+  <%= link_to room.name, image_path(room.picture.url(:original)) %>
+  <div class="ac_subitem">
+    <span class="ac_close"></span>
+    <h2><%= room.name %></h2>
+    <ul>
+      <li class="facilities">
+        <%= room.description.html_safe %>
+      </li>
+      <%= render partial: "form_booking", locals: {room_id: room.id} %>
+    </ul>
+  </div>
+</li>

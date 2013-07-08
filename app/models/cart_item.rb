@@ -5,12 +5,17 @@ class CartItem < ActiveRecord::Base
   belongs_to :room
   belongs_to :cart
   belongs_to :facility
+  belongs_to :company
 
   before_validation :parse_time
   validate :check_time
   validates_presence_of :start_time
   validates_presence_of :end_time
+  validates_presence_of :title
+  validates_presence_of :company_id
   before_destroy :facilities
+
+  delegate :title, to: :company, prefix: true, allow_nil: true
 
   def parse_time
     self.start_time = Time.parse("#{self.check_in_date} #{self.hour_start}").to_i if self.hour_start.present?
@@ -25,7 +30,7 @@ class CartItem < ActiveRecord::Base
       end
     	
       if self.end_time.present? && self.end_time < Time.now.to_i
-        errors.add("End Time", "should be greater than now #{self.end_time} | #{Time.now.to_i}")
+        errors.add("End Time", "should be greater than now")
     	end
     
     	if self.start_time && self.end_time && self.start_time > self.end_time

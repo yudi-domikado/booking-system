@@ -1,107 +1,25 @@
-<div id="ac_background" class="ac_background">
-  <%= image_tag "meeting_1.jpg", border: 0, class: "ac_bgimage", alt: "Background" %>
+<div id="ac_background" class="ac_background" image-default="<%= image_path("front-meetingroom.jpg") %>">
+  <%= image_tag "front-meetingroom.jpg", border: 0, class: "ac_bgimage", alt: "Background" %>
   <div class="ac_overlay"></div>
   <div class="ac_loading"></div>
 </div>
 <div id="ac_content" class="ac_content">
   <h1><span>Meeting</span>Room</h1>
-  <div id="ac_content" class="ac_content">
-    <h1><span>Meeting</span>Room</h1>
-    <div class="ac_menu">
-      <ul>
-        <li>
-          <%= link_to "Milky Way", image_path("milkyway.jpg") %>
-          <div class="ac_subitem">
-            <span class="ac_close"></span>
-            <h2>Milky Way</h2>
-            <ul>
-              <li class="facilities">
-                <span><b>AC:</b> 1</span> 
-                <span class="devider">|</span>
-                <span><b>WHITEBOARD:</b> 1</span> 
-                <span class="devider">|</span>
-                <span><b>TABLE:</b> 1</span> 
-                <span class="devider">|</span>
-                <span><b>CHAIR:</b> 14</span> 
-              </li>
-              <li class="book-title">Book Now:</li>
-              <li>
-                <%= render partial: "form_booking", locals: {room: "x"} %>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <%= link_to "Andromeda", image_path("meeting_2.jpg") %>
-          <div class="ac_subitem">
-            <span class="ac_close"></span>
-            <h2>Andromeda</h2>
-            <ul>
-              <li class="facilities">
-                <span><b>AC:</b> 1</span> 
-                <span class="devider">|</span>
-                <span><b>WHITEBOARD:</b> 1</span> 
-                <span class="devider">|</span>
-                <span><b>TABLE:</b> 1</span> 
-                <span class="devider">|</span>
-                <span><b>CHAIR:</b> 8</span> 
-              </li>
-              <li class="book-title">Book Now:</li>
-              <li>
-                <%= render partial: "form_booking", locals: {room: "x"} %>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <%= link_to "Pinwheel", image_path("meeting_3.jpg") %>
-          <div class="ac_subitem">
-            <span class="ac_close"></span>
-            <h2>Pinwheel</h2>
-            <ul>
-              <li class="facilities">
-                <span><b>AC:</b> 1</span> 
-                <span class="devider">|</span>
-                <span><b>WHITEBOARD:</b> 1</span> 
-                <span class="devider">|</span>
-                <span><b>TABLE:</b> 1</span> 
-                <span class="devider">|</span>
-                <span><b>CHAIR:</b> 8</span> 
-              </li>
-              <li class="book-title">Book Now:</li>
-              <li>
-                <%= render partial: "form_booking", locals: {room: "x"} %>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <%= link_to "Thinkubator", image_path("meeting_4.jpg") %>
-          <div class="ac_subitem">
-            <span class="ac_close"></span>
-            <h2>Thinkubator</h2>
-            <ul>
-              <li class="facilities">
-                <span><b>AC:</b> 1</span> 
-                <span class="devider">|</span>
-                <span><b>WHITEBOARD:</b> 1</span> 
-                <span class="devider">|</span>
-                <span><b>TABLE:</b> 2</span> 
-                <span class="devider">|</span>
-                <span><b>CHAIR:</b> 17</span> 
-              </li>
-              <li class="book-title">Book Now:</li>
-              <li>
-                <%= render partial: "form_booking", locals: {room: "x"} %>
-              </li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </div>
+  <div class="ac_menu">
+    <ul>
+      <%= render partial: 'room', collection: @rooms, inline: true %>
+    </ul>
   </div>
 </div>
 <div class="ac_footer">
+  <%= render 'cart' %>
   <a class="ac_left" href="#"><span>&copy; copyrights</span> PT Sekawan Abadi Prima</a>
-  <a href="#">Pending Reservation: 1</a>
+  <%= link_to "Login", "", class: "login" %>
+  <%= link_to " | ", "#", class: "login" %>
+  <%= link_to "#", class: "booking-status" do %>
+    Bookings:
+    <span class="total-book"><%= @cart.cart_items.count %></span>
+  <% end %>
 </div>
+<div class="alert alert-error hide"></div>
+<div class="alert alert-success hide"></div>

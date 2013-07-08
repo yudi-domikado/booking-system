@@ -1,23 +1,27 @@
 class CartsController < ApplicationController  
   
   def index
-    @cart = Cart.find_or_create_by_session_id(session_cart)
+    cart
   end
 
   def create
-    @cart_item = Cart.add_item(session_cart,params)
+    @cart_item = cart.add_item!(params)
     flash[:alert] = @cart_item.errors.full_messages.uniq.to_sentence unless @cart_item.valid? 
-    redirect_to carts_path
+    respond_to do |format|
+      format.js
+    end
   end
 
-  def edit
-	@cart = Cart.find(params[:id])
+  def destroy
+	  cart_item = cart.cart_items.find(params[:id])
+    cart_item.destroy if cart_item
+    respond_to do |format|
+      format.js
+    end
   end
 
-  def update
-	@cart = cart.find(params[:id])
-	@cart.update_attributes(params[:cart])
-	redirect_to carts_path
+  def cart
+    @cart ||= Cart.find_or_create_by_session_id(session_cart)
   end
 
 end

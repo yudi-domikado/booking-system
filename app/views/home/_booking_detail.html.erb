@@ -1,0 +1,28 @@
+<% @cart.cart_items.each do |cart_item| %>
+  <tr>
+    <td>
+      <%= cart_item.room.name %>
+    </td>
+    <td>
+      <%= cart_item.check_in_date.strftime('%d-%B-%Y') if cart_item.check_in_date %><br/>
+      <%= Time.at(cart_item.start_time).strftime('%H:%M') if cart_item.start_time %> - 
+      <%= Time.at(cart_item.end_time).strftime('%H:%M') if cart_item.end_time %>
+    </td>
+    <td>
+      <%= cart_item.company_title %>
+    </td>
+    <td>
+      <%= cart_item.title %>
+    </td>
+    <td>
+      <%= link_to cart_path(cart_item), method: :delete, remote: true, confirm: "Do you want delete this reservation?" do %>
+        <span class="td_delete"></span>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+<% if @cart.cart_items.blank? %>
+  <tr>
+    <td colspan="4" style="text-align:center"> No Booking Item </td>
+  </tr>
+<% end %>

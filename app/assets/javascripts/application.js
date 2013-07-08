@@ -8,4 +8,8 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery.easing.1.3
+//= require bootstrap-datepicker/core
+//= require jquery.timepicker
+//= require kwargs
+//= require menu
 //= require custom
