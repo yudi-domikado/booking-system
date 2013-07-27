@@ -1,19 +1,25 @@
 class CartItem < ActiveRecord::Base
-  # attr_accessible :title, :body
   attr_accessor   :hour_start, :hour_end
+
+  before_validation :parse_time
+  
+
+  with_options(presence: true) do |presence|
+    presence.validates :start_time
+    presence.validates :end_time
+    presence.validates :title
+    presence.validates :company_id
+  end
+
+  validate :check_time
 
   belongs_to :room
   belongs_to :cart
   belongs_to :facility
   belongs_to :company
 
-  before_validation :parse_time
-  validate :check_time
-  validates_presence_of :start_time
-  validates_presence_of :end_time
-  validates_presence_of :title
-  validates_presence_of :company_id
   before_destroy :facilities
+
 
   delegate :title, to: :company, prefix: true, allow_nil: true
 
@@ -24,26 +30,42 @@ class CartItem < ActiveRecord::Base
 
   private
     def check_time
-
-    	if self.start_time.blank?
-        errors.add("Start time", "is invalid")
+      unless self.errors.present?
+        self.errors.add("Start hour", "is invalid and not empty") if self.start_time.blank?
+        self.errors.add("End hour", "is invalid and should be greater than time now") if is_older?
+      	self.errors.add("End hour", "is invalid and should be greater than Start hour") if is_wrong_end_time?
+        self.errors.add("Room", "is already used by another company") if is_already_booked?
+        self.errors.add("You", "have booked the room, please complete your order") if is_already_reserved?
+        self.errors.add("Room", "is not registered, please refresh your browser") if self.room.blank?
+        self.errors.add("Company", "is not registered, please refresh your browser") if self.company.blank?
       end
-    	
-      if self.end_time.present? && self.end_time < Time.now.to_i
-        errors.add("End Time", "should be greater than now")
-    	end
-    
-    	if self.start_time && self.end_time && self.start_time > self.end_time
-        errors.add("End Time", "should be greater than Start Time")
-    	end
+      return self.errors.blank?
+    end
 
-      if OrderItem.where(room_id: self.room_id).
-                   where(check_in_date: self.check_in_date).
-                   where("(start_time <= ? AND end_time > ?) OR (start_time < ? AND end_time >= ?) OR (start_time > ? AND end_time < ?)", 
-                          self.start_time, self.start_time, self.end_time, self.end_time, self.start_time, self.end_time).
-                   present?
-        self.errors.add("room", "is already used by another company")
-      end
+    def is_older?
+      self.errors.blank? && self.end_time.present? && self.end_time.to_i < Time.now.to_i
+    end
+
+    def is_wrong_end_time?
+      self.errors.blank? && self.start_time && self.end_time && self.start_time > self.end_time
+    end
+
+    def is_already_booked?
+      return false if self.errors.present?
+      OrderItem.where(room_id: self.room_id).
+                where(check_in_date: self.check_in_date).
+                where("(start_time <= ? AND end_time > ?) OR (start_time < ? AND end_time >= ?) OR (start_time > ? AND end_time < ?)", 
+                      self.start_time, self.start_time, self.end_time, self.end_time, self.start_time, self.end_time).
+                present?
+    end
+
+    def is_already_reserved?
+      return false if self.errors.present?
+      self.cart.cart_items.
+          where(room_id: self.room_id).
+          where(check_in_date: self.check_in_date).
+          where(start_time: self.start_time).
+          where(end_time: self.end_time).present?
     end
 
     def facilities

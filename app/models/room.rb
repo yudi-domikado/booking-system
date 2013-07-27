@@ -1,15 +1,20 @@
 class Room < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+  
+  attr_accessible :name, :description, :price, :picture, :user_id
+  
+  has_attached_file :picture, 
+                    :styles => {:large => "693xauto>", :medium => "66x50>", :thumb => "150x150>" }, 
+                    :default_url => "/assets/no_image.png"
+  
   belongs_to :user
   belongs_to :room
   belongs_to :order
   belongs_to :cart
+
   has_many :events
   has_many :facilities
-  attr_accessible :name, :description, :price, :picture, :user_id
-  has_attached_file :picture, 
-                    :styles => {:large => "693xauto>", :medium => "66x50>", :thumb => "150x150>" }, 
-                    :default_url => "/assets/no_image.png"
-
   has_many :order_items, dependent: :destroy
 
 	def self.search(search)

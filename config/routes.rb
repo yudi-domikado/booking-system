@@ -1,24 +1,27 @@
 Booking::Application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
-
   devise_for :users
-  ActiveAdmin.routes(self)
-  resources :users do
-    get :check_in, on: :collection
-    get :check_out, on: :collection
-    get :checkout, :on => :collection # collection ga pake id sedangkan member  pake id
-  end
 
+  namespace :private do
+    resources :topups
+    resources :orders
+    resources :rooms
+    resources :users do
+      collection do
+        get   :checkout
+        match :profile, via: [:put, :get]
+      end
+    end
+    root to: 'home#show', as: 'dashboard'
+  end
+  
+  resources :carts
+  resources :cart_items
   resources :rooms do
     member do
       get :info
     end
   end
-  resources :carts
-  resources :cart_items
-  resources :topups
-  resources :orders
+
   root to: 'home#show'
 
   get "/about",      to: 'pages#about'

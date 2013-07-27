@@ -1,36 +1,38 @@
-<section id="content" class="cols-a">
-  <article class="vcard">
-    <div class="tabs-a">
-      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), html:{class: "form-c"}) do |f| %>
-        <fieldset>
-          <legend> SIGN IN </legend>
-          <h3><span>Your Email</span></h3>
-          <p>
-            <span>
-              <%= f.email_field :email, autofocus: true, required: true %>
-            </span>
-          </p>
-          <h3><span>Your Password</span></h3>
-          <p>
-            <span>
-              <%= f.password_field :password, required: true %>
-            </span>
-          </p>
-          <% if devise_mapping.rememberable? -%>
-            <p>
-              <span><%= f.check_box :remember_me, style: "width: 20px;" %></span>
-              <span style="margin-top: -4px;display: inline-table;">Remember Me</span>
-            </p>
-          <% end -%>
-
-          <p class="submit"><button>ENTER</button></p>
-        </fieldset>
-      <% end %>
+<div class="container-fluid login-container">
+  <%= render "private/shared/notification" %>
+  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), html:{class: "form-signin"}) do |f| %>
+    <h2 class="form-signin-heading"><strong>Office</strong> Service</h2>
+    <div class="control-group">
+      <div class="controls">
+        <span class="add-on"><i class="icon-user"></i></span>
+        <%= f.email_field :email, placeholder: "Enter your email", required: true %>
+      </div>
     </div>
-  </article>
-  <aside style="padding:6px;">
-    <h4>
+
+    <div class="control-group">
+      <div class="controls">
+        <span class="add-on"><i class="icon-lock"></i></span>
+        <%= f.password_field :password, placeholder: "Enter your password", required: true %>
+      </div>
+    </div>
+    
+    <div class="control-group">
+      <div class="controls">
+        <div class="pull-left">
+          <%= f.check_box :remember_me, style: "width: 20px;" %> Remember Me
+        </div>
+        <div class="pull-right">
+          <button class="btn btn-primary" type="submit">Sign In</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="signInRow">
+    <div><h1>Sign In</h1></div>
+    <div>
       <%= render "devise/shared/links" %>
-    </h4>
-  </aside>
-</section>
+    </div>
+  </div>
+</div>

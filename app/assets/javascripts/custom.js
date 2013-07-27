@@ -1,3 +1,18 @@
+(function($){ 
+  jQuery.fn.idle = function(time)
+  { 
+    var o = $(this); 
+    o.dequeue();
+    o.queue(function()
+    { 
+       setTimeout(function()
+       { 
+          o.dequeue(); 
+       }, time);
+    });
+  };
+})(jQuery);
+
 $(document).ready(function() {
 
   $('.timepick').timepicker({
@@ -9,7 +24,9 @@ $(document).ready(function() {
 
   $(".dp-icon").datepicker({
     dateFormat: 'dd/mm/yy',
-    autoclose: true
+    autoclose: true,
+    startDate: "0d",
+    weekStart: 1
   });
 
   $('.close').click(function() {

@@ -1,0 +1,50 @@
+<div class="container-fluid profile-container">
+  <%= render "private/shared/notification" %>
+  <%= form_for(current_user, :url => profile_private_users_path, method: :put, html:{class: "form-signin signup"}) do |f| %>
+
+    <h2 class="form-signin-heading"><strong>Office</strong>Service</h2>
+    <div class="control-group">
+      <div class="controls">
+        <span class="add-on"><i class="icon-user"></i></span>
+        <%= f.text_field :name, placeholder: "Enter your name", required: true %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <span class="add-on"><i class="icon-briefcase"></i></span>
+        <%= f.select :company_id, options_for_select(Company.all.map{|c| [c.title, c.id]}), {prompt: "Select your company"}, required: true %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <span class="add-on"><i class="icon-flag"></i></span>
+        <%= f.text_field :department, placeholder: "Enter your department", required: true %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <span class="add-on"><i class="icon-th"></i></span>
+        <%= f.text_field :phone, placeholder: "Enter your phone number", required: true %>
+      </div>
+    </div>
+    
+    <div class="control-group">
+      <div class="controls">
+        <div class="pull-right">
+          <button class="btn btn-primary" type="submit">Save</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="signInRow">
+    <div><h1>Profile</h1></div>
+    <div>
+      <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+    </div>
+  </div>
+</div>

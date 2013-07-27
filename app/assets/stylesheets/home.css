@@ -113,7 +113,7 @@ img.ac_bgimage{
 }
 
 .ac_cart{
-  width: 600px;
+  width: 650px;
 }
 
 .ac_subitem h2, .ac_cart h2{
@@ -242,4 +242,31 @@ td.day.old{
 
 .ac_cart td a{
   float: left;
+}
+
+.container.login > .content {
+  background-color: #fff;
+  padding: 20px;
+  margin: 0 -20px; 
+  -webkit-border-radius: 10px 10px 10px 10px;
+     -moz-border-radius: 10px 10px 10px 10px;
+          border-radius: 10px 10px 10px 10px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+          box-shadow: 0 1px 2px rgba(0,0,0,.15);
+}
+
+.container.login .login-form {
+  margin-left: 65px;
+}
+
+.container.login legend {
+  margin-right: -50px;
+  font-weight: bold;
+  color: #404040;
+}
+
+.datepicker td, .datepicker th{
+  color: #555;
+  font-weight: bold;
 }

@@ -2,18 +2,7 @@
 <li>
   <%= form_tag carts_path, :class => 'form-c', remote: true do %>
     <div class="book-now">BOOK NOW:</div>
-    <div class="row-fluid">
-      <div class="span12">
-        <%= label_tag "Meeting Title" %>
-        <%= text_field_tag :title, "", class: "span12" %>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span12">
-        <%= label_tag "Company Name" %>
-        <%= select_tag :company_id, options_for_select(@companies.map{|c| [c.title, c.id]}), {prompt: "Please choose one"} %>
-      </div>
-    </div>
+    
     <div class="row-fluid">
       <div class="span12">
         <div class="span5">
@@ -33,6 +22,19 @@
             <%= text_field_tag :hour_end, "", class: "timepick span11" %>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="span12">
+        <%= label_tag "Meeting Title" %>
+        <%= text_field_tag :title, "", class: "span12" %>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <%= label_tag "Company Name" %>
+        <%= select_tag :company_id, options_for_select(@companies.map{|c| [c.title, c.id]}), {prompt: "Please choose one"} %>
       </div>
     </div>
     

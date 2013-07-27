@@ -7,7 +7,7 @@
       <li class="facilities">
         <%= room.description.html_safe %>
       </li>
-      <%= render partial: "form_booking", locals: {room_id: room.id} %>
+      <%= render partial: "form_booking", locals: {room_id: room.slug} %>
     </ul>
   </div>
 </li>

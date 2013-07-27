@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130708201618) do
+ActiveRecord::Schema.define(:version => 20130727095937) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -155,7 +155,10 @@ ActiveRecord::Schema.define(:version => 20130708201618) do
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
+    t.string   "slug"
   end
+
+  add_index "rooms", ["slug"], :name => "index_rooms_on_slug", :unique => true
 
   create_table "topups", :force => true do |t|
     t.integer  "user_id"
@@ -179,9 +182,9 @@ ActiveRecord::Schema.define(:version => 20130708201618) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "name"
-    t.string   "company"
     t.string   "department"
     t.string   "phone"
+    t.integer  "company_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -6,15 +6,15 @@ class CartsController < ApplicationController
 
   def create
     @cart_item = cart.add_item!(params)
-    flash[:alert] = @cart_item.errors.full_messages.uniq.to_sentence unless @cart_item.valid? 
+    flash[:alert] = @cart_item.errors.full_messages.uniq.to_sentence if @cart_item.errors.present? 
     respond_to do |format|
       format.js
     end
   end
 
   def destroy
-	  cart_item = cart.cart_items.find(params[:id])
-    cart_item.destroy if cart_item
+	  @cart_item = cart.cart_items.find(params[:id])
+    @cart_item.destroy if @cart_item
     respond_to do |format|
       format.js
     end
