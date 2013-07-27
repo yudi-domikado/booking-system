@@ -14,7 +14,13 @@
 <div class="ac_footer">
   <%= render 'cart' %>
   <a class="ac_left" href="#"><span>&copy; copyrights</span> PT Sekawan Abadi Prima</a>
-  <%= link_to "Login", user_session_path, class: "login" %>
+  <% if user_signed_in? %>
+    <%= link_to "Sign Out", destroy_user_session_path, class: "login", method: :delete %>
+    <%= link_to " | ", "#", class: "login" %>
+    <%= link_to "Dashboard", private_dashboard_path, class: "login" %>
+  <% else %>
+    <%= link_to "Sign In", user_session_path, class: "login" %>
+  <% end %>
   <%= link_to " | ", "#", class: "login" %>
   <%= link_to "#", class: "booking-status" do %>
     Bookings:
