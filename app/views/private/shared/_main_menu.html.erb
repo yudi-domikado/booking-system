@@ -2,9 +2,18 @@
 <div class="mainmenu">
   <div class="container-fluid">
     <ul class="nav">
-      <li class="collapseMenu"><a href="#"><i class="icon-double-angle-left"></i>hide menu<i class="icon-double-angle-right deCollapse"></i></a></li>
+      <li class="collapseMenu">
+        <a href="#">
+          <i class="icon-double-angle-left"></i>hide menu
+          <i class="icon-double-angle-right deCollapse"></i>
+        </a>
+      </li>
       <li class="divider-vertical firstDivider"></li>
-      <li class="left-side" id="dashboard"><a href="index-2.html"><i class="icon-dashboard"></i> DASHBOARD</a></li>
+      <li class="left-side" id="dashboard">
+        <%= link_to private_dashboard_path, "data-push"=>"true", "data-target"=>"div.content" do %>
+          <i class="icon-dashboard"></i> DASHBOARD
+        <% end %>
+      </li>
       <li class="divider-vertical"></li>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="formElements"><i class="icon-list"></i> FORMS <span class="label label-pressed">3</span></a>
@@ -15,7 +24,7 @@
         </ul>
       </li>
       <li class="divider-vertical"></li>
-      <li id="interfaceElements" class="active"><a href="interface.html"><i class="icon-pencil"></i> UI ELEMENTS</a></li>
+      <li id="interfaceElements"><a href="interface.html"><i class="icon-pencil"></i> UI ELEMENTS</a></li>
       <li class="divider-vertical"></li>
       <li id="buttonsIcons"><a href="buttons.html"><i class="icon-tint"></i> BUTTONS & ICONS</a></li>
       <li class="divider-vertical"></li>

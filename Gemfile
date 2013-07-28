@@ -26,6 +26,7 @@ end
 
 gem 'jquery-rails'
 gem 'devise'
+gem 'cancan'
 gem 'ckeditor_rails'
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 gem "sanitize"

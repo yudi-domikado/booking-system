@@ -2,7 +2,6 @@ Booking::Application.routes.draw do
   devise_for :users
 
   namespace :private do
-    resources :topups
     resources :orders
     resources :rooms
     resources :users do

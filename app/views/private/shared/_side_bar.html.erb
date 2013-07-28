@@ -318,21 +318,33 @@
       <a href="#collapsedSidebarContent" class="showCollapsedSidebarMenu"><i class="icon-chevron-sign-left"></i><h1> My account</h1></a>
       <h1>My account</h1>
       <div class="profileBlock">
-        <div class="profilePhoto">
-          <div class="usernameHolder">Ing. Imrich Kamarel</div>
-        </div>
         <div class="profileInfo">
-          <p><i class="icon-map-marker"></i> Piestany, SK</p>
-          <p><i class="icon-envelope-alt"></i> ici.kamarel@tattek.com</p>
-          <p><i class="icon-globe"></i> tattek.com</p>
-          <p class="aboutMe">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
+          <%= image_tag(current_user.company.logo.url(:thumb), style: "width: 150px;") %>
+          <hr/>
+          <p><i class="icon-user"></i><strong><%= current_user.name %></strong></p>
+          <p><i class="icon-envelope-alt"></i> <%= current_user.email %></p>
+          <p><i class="icon-phone"></i> <%= current_user.phone %></p>
+          <p><i class="icon-flag"></i> <%= current_user.department %></p>
         </div>
         <footer>
-          <div class="profileSettingBlock editProfile"><i class="icon-user"></i>edit profile</div>
-          <div class="profileSettingBlock changePassword"><i class="icon-lock"></i>change password</div>
-          <div class="profileSettingBlock logout"><i class="icon-off"></i>logout</div>
+          <%= link_to edit_private_user_path(current_user, do: "editProfile"), "data-push"=>"true", "data-target"=>"div.content" do %>
+            <div class="profileSettingBlock editProfile">
+              <i class="icon-user"></i>
+              edit profile
+            </div>
+          <% end %>
+          <%= link_to edit_private_user_path(current_user, do: "changePassword"), "data-push"=>"true", "data-target"=>"div.content" do %>
+            <div class="profileSettingBlock changePassword">
+              <i class="icon-lock"></i>
+              change password
+            </div>
+          <% end %>
+          <%= link_to destroy_user_session_path, method: :delete do %>
+            <div class="profileSettingBlock logout">
+              <i class="icon-off"></i>
+              sign out
+            </div>
+          <% end %>
         </footer>
       </div>
     </div>

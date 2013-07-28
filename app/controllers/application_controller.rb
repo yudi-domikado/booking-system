@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   layout :custom_layout
-
   before_filter :check_profile
   
   private
@@ -42,6 +41,17 @@ class ApplicationController < ActionController::Base
     def shared_redirection(resource=nil)
       resource = current_user unless resource
       complete_profile || stored_location_for(resource) || private_dashboard_path
+    end
+
+    def self.authorize_controller opts = {}
+      options = opts.clone
+      options.delete(:skip)
+      load_and_authorize_resource( options )
+      skip_authorize_resource(only: opts[:skip]) if opts[:skip]
+      rescue_from CanCan::AccessDenied do |e|
+        flash[:alert] = e.message
+        redirect_to private_dashboard_path
+      end
     end
 
 end

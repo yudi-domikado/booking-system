@@ -45,6 +45,7 @@ GEM
       railties (>= 3.0)
     bootstrap-datetimepicker-rails (0.0.10.1)
     builder (3.0.4)
+    cancan (1.6.10)
     celluloid (0.14.1)
       timers (>= 1.0.0)
     ckeditor_rails (4.1.1)
@@ -180,6 +181,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-datepicker-rails
   bootstrap-datetimepicker-rails
+  cancan
   ckeditor_rails
   coffee-rails (~> 3.2.1)
   debugger

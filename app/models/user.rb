@@ -6,14 +6,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, 
-                  :department, :phone, :company_id
-  # attr_accessible :title, :body
+  attr_accessible :name, :email, :password, :password_confirmation, 
+                  :remember_me, :department, :phone, :company_id
+                  
   has_many :orders
   has_many :carts
-  has_many :rooms
-  has_many :topups
-  has_many :events
   belongs_to :company
 
   with_options(on: :update) do |update|
@@ -28,4 +25,4 @@ class User < ActiveRecord::Base
   def complete_profile?
     company.present? && department.present?
   end
-end
+end 

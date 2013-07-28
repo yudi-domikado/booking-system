@@ -1,0 +1,22 @@
+<div class="titleLine">
+  <div class="container-fluid">
+    <div class="titleIcon"><i class="icon-check"></i></div>
+    <ul class="titleLineHeading">
+      <li class="heading"><h1>Dashboard</h1></li>
+    </ul>
+  </div>
+</div>
+<ul class="breadcrumb">
+  <li>
+    <i class="icon-home active"></i>
+    <%= link_to "Home", private_dashboard_path %>
+  </li>
+  <li class="moveDown pull-right">
+    <span class="time"></span>
+    <span class="date"></span>
+  </li>   
+</ul>
+
+<div class="container-fluid">
+  <%= render "private/shared/notification" %>
+</div>

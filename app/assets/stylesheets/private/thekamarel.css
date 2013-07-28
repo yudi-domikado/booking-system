@@ -477,8 +477,15 @@ div.profileBlock {
   width: 100%;
 }
 
+div.profileBlock footer a{
+  color: #fff;
+}
+
 div.profilePhoto {
-  background: url(ici.jpg) 0 -10px no-repeat;
+  background: url(/assets/no_image.png) no-repeat;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  background-position:center; 
   height: 105px;
   overflow: hidden;
   width: 100%;
