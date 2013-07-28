@@ -11,28 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130727122546) do
+ActiveRecord::Schema.define(:version => 20130728123524) do
 
   create_table "cart_items", :force => true do |t|
-    t.integer  "room_id"
     t.integer  "cart_id"
     t.integer  "price"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.decimal  "amount",           :precision => 10, :scale => 0
+    t.integer  "quantity"
+    t.string   "itemable_type"
+    t.integer  "itemable_integer"
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
+  end
+
+  create_table "cart_room_items", :force => true do |t|
+    t.integer  "room_id"
     t.date     "check_in_date"
     t.integer  "start_time"
     t.integer  "end_time"
-    t.integer  "total"
-    t.string   "facility_ids"
-    t.string   "title"
-    t.integer  "company_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "carts", :force => true do |t|
     t.string   "session_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "price"
+    t.string   "type"
+    t.decimal  "amount",     :precision => 10, :scale => 0
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   create_table "companies", :force => true do |t|
@@ -49,37 +55,43 @@ ActiveRecord::Schema.define(:version => 20130727122546) do
     t.string   "name"
     t.integer  "price"
     t.integer  "room_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.string   "description"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "order_items", :force => true do |t|
-    t.integer  "room_id"
+    t.integer  "order_id"
     t.integer  "price"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.decimal  "amount",           :precision => 10, :scale => 0
+    t.integer  "quantity"
+    t.string   "itemable_type"
+    t.integer  "itemable_integer"
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
+  end
+
+  create_table "order_room_items", :force => true do |t|
+    t.integer  "room_id"
     t.date     "check_in_date"
     t.integer  "start_time"
     t.integer  "end_time"
-    t.integer  "order_id"
-    t.integer  "title"
-    t.integer  "company_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "orders", :force => true do |t|
-    t.date    "order_at"
-    t.integer "user_id"
-    t.integer "total"
-    t.string  "status"
-    t.integer "ammount"
-    t.string  "company"
-    t.string  "department"
-    t.string  "phone"
-    t.text    "message"
+    t.date     "order_at"
+    t.integer  "user_id"
+    t.string   "type"
+    t.string   "status"
+    t.decimal  "amount",     :precision => 10, :scale => 0
+    t.text     "message"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
-  create_table "reservations", :force => true do |t|
+  create_table "roles", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -87,19 +99,20 @@ ActiveRecord::Schema.define(:version => 20130727122546) do
   create_table "rooms", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.integer  "price"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.decimal  "price",                :precision => 10, :scale => 0, :default => 0
     t.string   "picture_file_name"
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
     t.string   "slug"
+    t.datetime "created_at",                                                         :null => false
+    t.datetime "updated_at",                                                         :null => false
   end
 
   add_index "rooms", ["slug"], :name => "index_rooms_on_slug", :unique => true
 
   create_table "users", :force => true do |t|
+    t.string   "user",                   :default => "", :null => false
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
@@ -110,16 +123,17 @@ ActiveRecord::Schema.define(:version => 20130727122546) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.integer  "role_id"
     t.string   "name"
+    t.integer  "company_id"
     t.string   "department"
     t.string   "phone"
-    t.integer  "company_id"
-    t.boolean  "is_admin"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["role_id"], :name => "index_users_on_role_id"
 
 end
