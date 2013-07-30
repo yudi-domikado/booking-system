@@ -1,26 +1,53 @@
 class Order < ActiveRecord::Base
-  attr_accessible :user_id, :ammount, :company, :department, :phone
+  extend FriendlyId
+  attr_accessible :user_id, :ammount
   belongs_to :user
-  has_many :order_items, dependent: :destroy
+  before_create :before_creation
 
-  def self.approve_cart(session_id, user_id, params)
-  	cart = Cart.find_by_session_id(session_id)
-  	return unless cart 
-  	create do |order|
-    	order.user_id = user_id 
-      order.ammount = cart.cart_items.sum(:price)
-      order.company = params[:company]
-      order.department = params[:department]
-      order.phone = params[:phone] 
-    	cart.cart_items.each do |cart_item|
-    		order.order_items.new({room_id: cart_item.room_id,
-                               price: cart_item.price,
-                               check_in_date: cart_item.check_in_date,
-                               start_time: cart_item.start_time,
-                               end_time: cart_item.end_time})
-    	end
-      cart.destroy if order.valid?
-  	end
+  scoped_search on: [:code, :amount, :order_at, :amount, :type]
+  scoped_search in: :user, on: [:name, :email]
+  scoped_search in: :user, on: {company: :title}
+  
+  scope :newest_orders, order("order_at DESC")
+  scope :pendings, where(status: "pending")
+  friendly_id :code, use: :slugged
+
+  delegate :name, to: :user, prefix: true, allow_nil: true
+  
+
+  module Status
+  	PENDING = "pending"
+  	CANCELED = "canceled"
+  	APPROVED = "approved"
+  end
+  
+  def self.table_name_prefix
+    self.to_s == "Order" ? '' : 'order_'
   end
 
+  def self.order_histories(user)
+    return newest_orders.where(user_id: user.id) if user.customer?
+    newest_orders
+  end
+
+  private
+    def before_creation
+      self.code = generate_code
+      while(self.class.find_by_code(self.code).present?)
+        self.code = generate_code
+      end
+    end
+
+    def generate_code
+      self.code_number = total_order
+      Date.today.strftime("%d%m%Y/#{user.company_title.upcase}/R") + "%04d" % self.code_number
+    end
+
+    def total_order
+      start_at = Time.now.at_beginning_of_month.midnight
+      result =  self.class.where("order_at > ? AND order_at <= ?", start_at, start_at.at_end_of_month).
+                order("code_number DESC").first
+      return 1 unless result
+      result.code_number.to_i + 1
+    end
 end

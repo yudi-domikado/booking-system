@@ -8,7 +8,6 @@
         <thead>
           <th>Room</th>
           <th style="width: 65px;">Book At </th>
-          <th style="width: 75px;">Company</th>
           <th>Title</th>
           <th style="width: 5px;"> </th>
         </thead>
@@ -18,7 +17,7 @@
       </table>  
     </li>
     <li>
-      <%= link_to "Check Out", checkout_private_users_path, class: "btn btn-small btn-inverse" if @cart.cart_items.present? %>
+      <%= link_to "Check Out", checkout_private_room_orders_path, class: "btn btn-small btn-inverse btn-chk-out hide" %>
     </li>
   </ul>
 </div>

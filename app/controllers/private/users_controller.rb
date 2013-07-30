@@ -6,10 +6,6 @@ class Private::UsersController < ApplicationController
 	def index
 	end
 
-	def checkout
-	  @cart = Cart.find_or_create_by_session_id(session_cart)	
-	end
-
 	def show
   	redirect_to rooms_path
 	end
@@ -27,7 +23,7 @@ class Private::UsersController < ApplicationController
 
 	private
 	  def check_authority
-	  	@user ||= current_user.is_admin ? User.find(params[:id]) : current_user
+	  	@user ||= current_user.customer? ? current_user : (params[:id] ? User.find(params[:id]) : current_user)
 	  end
 
 end

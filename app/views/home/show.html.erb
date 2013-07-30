@@ -24,7 +24,7 @@
   <%= link_to " | ", "#", class: "login" %>
   <%= link_to "#", class: "booking-status" do %>
     Bookings:
-    <span class="total-book"><%= @cart.cart_items.count %></span>
+    <span class="total-book"><%= @cart.room_items.count %></span>
   <% end %>
 </div>
 <div class="alert alert-error hide"></div>

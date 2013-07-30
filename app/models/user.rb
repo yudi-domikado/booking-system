@@ -10,8 +10,13 @@ class User < ActiveRecord::Base
                   :remember_me, :department, :phone, :company_id
                   
   has_many :orders
-  has_many :carts
+  has_many :room_orders
   belongs_to :company
+  belongs_to :role
+
+  default_scope includes(:role, :company)
+  delegate :name,  to: :role,    allow_nil: true, prefix: true
+  delegate :title, to: :company, allow_nil: true, prefix: true
 
   with_options(on: :update) do |update|
     update.with_options(presence: true) do |presence|
@@ -25,4 +30,21 @@ class User < ActiveRecord::Base
   def complete_profile?
     company.present? && department.present?
   end
+
+  def super_admin?
+    role_name.to_s == "super_admin"
+  end
+
+  def food_admin?
+    role_name.to_s == "food_admin"
+  end
+
+  def room_admin?
+    role_name.to_s == "room_admin"
+  end
+
+  def customer?
+    role_name.blank? || role_name.to_s == "customer"
+  end
+
 end 

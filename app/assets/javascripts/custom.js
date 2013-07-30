@@ -33,4 +33,14 @@ $(document).ready(function() {
     $('.alert').fadeOut('medium');
   });
 
+  $("form.form-c").bind("ajax:beforeSend",function(){$(".ac_loading").fadeIn();}).
+                   bind("ajax:success", function(){$(".ac_loading").fadeOut();}).
+                   bind("ajax:error", function(){$(".ac_loading").fadeOut();});
+  $("a.book-del").bind("ajax:beforeSend",function(){$(".ac_loading").fadeIn();}).
+                   bind("ajax:success", function(){$(".ac_loading").fadeOut();}).
+                   bind("ajax:error", function(){$(".ac_loading").fadeOut();});
+  if(Number($(".total-book").html()) > 0){
+    $(".btn-chk-out").show();
+  }
+
 });

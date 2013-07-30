@@ -1,0 +1,95 @@
+<div class="titleLine">
+  <div class="container-fluid">
+    <div class="titleIcon"><i class="icon-check"></i></div>
+    <ul class="titleLineHeading">
+      <li class="heading"><h1>Room Orders</h1></li>
+    </ul>
+  </div>
+</div>
+<ul class="breadcrumb">
+  <li>
+    <i class="icon-home active"></i>
+    <%= link_to "Home", private_dashboard_path %>
+    <span class="divider"><i class="icon-angle-right"></i></span>
+  </li>
+  <li>Room Orders <span class="divider"><i class="icon-angle-right"></i></span></li>
+  <li class="active">List</li>
+  <li class="moveDown pull-right">
+    <span class="time"></span>
+    <span class="date"></span>
+  </li>   
+</ul>
+
+<div class="container-fluid">
+  <%= render "private/shared/notification" %>
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="containerHeadline tableHeadline">
+        <i class="icon-group"></i><h2>Orders</h2>
+        <form>
+          <div class="input-append">
+            <input class="inp-mini span8" type="text" placeholder="enter keywords..." name="keyword">
+            <span class="add-on add-on-first add-on-mini"><i class="icon-search"></i></span>
+            <span class="add-on add-on-middle add-on-mini minimizeTable"><i class="icon-caret-down"></i></span>
+          </div>
+        </form>
+      </div>
+      <div class="floatingBox table">
+        <div class="container-fluid">
+          <table class="table table-striped">
+            <thead >
+              <tr>
+                <th style="width: 80px;">Order At</th>
+                <th style="width: 100px;">Order #</th>
+                <th style="width: 50px;">Status</th>
+                <th style="width: 200px;">Customer</th>
+                <th>Rooms</th>
+                <th style="width: 80px;">Actions #</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @orders.each do |order| %>
+                <tr>
+                  <td>
+                   <%= order.order_at.strftime("%d %b %Y %H:%M") %>
+                  </td>
+                  <td>
+                    <b><%= link_to order.code, send("private_#{order.type.tableize.singularize}_path", order) %></b>
+                  </td>
+                  <td>
+                    <span class="label <%= status_class(order.status) %>"><%= order.status.downcase %></span>
+                  </td>
+                  <td>
+                    <b><%= link_to order.user_name, edit_private_user_path(order.user_id) %></b>
+                  </td>
+                  <td>
+                    <div class="row-fluid">
+                      <% order.items.each do |order_item| %> 
+                        <div class="span6" style="margin-left: 0px;">
+                          <div style="display: inline-block">
+                            <%= image_tag order_item.room.picture.url(:thumb), style:"width: 50px;position:relative;margin-top: -20px;" %>
+                          </div>
+                          <div style="display: inline-block">
+                            <%= link_to order_item.room.name, room_path(order_item.room_id) %> <br/>
+                            <%= order_item.check_in_date.strftime("%a, %d %b %Y") %> 
+                            (<%= Time.at(order_item.start_time).strftime("%H:%M") %> - <%= Time.at(order_item.end_time).strftime("%H:%M") %>)
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                  </td>
+                  <td>
+                    <%= link_to send("edit_private_#{order.type.tableize.singularize}_path", order), class: "btn btn-small" do %>
+                      <i class="icon-pencil"></i>
+                      Edit
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

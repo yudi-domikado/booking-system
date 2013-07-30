@@ -160,7 +160,7 @@ $(document).ready(function() {
         $sub_menu.addClass("active")
         $sub_menu.stop()
                  .animate({
-                    height    : '480px',
+                    height    : '375px',
                     marginTop : '-200px'
                   }, 400, function() {
                     self.showItemImage(el_image);
@@ -223,7 +223,7 @@ $(document).ready(function() {
         self.ac_cart.addClass("active");
         self.ac_cart.stop()
                  .animate({
-                    height    : '480px',
+                    height    : '375px',
                     marginTop : '-200px'
                   }, 400, function() {
                     self.showItemImage(self.ac_background.attr("image-default"));

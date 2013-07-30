@@ -114,6 +114,7 @@ img.ac_bgimage{
 
 .ac_cart{
   width: 650px;
+  overflow-y: auto;
 }
 
 .ac_subitem h2, .ac_cart h2{

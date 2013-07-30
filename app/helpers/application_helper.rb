@@ -24,5 +24,11 @@ module ApplicationHelper
       HTML
     html.html_safe
   end
+
+  def status_class(status)
+    return "label-warning" if status == Order::Status::PENDING
+    return "label-success" if status == Order::Status::APPROVED
+    "label-important"
+  end
   
 end

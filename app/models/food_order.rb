@@ -1,0 +1,2 @@
+class FoodOrder < Order
+end

@@ -1,0 +1,2 @@
+class FoodCart < Cart
+end
