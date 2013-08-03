@@ -23,6 +23,7 @@
  *= require private/jquery.jgrowl.min
  *= require private/bootstrap-tags
  *= require private/colorbox
+ *= require jquery.timepicker
  *= require private/thekamarel
  *= require private/thekamarel-responsive
 */

@@ -30,5 +30,11 @@ module ApplicationHelper
     return "label-success" if status == Order::Status::APPROVED
     "label-important"
   end
+
+  def meridian_time(time)
+    time = Time.now if time.blank?
+    time = Time.at(time) if time.is_a?(Fixnum)
+    time.strftime("%l:%M%P").gsub(/\s/,"")
+  end
   
 end

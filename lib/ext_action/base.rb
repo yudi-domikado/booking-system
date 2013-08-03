@@ -27,7 +27,7 @@ module ExtAction
 	    end
 
 	    def per_page
-	      params[:per_page]
+	      params[:per_page] || 20
 	    end
 
 	    def query_search

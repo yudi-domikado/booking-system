@@ -39,12 +39,12 @@
           <table class="table table-striped">
             <thead >
               <tr>
-                <th style="width: 80px;">Order At</th>
-                <th style="width: 100px;">Order #</th>
+                <th style="width: 80px;">Booked At</th>
+                <th>Booking No</th>
                 <th style="width: 50px;">Status</th>
-                <th style="width: 200px;">Customer</th>
+                <th>Customer</th>
                 <th>Rooms</th>
-                <th style="width: 80px;">Actions #</th>
+                <th>Actions #</th>
               </tr>
             </thead>
             <tbody>
@@ -53,16 +53,16 @@
                   <td>
                    <%= order.order_at.strftime("%d %b %Y %H:%M") %>
                   </td>
-                  <td>
-                    <b><%= link_to order.code, send("private_#{order.type.tableize.singularize}_path", order) %></b>
+                  <td style="max-width: 150px;">
+                    <b><%= link_to truncate(order.code, length: 25), send("private_#{order.type.tableize.singularize}_path", order) %></b>
                   </td>
                   <td>
                     <span class="label <%= status_class(order.status) %>"><%= order.status.downcase %></span>
                   </td>
-                  <td>
-                    <b><%= link_to order.user_name, edit_private_user_path(order.user_id) %></b>
+                  <td style="max-width: 150px;">
+                    <b><%= link_to truncate(order.user_name, length: 25), edit_private_user_path(order.user_id) %></b>
                   </td>
-                  <td>
+                  <td style="max-width: 500px;">
                     <div class="row-fluid">
                       <% order.items.each do |order_item| %> 
                         <div class="span6" style="margin-left: 0px;">
@@ -78,16 +78,35 @@
                       <% end %>
                     </div>
                   </td>
-                  <td>
+                  <td class="action" style="max-width: 175px;">
                     <%= link_to send("edit_private_#{order.type.tableize.singularize}_path", order), class: "btn btn-small" do %>
                       <i class="icon-pencil"></i>
                       Edit
+                    <% end %>
+                    <%= link_to send("private_#{order.type.tableize.singularize}_path", order, room_order: {status: Order::Status::APPROVED}), method: :put, class: "btn btn-small" do %>
+                      <i class="icon-check"></i>
+                      Approve
+                    <% end if order.pending? || order.canceled? %>
+                    <%= link_to send("private_#{order.type.tableize.singularize}_path", order, room_order: {status: Order::Status::CANCELED}), method: :put, class: "btn btn-small" do %>
+                      <i class="icon-remove"></i>
+                      Cancel
+                    <% end if order.approved? || order.pending? %>
+                    <%= link_to send("private_#{order.type.tableize.singularize}_path", order), method: :delete, confirm: "Do you will delete order no #{order.code}, are you sure?", class: "btn btn-small" do %>
+                      <i class="icon-trash"></i>
+                      Delete
                     <% end %>
                   </td>
                 </tr>
               <% end %>
             </tbody>
           </table>
+          <div class="pull-left">
+            <%= page_entries_info @orders %>
+          </div>
+          <div class="pull-right">
+            <%= paginate @orders %>
+          </div>
+          <div class="clearfix"></div>
         </div>
       </div>
     </div>

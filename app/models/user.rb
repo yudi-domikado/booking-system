@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   belongs_to :company
   belongs_to :role
 
-  default_scope includes(:role, :company)
+  default_scope includes(:role, :company).order("name ASC")
   delegate :name,  to: :role,    allow_nil: true, prefix: true
   delegate :title, to: :company, allow_nil: true, prefix: true
 

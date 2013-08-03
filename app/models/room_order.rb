@@ -4,9 +4,13 @@ class RoomOrder < Order
 
 	has_many :room_items, class_name: "Order::RoomItem", dependent: :destroy
   attr_accessible :room_items_attributes
-  accepts_nested_attributes_for :room_items
+  accepts_nested_attributes_for :room_items, reject_if: :all_blank, allow_destroy: true
   
   scoped_search in: :room_items, on: {room: :name}
+  after_validation :count_amount
+  validates :room_items, presence: true
+  validates :user_id, presence: true
+  after_save :after_saved
 
   def self.cart_class
     RoomCart
@@ -20,16 +24,12 @@ class RoomOrder < Order
   	cart = cart_class.find_by_session_id(session_id)
   	return unless cart 
   	create do |order|
-    	order.user_id = user_id 
-      order.status = Order::Status::PENDING
-      order.amount = cart.room_items.sum(:amount)
-      order.order_at = Time.now
+    	order.user_id = user_id
     	cart.room_items.each do |cart_item|
     		item = order.room_items.new_by_item(cart_item)
         item.quantity = cart_item.quantity
         item.price    = cart_item.price
         item.title    = cart_item.title
-    		item.amount   = item.quantity * item.price
     		order.room_items << item
     		item.errors.messages.each do |k,v|
     			if order.errors.messages[k]
@@ -41,7 +41,27 @@ class RoomOrder < Order
     		end if item.errors.any?
     	end
       cart.destroy if order.valid?
-  	end
+    end
   end
+
+  private
+    def count_amount
+      self.amount = self.room_items.sum(:amount)
+    end
+
+    def after_saved
+      if self.approved?
+        self.room_items.where("status IS NULL OR status NOT IN (?)", [Order::Status::APPROVED, Order::Status::CANCELED]).each do |item|
+          item.status = Order::Status::APPROVED 
+          item.save(validate: false)
+        end 
+      elsif self.canceled?
+        self.room_items.where("status IS NULL OR status NOT IN (?)", [Order::Status::CANCELED]).each do |item|
+          item.status = Order::Status::CANCELED 
+          item.save(validate: false)
+        end 
+      end
+    end
+
 
 end

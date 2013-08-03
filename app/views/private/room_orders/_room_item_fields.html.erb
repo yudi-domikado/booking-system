@@ -1,0 +1,22 @@
+<tr>
+  <td>
+    <%= f.select :room_id, options_from_collection_for_select(Room.all,"id","name", f.object.room_id), {prompt: "Select Room"}, {class: "span7"} %>
+  </td>
+  <td>
+    <%= f.text_field :check_in_date, class: "span6 datepick" %>
+    <span class="add-on"><i class="icon-calendar"></i></span>
+  </td>
+  <td>
+    <%= f.text_field :hour_start, class: "timepick span5", value: meridian_time(f.object.start_time) %>
+  </td>
+  <td>
+    <%= f.text_field :hour_end, class: "timepick span5", value: meridian_time(f.object.end_time) %>
+  </td>
+  <td>
+    <%= f.select :status, options_for_select(Order.statuses, f.object.status), {prompt: "Select Status"}, {class: "span7"} %>
+    <%= link_to_remove_association f, class: "btn btn-small", style: "margin-left: 10px;" do %>
+      <i class="icon-trash"></i>
+      Remove
+    <% end %>
+  </td>
+</tr>

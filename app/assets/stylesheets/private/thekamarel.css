@@ -47,6 +47,10 @@ button:focus {
   text-align: center;
 }
 
+.centered {
+  text-align: center !important;
+}
+
 /*==============================================================================================
 ===================================== TOPMENU SETTINGS =========================================
 ==============================================================================================*/
@@ -532,6 +536,17 @@ div.profileInfo p.aboutMe {
   text-align: left;
 }
 
+form.contentForm div.profileInfo p{
+  font-size: 12px;
+}
+
+form.contentForm div.profileInfo img{
+  width: 80px;
+}
+
+form.contentForm div.profileInfo h5{
+  
+}
 div.profileSettingBlock {
   background-color: #33B5E5;
   -webkit-box-shadow:  1px 1px 2px 0 rgba(0, 0, 0, .3);
@@ -3623,6 +3638,10 @@ div.mf_container,
   background: linear-gradient(to bottom,  rgba(254,254,254,1) 0%,rgba(243,243,243,1) 100%); /* W3C */
 }
 
+.containerHeadline.new-form-false{
+  height: 28px;
+}
+
 /* hover menu field color */
 
 ul.floatingBoxContainers .popover-content li > a:hover,
@@ -3640,4 +3659,32 @@ ol.mp_list li.mp_highlighted {
 
 table.table.no-border tr td{
   border-top: none;
+}
+
+td.day{
+  color: #000;
+}
+
+td.day.old{
+  color: #757575;
+}
+
+.datepicker td.day.disabled{
+  color: #A5A5A5;
+}
+
+td.day:hover{
+  background: #B2B2B2;
+}
+
+td.action a{
+  margin: 2px;
+}
+
+td .row-fluid{
+  margin-bottom: 3px;
+}
+
+td .row-fluid [class*="span"]{
+ margin-bottom: 3px;
 }

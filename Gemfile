@@ -37,6 +37,7 @@ gem 'sidekiq'
 gem 'kaminari'                       
 gem 'scoped_search'                  
 gem 'inherited_resources'
+gem 'cocoon'
 
 group :development, :test do
   gem 'debugger'

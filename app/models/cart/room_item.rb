@@ -20,32 +20,15 @@ class Cart::RoomItem < ActiveRecord::Base
 
   private
     def check_time
-      unless self.errors.present?
-        self.errors.add("Start hour", "is invalid and not empty") if self.start_time.blank?
-        self.errors.add("End hour", "is invalid and should be greater than time now") if is_older?
-      	self.errors.add("End hour", "is invalid and should be greater than Start hour") if is_wrong_end_time?
-        self.errors.add("Room", "is already used by another company") if is_already_booked?
-        self.errors.add("You", "have booked the room, please complete your order") if is_already_reserved?
-        self.errors.add("Room", "is not registered, please refresh your browser") if self.room.blank?
-      end
+      Order::RoomItem.validate_availability(self)
+      self.errors.add("You", "have booked the room, please complete your order") if is_already_reserved?
+      self.errors.add("Room", "is already used by another company") if is_already_booked?
       return self.errors.blank?
-    end
-
-    def is_older?
-      self.errors.blank? && self.end_time.present? && self.end_time.to_i < Time.now.to_i
-    end
-
-    def is_wrong_end_time?
-      self.errors.blank? && self.start_time && self.end_time && self.start_time > self.end_time
     end
 
     def is_already_booked?
       return false if self.errors.present?
-      Order::RoomItem.where(room_id: self.room_id).
-                      where(check_in_date: self.check_in_date).
-                      where("(start_time <= ? AND end_time > ?) OR (start_time < ? AND end_time >= ?) OR (start_time > ? AND end_time < ?)", 
-                            self.start_time, self.start_time, self.end_time, self.end_time, self.start_time, self.end_time).
-                      present?
+      Order::RoomItem.check_presence(self)
     end
 
     def is_already_reserved?

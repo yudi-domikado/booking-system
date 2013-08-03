@@ -14,20 +14,24 @@
           <i class="icon-dashboard"></i> DASHBOARD
         <% end %>
       </li>
-      <li class="divider-vertical"></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="formElements">
-          <i class="icon-calendar"></i> 
-          ROOM ORDERS
-        </a>
-      </li>
-      <li class="divider-vertical"></li>
-      <li id="interfaceElements">
-        <a href="interface.html">
-          <i class="icon-bookmark"></i> 
-          FOOD ORDERS
-        </a>
-      </li>
+      <% if can?(:index, RoomOrder) %>
+        <li class="divider-vertical"></li>
+        <li class="dropdown">
+          <%= link_to private_room_orders_path do %>
+            <i class="icon-calendar"></i> 
+            ROOM ORDERS
+          <% end %>
+        </li>
+      <% end %>
+      <% if can?(:index, FoodOrder) %>
+        <li class="divider-vertical"></li>
+        <li id="interfaceElements">
+          <a href="interface.html">
+            <i class="icon-bookmark"></i> 
+            FOOD ORDERS
+          </a>
+        </li>
+      <% end %>
       <li class="divider-vertical"></li>
       <li id="buttonsIcons">
         <a href="buttons.html">
