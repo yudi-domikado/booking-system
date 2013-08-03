@@ -1,17 +1,17 @@
 <div class="banner-image">
-  <div class="banner-logo">
-    <%= image_tag "sap.png" %>
-  </div>
-
   <% if @current_meeting %>
+    <% company = @current_meeting.room_order.user.company %>
+    <div class="banner-logo" data-color="<%= company.color %>">
+      <%= image_tag company.logo.url(:thumb) %>
+    </div>
     <p class="banner-time">
       <%= Time.at(@current_meeting.start_time).strftime("%H:%M") %> - <%= Time.at(@current_meeting.end_time).strftime("%H:%M") %>
     </p>
     <p class="banner-title">
-      <%= @current_meeting.order.company %>
+      <%= @current_meeting.title %>
     </p>
   <% else %>
-    <p class="banner-title">
+    <p class="banner-title noactive">
       Room is Available
     </p>
   <% end %>

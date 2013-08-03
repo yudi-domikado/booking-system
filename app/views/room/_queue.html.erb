@@ -1,0 +1,18 @@
+<% if @next_meetings.present? %>
+	<div id="intro-schedules">
+	  <p>TODAY UPCOMING SCHEDULES</p>
+	  <% @next_meetings.each do |queue| %>
+			<div id="schedule-list">
+			  <div class="schedule-time">
+			    <p><%= Time.at(queue.start_time).strftime("%H:%M") %> - <%= Time.at(queue.end_time).strftime("%H:%M") %></p>
+			  </div>
+			  <div class="schedule-logo">
+			    <%= image_tag queue.room_order.user.company.logo.url(:thumb) %>
+			  </div>
+			  <div class="schedule-title">
+			    <p><%= queue.title.titleize %></p>
+			  </div>
+			</div>
+		<% end %>
+	</div>
+<% end %>

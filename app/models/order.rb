@@ -1,16 +1,14 @@
 class Order < ActiveRecord::Base
-  extend FriendlyId
-  attr_accessible :user_id, :ammount
+  attr_accessible :user_id, :ammount, :slug
   belongs_to :user
   before_create :before_creation
 
   scoped_search on: [:code, :amount, :order_at, :amount, :type]
-  scoped_search in: :user, on: [:name, :email]
-  scoped_search in: :user, on: {company: :title}
+  scoped_search in: :user, on: [:name, :email], ext_method: :find_by_company_name
   
   scope :newest_orders, order("order_at DESC")
   scope :pendings, where(status: "pending")
-  friendly_id :code, use: :slugged
+  
 
   delegate :name, to: :user, prefix: true, allow_nil: true
   
@@ -19,6 +17,12 @@ class Order < ActiveRecord::Base
   	PENDING = "pending"
   	CANCELED = "canceled"
   	APPROVED = "approved"
+  end
+
+  def self.find_by_company_name(key, operator, value)
+    companies = Company.where("title LIKE ?", "%#{value}%").map(&:id)
+    users = User.where("id IN (?)", companies).map(&:id)
+    { :conditions => "orders.user_id IN(#{users.join(',')})" } 
   end
   
   def self.table_name_prefix

@@ -1,6 +1,7 @@
 class Order::RoomItem < ActiveRecord::Base
   attr_accessible :check_in_date, :end_time, :room_id, :start_time
   belongs_to :itemable, polymorphic: true
+  scoped_search in: :user, on: [:name, :email]
 
   validate :check_availability
   belongs_to :room_order
@@ -29,7 +30,7 @@ class Order::RoomItem < ActiveRecord::Base
 
       room_item = Order::RoomItem.where(room_id: self.room_id).
                   where(check_in_date: self.check_in_date).
-                  where("(start_time <= ? AND end_time >= ?) OR (start_time <= ? AND end_time >= ?) OR (start_time > ? AND end_time < ?)", 
+                  where("(start_time <= ? AND end_time > ?) OR (start_time < ? AND end_time >= ?) OR (start_time > ? AND end_time < ?)", 
                   self.start_time.to_i, self.start_time.to_i, self.end_time.to_i, self.end_time.to_i, self.start_time.to_i, self.end_time.to_i).first
       if room_item
         self.errors.add(room_item.room.name.titleize, "is already used by another company")

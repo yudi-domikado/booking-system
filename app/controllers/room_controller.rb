@@ -1,16 +1,7 @@
-class RoomsController < ApplicationController
+class RoomController < ApplicationController
   layout :custom
 
-	def index
-		@rooms = Room.search(params[:search])
-	end
-
-	def show
-	  @facilities = Facility.all
-    room
-	end
-
-  def info
+  def show
     gon.watch.current_meeting = current_meeting_content
     gon.watch.next_meetings = next_meetings_content
   end
@@ -29,17 +20,16 @@ class RoomsController < ApplicationController
     end
 
     def current_meeting_content
-      current_meeting
-      view_context.render(partial: 'rooms/status').to_s.html_safe if request.xhr?
+      current_meeting 
+      view_context.render(partial: 'room/status').to_s.html_safe
     end
 
     def next_meetings_content
-      view_context.render(partial: 'rooms/queue', collection: next_meetings).to_s.html_safe if request.xhr?
+      next_meetings ? view_context.render(partial: 'room/queue').to_s.html_safe : ""
     end
 
     def custom
       return false if request.xhr?
-      return "schedule" if params[:action] == "info"
-      "application"
+      "schedule"
     end
 end

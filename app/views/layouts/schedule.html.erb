@@ -35,8 +35,8 @@
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
     <%= include_gon(watch: true) %>
   </head>
-  <body>
-
+  <body style="background: url(<%= @room.picture.url(:large) %>) center top no-repeat;">
+    <div class="ac_overlay"></div>
     <%= yield %>
     
     <%= javascript_include_tag "schedule" %>

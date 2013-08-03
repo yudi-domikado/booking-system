@@ -20,17 +20,16 @@ gon.watch = function(name, possibleOptions, possibleCallback) {
     callback = possibleOptions;
   }
   performAjax = function() {
-    var xhr;
-    xhr = $.ajax({
-      type: options.type || 'GET',
+    var ajax_opts = {
+      type: options.type,
       url: options.url,
       dataType: options.dataType || 'html',
       data: {
-        _method: options.method,
         gon_return_variable: true,
         gon_watched_variable: name
       }
-    });
+    };
+    var xhr = $.ajax(ajax_opts);
     return xhr.complete(callback);
   };
   if (options.interval) {

@@ -40,24 +40,34 @@ $(document).ready(function() {
     $("#hours").html(( hours < 10 ? "0" : "" ) + hours);
   }, 1000);
 
-  if($('#current_meeting').length > 0){
-    var last_status = function(xhr, status){
-      if(xhr.responseText !=  gon.current_meeting){
-        gon.current_meeting = xhr.responseText;
-        $('#current_meeting').html(gon.current_meeting);
-      }
+  function change_header_color(){
+    var data_color = $(".banner-image").find("[data-color]");
+    if(data_color.length){
+      $("#header").css("background",data_color.attr("data-color"));
+    }else{
+      $("#header").css("background","#dc4f4f");
     }
-    gon.watch('current_meeting', {interval: 10000, type: "GET", cache: true}, last_status)
+  }
+  
+  if($('#current_meeting').length){
+    gon.watch('current_meeting', {interval: 9000, url: window.location.pathname, type: "GET", cache: true}, function(xhr){
+      if(xhr.responseText != gon.current_meeting && xhr.responseText.length){
+        gon.current_meeting = xhr.responseText;
+        $('#current_meeting').html(String(gon.current_meeting));
+      }
+      change_header_color();
+    });
+  }
+  
+  if($('#wrapper-schedule').length){
+    gon.watch('next_meetings', {interval: 10000, url: window.location.pathname, type: "GET", cache: true}, function(xhr){
+      if(xhr.responseText != gon.next_meetings){
+        gon.next_meetings = xhr.responseText;
+        $('#wrapper-schedule').html(String(gon.next_meetings));
+      }
+    });
   }
 
-  if($('#next_meetings').length > 0){
-    var next_statuses = function(xhr, status){
-      if(xhr.responseText !=  gon.current_meeting){
-        gon.next_meetings = xhr.responseText;
-        $('#next_meetings').html(gon.next_meetings);
-      }
-    }
-    gon.watch('next_meetings', {interval: 10000, type: "GET", cache: true}, next_statuses)
-  }
+  change_header_color();
   
 }); 

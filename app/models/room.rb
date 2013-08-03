@@ -15,7 +15,7 @@ class Room < ActiveRecord::Base
 
   has_many :events
   has_many :facilities
-  has_many :order_items, dependent: :destroy
+  has_many :order_items, class_name: "Order::RoomItem", dependent: :destroy
 
 	def self.search(search)
     find(:all) unless search
@@ -32,7 +32,7 @@ class Room < ActiveRecord::Base
     where(4.times.map{time.to_i}.unshift(booked_condition)).first
   end
 
-  def next_meetings(current_meeting=nil, limit=4)
+  def next_meetings(current_meeting=nil, limit=2)
     current_meeting = with_current_meeting if current_meeting.blank?
     end_time = current_meeting ? current_meeting.end_time : Time.now
     

@@ -1,0 +1,25 @@
+<div class="titleLine">
+  <div class="container-fluid">
+    <div class="titleIcon"><i class="icon-check"></i></div>
+    <ul class="titleLineHeading">
+      <li class="heading"><h1>Room Orders</h1></li>
+    </ul>
+  </div>
+</div>
+<ul class="breadcrumb">
+  <li>
+    <i class="icon-home active"></i>
+    <%= link_to "Home", private_dashboard_path %>
+    <span class="divider"><i class="icon-angle-right"></i></span>
+  </li>
+  <li>Room Orders <span class="divider"><i class="icon-angle-right"></i></span></li>
+  <% if params[:action] =~ /new|create/i %>
+    <li class="active"><%= params[:action].gsub(/new/i,"create").titleize %></li>
+  <% else %>
+    <li class="active"><%= @order.code.upcase %></li>
+  <% end %>
+  <li class="moveDown pull-right">
+    <span class="time"></span>
+    <span class="date"></span>
+  </li>   
+</ul>

@@ -5,6 +5,7 @@ module ExtAction
   	included do
   		layout :custom_layout
       before_filter :check_profile
+      respond_to :html, :xml, :json, :pdf, :js, :rss
   	end
     
     module ClassMethods

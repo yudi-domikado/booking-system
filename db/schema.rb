@@ -11,26 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130728123524) do
-
-  create_table "cart_items", :force => true do |t|
-    t.integer  "cart_id"
-    t.integer  "price"
-    t.decimal  "amount",           :precision => 10, :scale => 0
-    t.integer  "quantity"
-    t.string   "itemable_type"
-    t.integer  "itemable_integer"
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
-  end
+ActiveRecord::Schema.define(:version => 20130803091021) do
 
   create_table "cart_room_items", :force => true do |t|
     t.integer  "room_id"
     t.date     "check_in_date"
     t.integer  "start_time"
     t.integer  "end_time"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer  "room_cart_id"
+    t.string   "title"
+    t.integer  "price"
+    t.decimal  "amount",        :precision => 10, :scale => 0
+    t.integer  "quantity"
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
   end
 
   create_table "carts", :force => true do |t|
@@ -49,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20130728123524) do
     t.datetime "logo_updated_at"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.string   "color"
   end
 
   create_table "facilities", :force => true do |t|
@@ -59,36 +54,38 @@ ActiveRecord::Schema.define(:version => 20130728123524) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "order_items", :force => true do |t|
-    t.integer  "order_id"
-    t.integer  "price"
-    t.decimal  "amount",           :precision => 10, :scale => 0
-    t.integer  "quantity"
-    t.string   "itemable_type"
-    t.integer  "itemable_integer"
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
-  end
-
   create_table "order_room_items", :force => true do |t|
     t.integer  "room_id"
     t.date     "check_in_date"
     t.integer  "start_time"
     t.integer  "end_time"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer  "room_order_id"
+    t.string   "title"
+    t.integer  "price"
+    t.decimal  "amount",        :precision => 10, :scale => 0
+    t.integer  "quantity"
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
   end
 
   create_table "orders", :force => true do |t|
-    t.date     "order_at"
+    t.datetime "order_at"
     t.integer  "user_id"
     t.string   "type"
     t.string   "status"
-    t.decimal  "amount",     :precision => 10, :scale => 0
+    t.decimal  "amount",      :precision => 10, :scale => 0
     t.text     "message"
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.string   "code"
+    t.integer  "code_number"
+    t.string   "slug"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
+
+  add_index "orders", ["code"], :name => "index_orders_on_code", :unique => true
+  add_index "orders", ["code_number"], :name => "index_orders_on_code_number"
+  add_index "orders", ["slug"], :name => "index_orders_on_slug", :unique => true
+  add_index "orders", ["type"], :name => "index_orders_on_type"
 
   create_table "roles", :force => true do |t|
     t.string   "name"

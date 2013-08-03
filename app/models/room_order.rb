@@ -1,4 +1,7 @@
 class RoomOrder < Order
+  extend FriendlyId
+  friendly_id :code, use: :slugged
+
 	has_many :room_items, class_name: "Order::RoomItem", dependent: :destroy
   attr_accessible :room_items_attributes
   accepts_nested_attributes_for :room_items
@@ -25,6 +28,7 @@ class RoomOrder < Order
     		item = order.room_items.new_by_item(cart_item)
         item.quantity = cart_item.quantity
         item.price    = cart_item.price
+        item.title    = cart_item.title
     		item.amount   = item.quantity * item.price
     		order.room_items << item
     		item.errors.messages.each do |k,v|

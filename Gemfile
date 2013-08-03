@@ -34,6 +34,9 @@ gem 'gon'
 gem 'rabl-rails'
 gem 'friendly_id'
 gem 'sidekiq'
+gem 'kaminari'                       
+gem 'scoped_search'                  
+gem 'inherited_resources'
 
 group :development, :test do
   gem 'debugger'
