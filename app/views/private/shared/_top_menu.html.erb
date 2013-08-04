@@ -1,4 +1,3 @@
-<!-- ==================== TOP MENU ==================== -->
 <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container-fluid">
@@ -7,33 +6,21 @@
         <form class="navbar-form">
           <div class="input-append">
             <div class="collapsibleContent">
+              <% if current_user.room_admin? || current_user.super_admin %>
+                <a href="#pendingRoomContent" class="sidebar">
+                  <span class="add-on add-on-middle add-on-mini add-on-dark" id="tasks">
+                    <i class="icon-calendar"></i>
+                    <span class="notifyCircle cyan total_pending_room"><%= @pending_rooms.count %></span>
+                  </span>
+                </a>
+              <% end %>
 
-              <a href="#tasksContent" class="sidebar">
-                <span class="add-on add-on-middle add-on-mini add-on-dark" id="tasks">
-                  <i class="icon-tasks"></i>
-                  <span class="notifyCircle cyan">3</span>
-                </span>
-              </a>
-
-              <a href="#notificationsContent" class="sidebar">
+              <!-- <a href="#notificationsContent" class="sidebar">
                 <span class="add-on add-on-middle add-on-mini add-on-dark" id="notifications">
                   <i class="icon-bell-alt"></i>
                   <span class="notifyCircle orange">9</span>
                 </span>
-              </a>
-
-              <a href="#messagesContent" class="sidebar">
-                <span class="add-on add-on-middle add-on-mini add-on-dark" id="messages">
-                  <i class="icon-comments-alt"></i>
-                  <span class="notifyCircle red">12</span>
-                </span>
-              </a>
-
-              <a href="#settingsContent" class="sidebar">
-                <span class="add-on add-on-middle add-on-mini add-on-dark" id="settings">
-                  <i class="icon-cog"></i>
-                </span>
-              </a>
+              </a> -->
 
               <a href="#profileContent" class="sidebar">
                 <span class="add-on add-on-mini add-on-dark" id="profile">

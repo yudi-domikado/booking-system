@@ -16,7 +16,7 @@
   <% if params[:action] =~ /new|create/i %>
     <li class="active"><%= params[:action].gsub(/new/i,"create").titleize %></li>
   <% else %>
-    <li class="active"><%= @order.code.upcase %></li>
+    <li class="active"><%= @room_order.code.upcase %></li>
   <% end %>
   <li class="moveDown pull-right">
     <span class="time"></span>
@@ -26,17 +26,17 @@
 
 <div class="container-fluid">
   <%= render "private/shared/notification" %>
-  <%= render partial: "private/shared/errors", locals: {resource: @order} %>
-  <%= form_for [:private, @order], html: {class: "form-horizontal contentForm"} do |f| %>
+  <%= render partial: "private/shared/errors", locals: {resource: @room_order} %>
+  <%= form_for [:private, @room_order], html: {class: "form-horizontal contentForm"} do |f| %>
     <div class="row-fluid">
       <div class="span12">
-        <div class="containerHeadline new-form-<%= @order.new_record? %>">
+        <div class="containerHeadline new-form-<%= @room_order.new_record? %>">
           <i class="icon-pencil"></i><h2>Booking Form</h2>
-          <% unless @order.new_record? %>
+          <% unless @room_order.new_record? %>
             <div class="controlButton pull-right btn-group">
-              <%= link_to "Approve", private_room_order_path(@order, room_order: {status: Order::Status::APPROVED}), method: :put, class: "btn btn-small" if !@order.approved? %>
-              <%= link_to "Cancel", private_room_order_path(@order, room_order: {status: Order::Status::CANCELED}), method: :put, class: "btn btn-small" if !@order.canceled? %>
-              <%= link_to "Delete", private_room_path(@order), method: :delete, confirm: "Do you want delete this booking room?", class: "btn btn-small" %>
+              <%= link_to "Approve", private_room_order_path(@room_order, room_order: {status: Order::Status::APPROVED}), method: :put, class: "btn btn-small" if !@room_order.approved? && (current_user.room_admin? || current_user.super_admin?) %>
+              <%= link_to "Cancel", private_room_order_path(@room_order, room_order: {status: Order::Status::CANCELED}), method: :put, class: "btn btn-small" if !@room_order.canceled? %>
+              <%= link_to "Delete", private_room_order_path(@room_order), method: :delete, confirm: "Do you want delete this booking room?", class: "btn btn-small" %>
             </div>
           <% end %>
         </div>
@@ -45,26 +45,26 @@
             <div class="row-fluid">
               <div class="span12">
                 <div class="pull-left">
-                  <% if @order.new_record? %>
+                  <% if @room_order.new_record? %>
                     <h5>Customer Information</h5>
                     <p>
-                      <%= f.select :user_id, options_from_collection_for_select(User.all, "id", "name", @order.user_id), {prompt: "Select User"},{} %>
+                      <%= f.select :user_id, options_from_collection_for_select(User.all, "id", "name", @room_order.user_id), {prompt: "Select User"},{} %>
                     </p>
                   <% else %>
                     <div class="profileInfo">
-                      <%= image_tag(@order.user.company.logo.url(:thumb)) %>
-                      <h5 style="margin-bottom:0px;"><%= @order.user.name %></h5>
-                      <p><i class="icon-envelope-alt"></i> <%= @order.user.email %></p>
-                      <p><i class="icon-phone"></i> <%= @order.user.phone %></p>
-                      <p><i class="icon-flag"></i> <%= @order.user.department %></p>
+                      <%= image_tag(@room_order.user.company.logo.url(:thumb)) %>
+                      <h5 style="margin-bottom:0px;"><%= @room_order.user.name %></h5>
+                      <p><i class="icon-envelope-alt"></i> <%= @room_order.user.email %></p>
+                      <p><i class="icon-phone"></i> <%= @room_order.user.phone %></p>
+                      <p><i class="icon-flag"></i> <%= @room_order.user.department %></p>
                     </div>
                   <% end %>
                 </div>
                 <div class="pull-right">
-                  <% if @order.new_record? %>
+                  <% if @room_order.new_record? %>
                     <h3> New Booking Room </h3>
                   <% else %>
-                    <table class="table table-bordered">
+                    <table class="table table-broom_ordered">
                       <thead>
                         <tr>
                           <th class="centered"> BOOKING NO </th>
@@ -74,9 +74,9 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td><%= @order.code %></td>
-                          <td><%= @order.order_at.strftime("%d %b %Y %H:%M") %></td>
-                          <td><span class="label <%= status_class(@order.status) %>"><%= @order.status.downcase %></span></td>
+                          <td><%= @room_order.code %></td>
+                          <td><%= @room_order.order_at.strftime("%d %b %Y %H:%M") %></td>
+                          <td><span class="label <%= status_class(@room_order.status) %>"><%= @room_order.status.downcase %></span></td>
                         </tr>
                       </tbody>
                     </table>
@@ -94,7 +94,9 @@
                       <th style="width: 15%"> CHECK IN </th>
                       <th style="width: 15%"> START HOUR </th>
                       <th style="width: 15%"> END HOUR </th>
-                      <th style="width: 20%"> STATUS </th>
+                      <% if current_user.room_admin? || current_user.super_admin? %>
+                        <th style="width: 20%"> STATUS </th>
+                      <% end %>
                     </tr>
                   </thead>
                   <tbody class="room_items">

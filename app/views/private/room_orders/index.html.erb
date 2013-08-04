@@ -7,7 +7,11 @@
       </ul>
     </div>
     <div class="pull-right" style="line-height: 45px;">
-      <%= link_to "Create Booking", new_private_room_order_path, class: "btn btn-primary" %>
+      <% if current_user.room_admin? || current_user.super_admin? %>
+        <%= link_to "Create Booking", new_private_room_order_path, class: "btn btn-primary" %>
+      <% else %>
+        <%= link_to "Create Booking", root_path, class: "btn btn-primary" %>
+      <% end %>
     </div>
     <div class="clearfix">&nbsp;</div>
   </div>
@@ -88,7 +92,7 @@
                     <%= link_to send("private_#{order.type.tableize.singularize}_path", order, room_order: {status: Order::Status::APPROVED}), method: :put, class: "btn btn-small" do %>
                       <i class="icon-check"></i>
                       Approve
-                    <% end if order.pending? || order.canceled? %>
+                    <% end if (order.pending? || order.canceled?) && (current_user.room_admin? || current_user.super_admin?) %>
                     <%= link_to send("private_#{order.type.tableize.singularize}_path", order, room_order: {status: Order::Status::CANCELED}), method: :put, class: "btn btn-small" do %>
                       <i class="icon-remove"></i>
                       Cancel

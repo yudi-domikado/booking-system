@@ -1,5 +1,6 @@
 class Private::RoomOrdersController < InheritedResources::Base
   before_filter :authenticate_user!
+  before_filter :protect_status, only: [:create, :update]
   authorize_controller class: "RoomOrder", except: [:checkout, :create]
   defaults resource_class: RoomOrder, collection_name: 'room_orders', instance_name: 'room_order'
   actions :all, except: [:show]
@@ -67,6 +68,18 @@ class Private::RoomOrdersController < InheritedResources::Base
       	flash[:notice] = "Booking room has been #{params[:action]}d successfully"
         format.html { redirect_to private_room_orders_path }
       end
+    end
+
+    def protect_status
+    	unless (current_user.room_admin? || current_user.super_admin?)
+    		if params[:room_order][:status] && params[:room_order][:status].to_s !~ /cancel/i
+    			params[:room_order].delete(:status)
+    		end
+    		
+    		if params[:room_order][:room_items_attributes]
+    			params[:room_order][:room_items_attributes].map{|item| item.delete(:status) }
+    		end
+    	end if params[:room_order]
     end
 
 end

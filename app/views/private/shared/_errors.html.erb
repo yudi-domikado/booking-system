@@ -1,7 +1,7 @@
 <% if defined?(resource) && resource.errors.present? %>
 	<div class="row-fluid middle-alert">
 		<div class="alert alert-error">
-		  <%= display_error_messages! %>
+		  <%= display_error_messages!(resource) %>
 		</div>
 	</div>
 <% end %>

@@ -3,11 +3,11 @@
     <div class="pull-left">
       <div class="titleIcon"><i class="icon-check"></i></div>
       <ul class="titleLineHeading">
-        <li class="heading"><h1>Users</h1></li>
+        <li class="heading"><h1>Companies</h1></li>
       </ul>
     </div>
     <div class="pull-right" style="line-height: 45px;">
-      <%= link_to "Create User", new_private_user_path, class: "btn btn-primary" %>
+      <%= link_to "Create Company", new_private_company_path, class: "btn btn-primary" %>
     </div>
     <div class="clearfix">&nbsp;</div>
   </div>
@@ -18,7 +18,7 @@
     <%= link_to "Home", private_dashboard_path %>
     <span class="divider"><i class="icon-angle-right"></i></span>
   </li>
-  <li>Users <span class="divider"><i class="icon-angle-right"></i></span></li>
+  <li>Companies <span class="divider"><i class="icon-angle-right"></i></span></li>
   <li class="active">List</li>
   <li class="moveDown pull-right">
     <span class="time"></span>
@@ -31,7 +31,7 @@
   <div class="row-fluid">
     <div class="span12">
       <div class="containerHeadline tableHeadline">
-        <i class="icon-th"></i><h2>User List</h2>
+        <i class="icon-th"></i><h2>Company List</h2>
         <form>
           <div class="input-append">
             <input class="inp-mini span8" type="text" placeholder="enter keywords..." name="keywords">
@@ -45,38 +45,26 @@
           <table class="table table-striped">
             <thead >
               <tr>
+                <th width="90px;">Image</th>
                 <th>Name</th>
-                <th>Role</th>
-                <th>Company</th>
-                <th>Email</th>
-                <th>Phone</th>
                 <th style="width: 145px;">Actions #</th>
               </tr>
             </thead>
             <tbody>
-              <% @users.each do |user| %>
+              <% @companies.each do |company| %>
                 <tr>
                   <td>
-                   <%= user.name.titleize %>
+                   <%= image_tag company.logo.url(:thumb), style: "width: 90px;" %>
                   </td>
                   <td>
-                   <%= user.role_name.titleize %>
+                    <%= company.title.titleize %>
                   </td>
                   <td>
-                    <%= user.company_title %>
-                  </td>
-                  <td>
-                    <%= user.email %>
-                  </td>
-                  <td>
-                    <%= user.phone %>
-                  </td>
-                  <td>
-                    <%= link_to edit_private_user_path(user), class: "btn btn-small" do %>
+                    <%= link_to edit_private_company_path(company), class: "btn btn-small" do %>
                       <i class="icon-pencil"></i>
                       Edit
                     <% end %>
-                    <%= link_to private_user_path(user), method: :delete, confirm: "Do you will delete user, #{user.name.titleize}, are you sure?", class: "btn btn-small" do %>
+                    <%= link_to private_company_path(company), method: :delete, confirm: "Do you will delete company, #{company.title.titleize}, are you sure?", class: "btn btn-small" do %>
                       <i class="icon-trash"></i>
                       Delete
                     <% end %>
@@ -85,13 +73,6 @@
               <% end %>
             </tbody>
           </table>
-          <div class="pull-left">
-            <%= page_entries_info @users %>
-          </div>
-          <div class="pull-right">
-            <%= paginate @users %>
-          </div>
-          <div class="clearfix"></div>
         </div>
       </div>
     </div>

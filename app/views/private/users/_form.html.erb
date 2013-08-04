@@ -1,0 +1,118 @@
+<div class="titleLine">
+  <div class="container-fluid">
+    <div class="titleIcon"><i class="icon-check"></i></div>
+    <ul class="titleLineHeading">
+      <li class="heading">
+        <h1>
+          <%= params[:do] ? params[:do].titleize : "#{params[:action].gsub(/new/i,'create').titleize} Profile" %>
+        </h1>
+      </li>
+    </ul>
+  </div>
+</div>
+<ul class="breadcrumb">
+  <li>
+    <i class="icon-home"></i>
+    <%= link_to "Home", private_dashboard_path %>
+    <span class="divider">
+      <i class="icon-angle-right"></i>
+    </span>
+  </li>
+  <% if params[:action] =~ /new|create/i %>
+    <li class="active"><%= params[:action].gsub(/new/i,"create").titleize %> User</li>
+  <% else %>
+    <li class="active"><%= @user.name.titleize %></li>
+  <% end %>
+  <li class="moveDown pull-right">
+    <span class="time"></span>
+    <span class="date"></span>
+  </li>   
+</ul>
+
+<div class="container-fluid">
+  <%= render "private/shared/notification" %>
+  <%= render partial: "private/shared/errors", locals: {resource: @user} %>
+  <%= form_for([:private, @user], html: {class: "form-horizontal contentForm", "data-validate"=>"parsley"}) do |f| %>
+    <%= hidden_field_tag :do, params[:do] %>
+    <% if params[:do] == "editProfile" || params[:do].blank? %>
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="containerHeadline">
+            <i class="icon-user"></i><h2>User Information</h2>
+            <div class="controlButton pull-right"><i class="icon-remove removeElement"></i></div>
+            <div class="controlButton pull-right"><i class="icon-caret-down minimizeElement"></i></div>
+          </div>
+          <div class="floatingBox">
+            <div class="container-fluid">
+              <div class="control-group">
+                <label class="control-label" for="fullname">Full Name *</label>
+                <div class="controls">
+                  <%= f.text_field :name, class: "span10", "data-trigger"=>"change", "data-required"=>"true", "data-minlength"=>"4" %>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="email">Email *</label>
+                <div class="controls">
+                  <%= f.email_field :email, class: "span10", "data-trigger"=>"change", "data-required"=>"true", "data-type"=>"email" %>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="email">Company *</label>
+                <div class="controls">
+                  <%= f.select :company_id, options_for_select(Company.all.map{|c| [c.title, c.id]}), {prompt: "Select your company"}, {class: "span10", "data-required"=>"true", "data-trigger"=>"change"} %>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="email">Department *</label>
+                <div class="controls">
+                  <%= f.text_field :department, class: "span10", "data-trigger"=>"change", "data-required"=>"true", "data-minlength"=>"2" %>
+                </div>
+              </div>
+              <div class="control-group last">
+                <label class="control-label" for="phone">Phone Number</label>
+                <div class="controls">
+                  <%= f.text_field :phone, class: "span10", "data-trigger"=>"change", "data-required"=>"true" %>
+                </div>
+              </div> 
+              <div class="formFooter">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="reset" class="btn">Reset</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <% if params[:do] == "changePassword" || params[:do].blank? %>
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="containerHeadline">
+            <i class="icon-lock"></i><h2>Change Password</h2>
+            <div class="controlButton pull-right"><i class="icon-remove removeElement"></i></div>
+            <div class="controlButton pull-right"><i class="icon-caret-down minimizeElement"></i></div>
+          </div>
+          <div class="floatingBox">
+            <div class="container-fluid">
+              <div class="control-group">
+                <label class="control-label" for="password">Password</label>
+                <div class="controls">
+                  <%= f.password_field :password, class: "span10" %>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="passwordConf">Password Confirmation</label>
+                <div class="controls">
+                  <%= f.password_field :password_confirmation, class: "span10" %>
+                </div>
+              </div>
+              <div class="formFooter">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="reset" class="btn">Reset</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

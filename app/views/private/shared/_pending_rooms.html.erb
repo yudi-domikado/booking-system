@@ -1,0 +1,28 @@
+ <a href="#collapsedSidebarContent" class="showCollapsedSidebarMenu">
+  <i class="icon-chevron-sign-left"></i>
+  <h1> Pending Booking Room </h1>
+</a>
+<h1>Pending Booking Room</h1>
+<ul class="tasksList">
+  <% @pending_rooms.each do |order| %>
+    <% user = order.user %>
+    <% company = user.company %>
+    <% order.room_items.each do |room_item| %>
+      <li class="unreaded">
+        <%= link_to edit_private_room_order_path(order), "data-push"=>"true", "data-target"=>"div.content", style: "text-decoration: none;" do %>
+          <div class="messageAvatar">
+            <%= image_tag room_item.room.picture.url(:thumb), style:"width: 50px;" %>
+          </div>
+          <h3><b><%= room_item.room.name %></b></h3>
+          <span class="messageDate" style="color: #5A0101">
+            <b><%= Time.at(room_item.start_time).strftime("%d.%m.%Y %H:%M") %> - <%= Time.at(room_item.end_time).strftime("%H:%M") %></b>
+          </span> 
+          <div class="messageContent">
+            <b><%= user.company_title.to_s.upcase %></b> <%= room_item.title %>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+<%= link_to "View All", private_room_orders_path(keywords: "pending"), class: "btn btn-primary" %>

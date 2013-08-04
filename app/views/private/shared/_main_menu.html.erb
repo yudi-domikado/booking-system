@@ -17,7 +17,7 @@
       <% if can?(:index, RoomOrder) %>
         <li class="divider-vertical"></li>
         <li class="dropdown">
-          <%= link_to private_room_orders_path do %>
+          <%= link_to private_room_orders_path, "data-push"=>"true", "data-target"=>"div.content" do %>
             <i class="icon-calendar"></i> 
             ROOM ORDERS
           <% end %>
@@ -35,40 +35,46 @@
       <% if can?(:index, Room) %>
         <li class="divider-vertical"></li>
         <li id="buttonsIcons">
-          <%= link_to private_rooms_path do %>
+          <%= link_to private_rooms_path, "data-push"=>"true", "data-target"=>"div.content" do %>
             <i class="icon-th"></i> 
             MANAGE ROOMS
           <% end %>
         </li>
       <% end %>
-      <li class="divider-vertical"></li>
-      <li id="gridLayout">
-        <a href="grid.html">
-          <i class="icon-list"></i> 
-          MANAGE FOODS
-        </a>
-      </li>
-      <li class="divider-vertical"></li>
-      <li id="tables">
-        <a href="tables.html">
-          <i class="icon-user"></i> 
-          MANAGE USERS
-        </a>
-      </li>
-      <li class="divider-vertical"></li>
-      <li class="right-side" id="chartsGraphs">
-        <a href="charts.html">
-          <i class="icon-th-large"></i> 
-          MANAGE COMPANIES 
-        </a>
-      </li>
-      <li class="divider-vertical"></li>
+      <% if can?(:index, Food) %>
+        <li class="divider-vertical"></li>
+        <li id="gridLayout">
+          <a href="grid.html">
+            <i class="icon-list"></i> 
+            MANAGE FOODS
+          </a>
+        </li>
+      <% end %>
+      <% if can?(:index, User) %>
+        <li class="divider-vertical"></li>
+        <li id="tables">
+          <%= link_to private_users_path, "data-push"=>"true", "data-target"=>"div.content" do %>
+            <i class="icon-user"></i> 
+            MANAGE USERS
+          <% end %>
+        </li>
+      <% end %>
+      <% if can?(:index, Company) %>
+        <li class="divider-vertical"></li>
+        <li class="right-side" id="chartsGraphs">
+          <%= link_to private_companies_path, "data-push"=>"true", "data-target"=>"div.content" do %>
+            <i class="icon-th-large"></i> 
+            MANAGE COMPANIES 
+          <% end %>
+        </li>
+      <% end %>
+      <!-- <li class="divider-vertical"></li>
       <li class="right-side" id="chartsGraphs">
         <a href="charts.html">
           <i class="icon-bar-chart"></i> 
           MANAGE REPORTS 
         </a>
-      </li>
+      </li> -->
       <li class="divider-vertical"></li>
     </ul>
    </div>

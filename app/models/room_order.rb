@@ -18,6 +18,10 @@ class RoomOrder < Order
     RoomCart
   end
 
+  def self.pendings
+    newest_orders.where("orders.status LIKE ? OR orders.status IS NULL", "%pending%")
+  end
+
   def items
   	self.room_items
   end

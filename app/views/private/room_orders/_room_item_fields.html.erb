@@ -11,12 +11,20 @@
   </td>
   <td>
     <%= f.text_field :hour_end, class: "timepick span5", value: meridian_time(f.object.end_time) %>
-  </td>
-  <td>
-    <%= f.select :status, options_for_select(Order.statuses, f.object.status), {prompt: "Select Status"}, {class: "span7"} %>
-    <%= link_to_remove_association f, class: "btn btn-small", style: "margin-left: 10px;" do %>
-      <i class="icon-trash"></i>
-      Remove
+    <% unless (current_user.room_admin? || current_user.super_admin?) %>
+      <%= link_to_remove_association f, class: "btn btn-small", style: "margin-left: 10px;" do %>
+        <i class="icon-trash"></i>
+        Remove
+      <% end %>
     <% end %>
   </td>
+  <% if current_user.room_admin? || current_user.super_admin? %>
+    <td>
+      <%= f.select :status, options_for_select(Order.statuses, f.object.status), {prompt: "Select Status"}, {class: "span7"} %>
+      <%= link_to_remove_association f, class: "btn btn-small", style: "margin-left: 10px;" do %>
+        <i class="icon-trash"></i>
+        Remove
+      <% end %>
+    </td>
+  <% end %>
 </tr>

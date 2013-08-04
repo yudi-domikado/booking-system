@@ -18,6 +18,11 @@ class User < ActiveRecord::Base
   delegate :name,  to: :role,    allow_nil: true, prefix: true
   delegate :title, to: :company, allow_nil: true, prefix: true
 
+  scoped_search on: [:name, :email, :phone]
+  scoped_search in: :company, on: :title
+
+  scope :newest, order("users.updated_at DESC")
+
   with_options(on: :update) do |update|
     update.with_options(presence: true) do |presence|
       presence.validates :name

@@ -22,6 +22,7 @@
 //= require private/vendor/bootstrap-editable.min
 //= require private/thekamarel.min
 //= require cocoon
+//= require override_gon
 
 //= require wiselinks
 //= require_self
@@ -63,5 +64,21 @@ $(document).ready(function(){
   });
 
   prepare_date_and_time_fields();
+
+  if($('#pendingRoomContent').length){
+    gon.watch('pending_rooms', {interval: 10000, url: '/private/pending-rooms', type: "GET", cache: true}, function(xhr){
+      if(xhr.responseText != gon.pending_rooms && xhr.responseText.length){
+        gon.pending_rooms = xhr.responseText;
+        $('#pendingRoomContent .sidebarContent').html(String(gon.pending_rooms));
+      }
+    });
+    gon.watch('total_pending_rooms', {interval: 10000, url: '/private/total-pending-rooms', type: "GET", cache: true}, function(xhr){
+      if(xhr.responseText != gon.total_pending_rooms && xhr.responseText.length){
+        gon.total_pending_rooms = xhr.responseText;
+        $('.total_pending_room').html(String(gon.total_pending_rooms));
+      }
+    });
+  }
+  
 })
 

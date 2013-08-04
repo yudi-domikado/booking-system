@@ -14,6 +14,7 @@ class Ability
     elsif user.food_admin?
       food_and_room_admin_abilities(user)
       food_admin_and_customer_abilities(user)
+      can :manage, Food
     elsif user.customer?
       food_admin_and_customer_abilities(user)
       cannot :index, User
