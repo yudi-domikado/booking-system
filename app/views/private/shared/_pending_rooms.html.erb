@@ -25,4 +25,4 @@
     <% end %>
   <% end %>
 </ul>
-<%= link_to "View All", private_room_orders_path(keywords: "pending"), class: "btn btn-primary" %>
+<%= link_to "View All", private_room_orders_path(keywords: "pending"), class: "btn btn-primary", "data-push"=>"true", "data-target"=>"div.content" %>

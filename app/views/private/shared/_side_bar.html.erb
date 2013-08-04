@@ -3,7 +3,7 @@
     <div class="sidebarDivider"></div>
     <div class="sidebarContent">
       <ul class="collapsedSidebarMenu">
-        <% if current_user.room_admin? || current_user.super_admin %>
+        <% if current_user.room_admin? || current_user.super_admin? %>
           <li>
             <a href="#pendingRoomContent" class="sidebar">Pending Rooms
               <div class="notifyCircle cyan total_pending_room"><%= @pending_rooms.count %></div>
@@ -35,7 +35,7 @@
     </div>   
   </div>
   
-  <% if current_user.room_admin? || current_user.super_admin %>
+  <% if current_user.room_admin? || current_user.super_admin? %>
     <div id="pendingRoomContent">
       <div class="sidebarDivider"></div>
       <div class="sidebarContent">

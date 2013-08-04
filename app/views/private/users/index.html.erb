@@ -7,7 +7,7 @@
       </ul>
     </div>
     <div class="pull-right" style="line-height: 45px;">
-      <%= link_to "Create User", new_private_user_path, class: "btn btn-primary" %>
+      <%= link_to "Create User", new_private_user_path, class: "btn btn-primary", "data-push"=>"true", "data-target"=>"div.content" %>
     </div>
     <div class="clearfix">&nbsp;</div>
   </div>
@@ -72,7 +72,7 @@
                     <%= user.phone %>
                   </td>
                   <td>
-                    <%= link_to edit_private_user_path(user), class: "btn btn-small" do %>
+                    <%= link_to edit_private_user_path(user), class: "btn btn-small", "data-push"=>"true", "data-target"=>"div.content" do %>
                       <i class="icon-pencil"></i>
                       Edit
                     <% end %>

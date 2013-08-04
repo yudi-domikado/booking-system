@@ -8,7 +8,7 @@
     </div>
     <div class="pull-right" style="line-height: 45px;">
       <% if current_user.room_admin? || current_user.super_admin? %>
-        <%= link_to "Create Booking", new_private_room_order_path, class: "btn btn-primary" %>
+        <%= link_to "Create Booking", new_private_room_order_path, class: "btn btn-primary", "data-push"=>"true", "data-target"=>"div.content" %>
       <% else %>
         <%= link_to "Create Booking", root_path, class: "btn btn-primary" %>
       <% end %>
@@ -64,13 +64,13 @@
                    <%= order.order_at.strftime("%d %b %Y %H:%M") %>
                   </td>
                   <td style="width: 120px;">
-                    <b><%= link_to truncate(order.code, length: 25), send("private_#{order.type.tableize.singularize}_path", order) %></b>
+                    <b><%= link_to truncate(order.code, length: 25), send("edit_private_#{order.type.tableize.singularize}_path", order), "data-push"=>"true", "data-target"=>"div.content" %></b>
                   </td>
                   <td>
                     <span class="label <%= status_class(order.status) %>"><%= order.status.downcase %></span>
                   </td>
                   <td style="width: 120px;">
-                    <b><%= link_to truncate(order.user_name, length: 25), edit_private_user_path(order.user_id) %></b>
+                    <b><%= link_to truncate(order.user_name, length: 25), edit_private_user_path(order.user_id), "data-push"=>"true", "data-target"=>"div.content" %></b>
                   </td>
                   <td style="max-width: 500px;">
                     <div class="row-fluid">
@@ -80,7 +80,7 @@
                             <%= image_tag order_item.room.picture.url(:thumb), style:"width: 50px;position:relative;margin-top: -20px;" %>
                           </div>
                           <div style="display: inline-block">
-                            <%= link_to order_item.room.name, room_path(order_item.room_id) %> <br/>
+                            <%= link_to order_item.room.name, room_path(order_item.room_id), "data-push"=>"true", "data-target"=>"div.content" %> <br/>
                             <%= order_item.check_in_date.strftime("%a, %d %b %Y") %> 
                             (<%= Time.at(order_item.start_time).strftime("%H:%M") %> - <%= Time.at(order_item.end_time).strftime("%H:%M") %>)
                           </div>
@@ -97,7 +97,7 @@
                       <i class="icon-remove"></i>
                       Cancel
                     <% end if order.approved? || order.pending? %>
-                    <%= link_to send("edit_private_#{order.type.tableize.singularize}_path", order), class: "btn btn-small" do %>
+                    <%= link_to send("edit_private_#{order.type.tableize.singularize}_path", order), class: "btn btn-small", "data-push"=>"true", "data-target"=>"div.content" do %>
                       <i class="icon-pencil"></i>
                       Edit
                     <% end %>

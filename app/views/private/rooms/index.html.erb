@@ -7,7 +7,7 @@
       </ul>
     </div>
     <div class="pull-right" style="line-height: 45px;">
-      <%= link_to "Create Room", new_private_room_path, class: "btn btn-primary" %>
+      <%= link_to "Create Room", new_private_room_path, class: "btn btn-primary", "data-push"=>"true", "data-target"=>"div.content" %>
     </div>
     <div class="clearfix">&nbsp;</div>
   </div>
@@ -64,7 +64,7 @@
                     <b><%= link_to room.order_items.count, private_room_orders_path(keywords: room.name) %></b>
                   </td>
                   <td>
-                    <%= link_to edit_private_room_path(room), class: "btn btn-small" do %>
+                    <%= link_to edit_private_room_path(room), class: "btn btn-small", "data-push"=>"true", "data-target"=>"div.content" do %>
                       <i class="icon-pencil"></i>
                       Edit
                     <% end %>
