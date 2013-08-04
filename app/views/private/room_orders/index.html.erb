@@ -1,9 +1,15 @@
 <div class="titleLine">
   <div class="container-fluid">
-    <div class="titleIcon"><i class="icon-check"></i></div>
-    <ul class="titleLineHeading">
-      <li class="heading"><h1>Room Orders</h1></li>
-    </ul>
+    <div class="pull-left">
+      <div class="titleIcon"><i class="icon-check"></i></div>
+      <ul class="titleLineHeading">
+        <li class="heading"><h1>Room Orders</h1></li>
+      </ul>
+    </div>
+    <div class="pull-right" style="line-height: 45px;">
+      <%= link_to "Create Booking", new_private_room_order_path, class: "btn btn-primary" %>
+    </div>
+    <div class="clearfix">&nbsp;</div>
   </div>
 </div>
 <ul class="breadcrumb">
@@ -25,7 +31,7 @@
   <div class="row-fluid">
     <div class="span12">
       <div class="containerHeadline tableHeadline">
-        <i class="icon-group"></i><h2>Orders</h2>
+        <i class="icon-calendar"></i><h2>Orders</h2>
         <form>
           <div class="input-append">
             <input class="inp-mini span8" type="text" placeholder="enter keywords..." name="keywords">
@@ -39,7 +45,7 @@
           <table class="table table-striped">
             <thead >
               <tr>
-                <th style="width: 80px;">Booked At</th>
+                <th style="width: 110px;">Booked At</th>
                 <th>Booking No</th>
                 <th style="width: 50px;">Status</th>
                 <th>Customer</th>
@@ -48,18 +54,18 @@
               </tr>
             </thead>
             <tbody>
-              <% @orders.each do |order| %>
+              <% @room_orders.each do |order| %>
                 <tr>
                   <td>
                    <%= order.order_at.strftime("%d %b %Y %H:%M") %>
                   </td>
-                  <td style="max-width: 150px;">
+                  <td style="width: 120px;">
                     <b><%= link_to truncate(order.code, length: 25), send("private_#{order.type.tableize.singularize}_path", order) %></b>
                   </td>
                   <td>
                     <span class="label <%= status_class(order.status) %>"><%= order.status.downcase %></span>
                   </td>
-                  <td style="max-width: 150px;">
+                  <td style="width: 120px;">
                     <b><%= link_to truncate(order.user_name, length: 25), edit_private_user_path(order.user_id) %></b>
                   </td>
                   <td style="max-width: 500px;">
@@ -78,11 +84,7 @@
                       <% end %>
                     </div>
                   </td>
-                  <td class="action" style="max-width: 175px;">
-                    <%= link_to send("edit_private_#{order.type.tableize.singularize}_path", order), class: "btn btn-small" do %>
-                      <i class="icon-pencil"></i>
-                      Edit
-                    <% end %>
+                  <td class="action" style="max-width: 75px;">
                     <%= link_to send("private_#{order.type.tableize.singularize}_path", order, room_order: {status: Order::Status::APPROVED}), method: :put, class: "btn btn-small" do %>
                       <i class="icon-check"></i>
                       Approve
@@ -91,6 +93,10 @@
                       <i class="icon-remove"></i>
                       Cancel
                     <% end if order.approved? || order.pending? %>
+                    <%= link_to send("edit_private_#{order.type.tableize.singularize}_path", order), class: "btn btn-small" do %>
+                      <i class="icon-pencil"></i>
+                      Edit
+                    <% end %>
                     <%= link_to send("private_#{order.type.tableize.singularize}_path", order), method: :delete, confirm: "Do you will delete order no #{order.code}, are you sure?", class: "btn btn-small" do %>
                       <i class="icon-trash"></i>
                       Delete
@@ -101,10 +107,10 @@
             </tbody>
           </table>
           <div class="pull-left">
-            <%= page_entries_info @orders %>
+            <%= page_entries_info @room_orders %>
           </div>
           <div class="pull-right">
-            <%= paginate @orders %>
+            <%= paginate @room_orders %>
           </div>
           <div class="clearfix"></div>
         </div>

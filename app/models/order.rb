@@ -3,11 +3,12 @@ class Order < ActiveRecord::Base
   friendly_id :code, use: :slugged
 
   attr_accessible :user_id, :ammount, :slug
+  cattr_accessor :search_type
   belongs_to :user
   before_create :before_creation
 
-  scoped_search on: [:code, :amount, :order_at, :amount, :type]
-  scoped_search in: :user, on: [:name, :email], ext_method: :find_by_company_name
+  scoped_search on: [:code, :amount, :order_at, :type, :status]
+  scoped_search in: :user, on: [:name, :email], ext_method: :custom_search
   
   scope :newest_orders, order("orders.order_at DESC")
   scope :pendings, where("orders.status = ?", "pending")
@@ -30,18 +31,47 @@ class Order < ActiveRecord::Base
     ]
   end
 
-  def self.find_by_company_name(key, operator, value)
+  def self.custom_search(key, operator, value)
+
     companies = Company.where("title LIKE ?", "%#{value}%").map(&:id)
-    users = User.where("id IN (?)", companies).map(&:id)
-    return {conditions: "orders.user_id IS NOT NULL"} if users.blank?
-    { :conditions => "orders.user_id IN(#{users.join(',')})" } 
+    user_queries = ["users.name LIKE ?", "users.email LIKE ?"]
+    user_queries.push("id IN (?)") if companies.present?
+    user_queries = [user_queries.join(' OR '), "%#{value}%", "%#{value}%"]
+    user_queries.push(companies) if companies.present? 
+    user_ids = User.where(user_queries).map(&:id)
+
+    arr_queries = []
+    
+    unless user_ids.blank?
+      arr_queries.push("orders.user_id IN(#{user_ids.join(',')})")
+    end
+    
+    if self.search_type == "RoomOrder"
+      room_ids = Room.where("name LIKE ?", "%#{value}%").map(&:id)
+      order_ids = Order::RoomItem.
+                         where("room_id IN (?)", room_ids).
+                         map(&:room_order_id).uniq if room_ids.present?
+      
+      unless order_ids.blank?
+        arr_queries.push("orders.id IN(#{order_ids.join(',')})")
+      end
+    end
+    
+    if arr_queries.blank?
+      arr_queries.push("orders.user_id IS NULL") 
+    end
+
+    
+    {conditions: arr_queries.uniq.compact.join(' OR ')}
+
   end
   
   def self.table_name_prefix
     self.to_s == "Order" ? '' : 'order_'
   end
 
-  def self.order_histories(user)
+  def self.order_histories(user, _type="")
+    self.search_type = _type
     return newest_orders.where(user_id: user.id) if user.customer?
     newest_orders
   end

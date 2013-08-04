@@ -1,0 +1,84 @@
+<div class="titleLine">
+  <div class="container-fluid">
+    <div class="pull-left">
+      <div class="titleIcon"><i class="icon-check"></i></div>
+      <ul class="titleLineHeading">
+        <li class="heading"><h1>Rooms</h1></li>
+      </ul>
+    </div>
+    <div class="pull-right" style="line-height: 45px;">
+      <%= link_to "Create Room", new_private_room_path, class: "btn btn-primary" %>
+    </div>
+    <div class="clearfix">&nbsp;</div>
+  </div>
+</div>
+<ul class="breadcrumb">
+  <li>
+    <i class="icon-home active"></i>
+    <%= link_to "Home", private_dashboard_path %>
+    <span class="divider"><i class="icon-angle-right"></i></span>
+  </li>
+  <li>Rooms <span class="divider"><i class="icon-angle-right"></i></span></li>
+  <li class="active">List</li>
+  <li class="moveDown pull-right">
+    <span class="time"></span>
+    <span class="date"></span>
+  </li>   
+</ul>
+
+<div class="container-fluid">
+  <%= render "private/shared/notification" %>
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="containerHeadline tableHeadline">
+        <i class="icon-th"></i><h2>Room List</h2>
+        <form>
+          <div class="input-append">
+            <input class="inp-mini span8" type="text" placeholder="enter keywords..." name="keywords">
+            <span class="add-on add-on-first add-on-mini"><i class="icon-search"></i></span>
+            <span class="add-on add-on-middle add-on-mini minimizeTable"><i class="icon-caret-down"></i></span>
+          </div>
+        </form>
+      </div>
+      <div class="floatingBox table">
+        <div class="container-fluid">
+          <table class="table table-striped">
+            <thead >
+              <tr>
+                <th style="width: 55px;">Image</th>
+                <th>Name</th>
+                <th>Total Booked</th>
+                <th style="width: 145px;">Actions #</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @rooms.each do |room| %>
+                <tr>
+                  <td>
+                   <%= image_tag room.picture.url(:medium) %>
+                  </td>
+                  <td>
+                    <%= room.name.titleize %>
+                  </td>
+                  <td>
+                    <b><%= link_to room.order_items.count, private_room_orders_path(keywords: room.name) %></b>
+                  </td>
+                  <td>
+                    <%= link_to edit_private_room_path(room), class: "btn btn-small" do %>
+                      <i class="icon-pencil"></i>
+                      Edit
+                    <% end %>
+                    <%= link_to private_room_path(room), method: :delete, confirm: "Do you will delete room, #{room.name.titleize}, are you sure?", class: "btn btn-small" do %>
+                      <i class="icon-trash"></i>
+                      Delete
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

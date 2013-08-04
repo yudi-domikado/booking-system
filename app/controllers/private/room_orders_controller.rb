@@ -1,7 +1,8 @@
 class Private::RoomOrdersController < InheritedResources::Base
   before_filter :authenticate_user!
   authorize_controller class: "RoomOrder", except: [:checkout, :create]
-  defaults resource_class: RoomOrder, collection_name: 'orders', instance_name: 'order'
+  defaults resource_class: RoomOrder, collection_name: 'room_orders', instance_name: 'room_order'
+  actions :all, except: [:show]
 
 	def create
 		
@@ -43,7 +44,7 @@ class Private::RoomOrdersController < InheritedResources::Base
 
 	protected
     def collection
-      @orders ||= end_of_association_chain.order_histories(current_user).search_for(query_search).page(page).per(per_page)
+      @room_orders = end_of_association_chain.order_histories(current_user,"RoomOrder").search_for(query_search).page(page).per(per_page)
     end
 
     def model
@@ -56,14 +57,14 @@ class Private::RoomOrdersController < InheritedResources::Base
 
 	  def sanitize_status
 	  	if params[:room_order][:status]
-	  		@order.status = params[:room_order][:status] 
+	  		@room_order.status = params[:room_order][:status] 
 	  		params[:room_order].delete(:status)
 	  	end
 	  end
 
 	  def after_save(format)
-	  	if @order.errors.empty?
-      	flash[:notice] = "Booking room has been #{params[:action]}ed successfully"
+	  	if @room_order.errors.empty?
+      	flash[:notice] = "Booking room has been #{params[:action]}d successfully"
         format.html { redirect_to private_room_orders_path }
       end
     end

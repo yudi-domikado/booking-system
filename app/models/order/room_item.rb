@@ -1,7 +1,6 @@
 class Order::RoomItem < ActiveRecord::Base
   attr_accessible :check_in_date, :room_id, :status, :hour_start, :hour_end
   belongs_to :itemable, polymorphic: true
-  scoped_search in: :user, on: [:name, :email]
 
   attr_accessor :hour_start, :hour_end
   

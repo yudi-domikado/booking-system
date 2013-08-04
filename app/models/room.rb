@@ -13,18 +13,15 @@ class Room < ActiveRecord::Base
   belongs_to :order
   belongs_to :cart
 
+  validates :name, presence: true
+  validates :name, uniqueness: true
+
   has_many :events
   has_many :facilities
   has_many :order_items, class_name: "Order::RoomItem", dependent: :destroy
+  scoped_search on: [:name, :description, :price]
 
-	def self.search(search)
-    find(:all) unless search
-    where(3.times.map{"%#{search}%"}.unshift(search_condition))
-	end
-
-  def self.search_condition
-    "name LIKE ? OR price LIKE ? OR description LIKE ?"
-  end
+  scope :newest, order("rooms.updated_at DESC")
 
   def with_current_meeting(time=Time.now)
     order_items.
@@ -38,7 +35,9 @@ class Room < ActiveRecord::Base
     
     order_items.
     where(check_in_date: (current_meeting ? current_meeting.check_in_date : Date.today)).
-    where("start_time >= ? AND end_time >= ?", end_time.to_i, end_time.to_i).order("start_time ASC").limit(limit)
+    where("start_time >= ? AND end_time >= ?", end_time.to_i, end_time.to_i).
+    order("start_time ASC").
+    limit(limit)
   end
 
   def booked_condition

@@ -3,13 +3,15 @@ class RoomOrder < Order
   friendly_id :code, use: :slugged
 
 	has_many :room_items, class_name: "Order::RoomItem", dependent: :destroy
+
   attr_accessible :room_items_attributes
   accepts_nested_attributes_for :room_items, reject_if: :all_blank, allow_destroy: true
   
-  scoped_search in: :room_items, on: {room: :name}
   after_validation :count_amount
   validates :room_items, presence: true
   validates :user_id, presence: true
+  default_scope includes([{:room_items => :room}, {:user => :company}])
+
   after_save :after_saved
 
   def self.cart_class

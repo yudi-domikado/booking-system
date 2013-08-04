@@ -32,13 +32,15 @@
           </a>
         </li>
       <% end %>
-      <li class="divider-vertical"></li>
-      <li id="buttonsIcons">
-        <a href="buttons.html">
-          <i class="icon-th"></i> 
-          MANAGE ROOMS
-        </a>
-      </li>
+      <% if can?(:index, Room) %>
+        <li class="divider-vertical"></li>
+        <li id="buttonsIcons">
+          <%= link_to private_rooms_path do %>
+            <i class="icon-th"></i> 
+            MANAGE ROOMS
+          <% end %>
+        </li>
+      <% end %>
       <li class="divider-vertical"></li>
       <li id="gridLayout">
         <a href="grid.html">
