@@ -4,7 +4,7 @@ colors = {"sap" => "#b70039", "stp" => "#0767a5", "domikado" => "#b8c223"}
   if company.new_record?
   	company.logo = File.new("#{Rails.root}/app/assets/images/#{company_name}.png")
   	company.color = colors[company_name]
-  	company.save
+  	company.save(validate: false)
   end
 end
 
@@ -20,7 +20,7 @@ sap = Company.find_by_title("SAP")
 		user.password_confirmation = user.password
 		user.name = role_name.titleize
 		user.role_id = role.id
-		user.company_id = sap.id
+		user.company_id = Company.first.id
 		user.save
 	end
 end
