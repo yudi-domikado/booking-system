@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(:version => 20130803144411) do
   add_index "rooms", ["slug"], :name => "index_rooms_on_slug", :unique => true
 
   create_table "users", :force => true do |t|
-    t.string   "user",                   :default => "", :null => false
+    t.string   "username",               :default => "", :null => false
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
